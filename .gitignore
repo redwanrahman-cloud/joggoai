@@ -9,5 +9,6 @@ dist/
 coverage/
 *.tsbuildinfo
 *.log
+shohojsheba-sites*.tar.gz
 .DS_Store
 Thumbs.db

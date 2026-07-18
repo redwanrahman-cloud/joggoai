@@ -261,3 +261,13 @@ Completed:
 - Verified the owner-only access policy before deployment.
 - Ran ESLint, TypeScript, all eighteen tests, and the complete Sites build successfully.
 - Confirmed the artifact contains the required worker entry, client assets, and `.openai/hosting.json`.
+
+## Phase 11 — Private production deployment
+
+Completed:
+
+- Pushed the exact validated commit to the Sites source repository using a short-lived credential.
+- Stored `OPENAI_API_KEY` as a hosted secret rather than in source or the deployment archive.
+- Saved Sites version 1 and deployed it with owner-only access.
+- Smoke-tested the production landing page, staffing-request page, and live GPT-5.6 Sol extraction route.
+- Recorded the final Sites origin directly in social metadata after the provider rejected a runtime public-origin variable.

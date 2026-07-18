@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "ShohojSheba",
   description: "Explainable healthcare staffing, with people in control.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL("https://joggo-ai-bd.najdhotel1.chatgpt.site"),
   openGraph: {
     title: "ShohojSheba",
     description: "Verified professionals. Explainable matching. Human decisions.",
