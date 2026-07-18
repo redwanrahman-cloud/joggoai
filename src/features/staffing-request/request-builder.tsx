@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import type { Profession, StaffingRequirement } from "../../domain/types";
 import { extractStaffingRequestFallback, validateStaffingRequirement } from "./extraction";
 
@@ -42,7 +43,10 @@ export function RequestBuilder() {
         <p>
           The confirmed request requires a {professionLabels[requirement.profession].toLowerCase()} in {requirement.area} with {requirement.requiredSkills.join(" and ")} experience.
         </p>
-        <button className="secondary-action" type="button" onClick={() => setConfirmed(false)}>Edit requirements</button>
+        <div className="confirmation-actions">
+          <Link className="primary-action link-action" href="/requests/request-icu-night/matches">View eligible matches</Link>
+          <button className="secondary-action" type="button" onClick={() => setConfirmed(false)}>Edit requirements</button>
+        </div>
       </section>
     );
   }
@@ -116,4 +120,3 @@ export function RequestBuilder() {
     </div>
   );
 }
-

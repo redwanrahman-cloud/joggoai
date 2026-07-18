@@ -41,3 +41,9 @@ The competition build uses a typed repository backed by deterministic, fictional
 Status: accepted on 2026-07-18.
 
 Request extraction returns one validated contract whether it comes from GPT-5.6 Sol or the deterministic competition fallback. The interface always identifies fallback output, surfaces warnings, and requires human review before confirmation. This keeps the demo reliable without disguising scripted output as AI-generated output.
+
+## ADR-008: Eligibility precedes scoring
+
+Status: accepted on 2026-07-18.
+
+Profession, verified registration, required skills, full-shift availability, and budget are hard constraints. A candidate who fails any hard constraint receives no match score and cannot appear in the recommended shortlist. Transparent scoring uses reliability, experience, completed demo assignments, and area fit only after eligibility is established.

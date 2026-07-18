@@ -98,3 +98,30 @@ Known limitations:
 - Live GPT-5.6 Sol extraction is not active until an OpenAI API credential is configured.
 - The fallback resolves relative dates only for the scripted Build Week scenario and discloses this limitation.
 - The confirmed request remains client-side until the matching workflow is connected.
+
+## 2026-07-18 — Phase 4
+
+Completed:
+
+- Added deterministic eligibility checks for profession, registration, skills, full-shift availability, and budget.
+- Guaranteed that scoring cannot override a failed hard requirement.
+- Added transparent eligible-candidate scoring from reliability, experience, completed demo assignments, and area fit.
+- Added a recommended shortlist with evidence, metrics, credential status, and uncertainty flags.
+- Added an excluded-candidate section with exact hard-failure reasons.
+- Connected the confirmed staffing request to its matching route.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Nine tests passed across matching, extraction, domain invariant, and UI suites.
+- Tests prove expired registration and missing skills force exclusion and a zero score.
+- Next.js production build completed successfully.
+- Dynamic `/requests/[id]/matches` and static request-entry routes built successfully.
+- Browser review passed on desktop and a 390×844 mobile viewport with no console warnings or errors.
+
+Known limitations:
+
+- Distance and travel time are not calculated; area differences appear as explicit uncertainty flags.
+- Match explanations are deterministic until the live GPT-5.6 explanation gateway is enabled.
+- Candidate review and credential-document inspection begin in Phase 5.

@@ -10,7 +10,7 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 3 is complete. A clinic can now describe a staffing need naturally, receive structured suggested requirements, edit every field, see fallback warnings and validation errors, and explicitly confirm the request before matching. The workflow currently uses a clearly labeled deterministic fallback until live API credentials are configured.
+Phase 4 is complete. After confirming a staffing request, the clinic receives an explainable shortlist where deterministic hard requirements control eligibility and transparent scoring only compares candidates who passed. Ineligible fictional professionals remain visible with exact exclusion reasons.
 
 ## Local development
 
