@@ -70,3 +70,31 @@ Known limitations:
 - Data resets with each application process by design during the competition prototype.
 - Matching evaluations, invitations, assignments, and AI audit collections are initially empty.
 - The dataset is fictional and does not represent live professional registration verification.
+
+## 2026-07-18 — Phase 3
+
+Completed:
+
+- Added a clinic-facing natural-language staffing request form.
+- Added a typed extraction result with source, confidence, and warnings.
+- Added a deterministic fallback for the scripted ICU-night scenario.
+- Added editable profession, area, hourly rate, and required-skill fields.
+- Added review validation and prevented confirmation of invalid requirements.
+- Added an explicit human confirmation state before matching.
+- Added prominent patient-data and fictional-data safety notices.
+- Confirmed the Responses API and structured-output path for future GPT-5.6 Sol activation.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Six tests passed across extraction, domain invariant, and UI suites.
+- Next.js production build completed successfully.
+- Static `/`, `/requests/new`, and `/_not-found` routes were generated.
+- Human visual testing confirmed extraction, editing, warning, and confirmation states at a desktop viewport.
+
+Known limitations:
+
+- Live GPT-5.6 Sol extraction is not active until an OpenAI API credential is configured.
+- The fallback resolves relative dates only for the scripted Build Week scenario and discloses this limitation.
+- The confirmed request remains client-side until the matching workflow is connected.

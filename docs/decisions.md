@@ -35,3 +35,9 @@ The scripted demo must remain functional when credentials, quota, or network acc
 Status: accepted on 2026-07-18.
 
 The competition build uses a typed repository backed by deterministic, fictional in-memory data. This avoids deployment-specific database behavior while the golden workflow is still changing. Domain services depend on the repository interface, so a durable adapter can be introduced later without rewriting the workflow.
+
+## ADR-007: Extraction contract works without live model access
+
+Status: accepted on 2026-07-18.
+
+Request extraction returns one validated contract whether it comes from GPT-5.6 Sol or the deterministic competition fallback. The interface always identifies fallback output, surfaces warnings, and requires human review before confirmation. This keeps the demo reliable without disguising scripted output as AI-generated output.

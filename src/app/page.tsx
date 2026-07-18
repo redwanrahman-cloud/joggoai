@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const milestones = [
   { label: "Request", detail: "Describe the shift in everyday language." },
   { label: "Review", detail: "Confirm structured requirements before matching." },
@@ -25,10 +27,10 @@ export default function HomePage() {
             and understand candidate evidence—while people stay in control.
           </p>
           <div className="actions">
-            <button className="primary-action" type="button" disabled>
+            <Link className="primary-action link-action" href="/requests/new">
               Start a staffing request
-            </button>
-            <span className="coming-soon">Workflow arrives in Phase 3</span>
+            </Link>
+            <span className="coming-soon">Review before matching</span>
           </div>
         </div>
 
@@ -62,4 +64,3 @@ export default function HomePage() {
     </main>
   );
 }
-

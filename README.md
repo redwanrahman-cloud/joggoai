@@ -10,7 +10,7 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 2 is complete. The repository contains a responsive typed application shell, the initial Joggo AI visual language, a healthcare staffing domain model, a deterministic fictional Dhaka dataset, repository access, and cross-entity safety invariants. The interactive staffing-request workflow begins in Phase 3.
+Phase 3 is complete. A clinic can now describe a staffing need naturally, receive structured suggested requirements, edit every field, see fallback warnings and validation errors, and explicitly confirm the request before matching. The workflow currently uses a clearly labeled deterministic fallback until live API credentials are configured.
 
 ## Local development
 
