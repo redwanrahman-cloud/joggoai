@@ -206,3 +206,34 @@ Known limitations:
 - Automated end-to-end testing is not yet part of the repository; the competition golden path is browser-validated through Codex sessions.
 - Authentication, durable persistence, external registries, and production observability remain outside this prototype.
 - Final deployment and submission artifacts begin in Phase 8.
+
+## 2026-07-18 — Phase 8 preparation
+
+Completed:
+
+- Rechecked the current OpenAI Build Week requirements and selected Work & Productivity.
+- Reworked the README into a judge-facing product, safety, technical, setup, and Codex evidence guide.
+- Added Devpost-ready short and full descriptions, differentiation, impact, testing path, and checklist.
+- Added a timed demo-video storyboard designed to remain below three minutes.
+- Added a deployment and post-deployment smoke-test checklist.
+- Added an MIT licence for public repository judging.
+- Created and inspected a project-specific social preview card with exact Joggo AI messaging.
+- Registered the Joggo AI Sites project and persisted its opaque project identifier.
+- Updated social metadata and made the test runner reliable in constrained environments.
+
+Validation:
+
+- The generated social card was visually inspected and its exact 1672×941 dimensions were recorded in metadata.
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Sixteen tests passed using one controlled worker.
+- Next.js production build completed successfully for every route.
+
+Remaining submission actions:
+
+- Configure an OpenAI API key locally before implementing and validating the live GPT-5.6 Sol gateway.
+- Publish this exact commit before saving a Sites version.
+- Complete the production deployment and run the documented smoke test.
+- Record and upload the public YouTube video.
+- Retrieve the main Codex `/feedback` session ID.
+- Replace pending deployment, video, and session placeholders and submit on Devpost.

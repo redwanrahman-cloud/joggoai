@@ -3,12 +3,12 @@
 ## Proposed stack
 
 - Next.js with TypeScript for the web application and server routes
-- Tailwind CSS for a focused design system
+- Plain CSS with shared design tokens for a focused design system
 - A typed repository boundary with deterministic in-memory demo data
-- Zod schemas at every AI and server boundary
+- Typed validation contracts at domain and AI boundaries
 - OpenAI Responses API for request extraction and explanation generation
 - Vitest for unit and integration tests
-- Playwright for the golden browser journey
+- Codex browser regression checks for the golden journey
 
 The repository boundary keeps the competition build portable and deterministic. A durable database adapter can replace the in-memory implementation after the core workflow is proven.
 
