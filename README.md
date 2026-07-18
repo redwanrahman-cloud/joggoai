@@ -44,7 +44,7 @@ The competition scope intentionally excludes payments, real registration checks,
 
 The staffing-request workflow uses `gpt-5.6-sol` through the OpenAI Responses API with a strict JSON schema and domain validation. The server-only integration was validated against the live model on July 18, 2026. A visibly labelled deterministic fallback keeps the scripted journey runnable when `OPENAI_API_KEY`, quota, or network access is unavailable.
 
-The model is allowed to parse intent and explain evidence. It is never allowed to change eligibility, fabricate credential evidence, send an invitation, or accept on behalf of a person.
+The model is allowed to parse intent and produce an evidence-grounded staffing briefing after deterministic matching. It is never allowed to change eligibility, fabricate credential evidence, send an invitation, or accept on behalf of a person. The briefing has a disclosed deterministic fallback and always states that a person makes the final decision.
 
 ## Built with Codex
 

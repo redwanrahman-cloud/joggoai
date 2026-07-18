@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { acceptInvitation, prepareInvitation } from "../../../features/assignments/assignment-workflow";
 
+function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
+
 export default async function AssignmentPage({ params, searchParams }: {
   params: Promise<{ requestId: string }>;
   searchParams: Promise<{ professional?: string }>;
@@ -31,7 +33,7 @@ export default async function AssignmentPage({ params, searchParams }: {
         <div className="brief-grid">
           <article><small>Professional</small><strong>{professional.displayName}</strong><span>{professional.headline}</span></article>
           <article><small>Organisation</small><strong>{organisation.name}</strong><span>{organisation.area}, Dhaka</span></article>
-          <article><small>Shift</small><strong>20 Jul · 8 PM</strong><span>12 hours · overnight</span></article>
+          <article><small>Shift</small><strong>{formatShift(brief.assignment.startsAt)}</strong><span>{brief.totalHours} hours · ends {formatShift(brief.assignment.endsAt)}</span></article>
           <article><small>Agreed rate</small><strong>BDT {brief.assignment.hourlyRateBdt}/hour</strong><span>BDT {brief.estimatedTotalBdt.toLocaleString()} estimated</span></article>
         </div>
         <div className="brief-footer">

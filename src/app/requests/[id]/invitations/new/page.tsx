@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../../data/demo-repository";
 import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
 
+function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
+
 export default async function NewInvitationPage({
   params,
   searchParams,
@@ -45,12 +47,12 @@ export default async function NewInvitationPage({
             <h1>Confirm the invitation</h1>
             <p className="lead">Nothing is sent until the clinic coordinator confirms these terms.</p>
             <div className="party-card">
-              <span className="profile-monogram" aria-hidden="true">NJ</span>
+              <span className="profile-monogram" aria-hidden="true">{professional.displayName.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
               <div><small>Inviting</small><h2>{professional.displayName}</h2><p>{professional.headline}</p></div>
             </div>
             <dl className="terms-list">
               <div><dt>Organisation</dt><dd>{organisation.name}</dd></div>
-              <div><dt>Shift</dt><dd>20 Jul, 8:00 PM → 21 Jul, 8:00 AM</dd></div>
+              <div><dt>Shift</dt><dd>{formatShift(request.requirement.startsAt)} → {formatShift(request.requirement.endsAt)}</dd></div>
               <div><dt>Location</dt><dd>{request.requirement.area}, Dhaka</dd></div>
               <div><dt>Required skills</dt><dd>{request.requirement.requiredSkills.join(", ")}</dd></div>
               <div><dt>Rate</dt><dd>BDT {professional.expectedHourlyRateBdt} per hour</dd></div>
@@ -62,7 +64,7 @@ export default async function NewInvitationPage({
             <h2>Coordinator declaration</h2>
             <ul className="check-list">
               <li>Requirements and rate have been reviewed.</li>
-              <li>Pending ICU evidence is understood.</li>
+              <li>Credential evidence and any cautions are understood.</li>
               <li>No patient information is included.</li>
               <li>The professional may accept or decline.</li>
             </ul>

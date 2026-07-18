@@ -26,7 +26,7 @@ AI assists with intent and explanation. It cannot override hard requirements, au
 
 The project was built from a fresh repository during Build Week with Codex as the primary development environment. The main Codex thread created the architecture, typed domain model, application routes, matching and credential services, UI, automated tests, browser validation, documentation, and iterative repairs. Dated commits and the build log separate each implementation phase.
 
-GPT-5.6 Sol is integrated through the Responses API for structured staffing-request extraction using a strict JSON schema, low reasoning effort, and server-side credentials. The live path was validated on July 18, 2026. A disclosed deterministic fallback keeps the public demo repeatable when API quota or network access is unavailable. Deterministic application code—not the model—owns eligibility and state transitions.
+GPT-5.6 Sol is integrated through the Responses API for two bounded tasks: structured staffing-request extraction and an evidence-grounded shortlist briefing. Both use strict JSON schemas, server-side credentials, and disclosed deterministic fallbacks. The briefing receives only the results of deterministic matching and cannot change eligibility. Deterministic application code—not the model—owns eligibility and state transitions.
 
 ## What makes it different
 

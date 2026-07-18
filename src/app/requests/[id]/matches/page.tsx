@@ -2,6 +2,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../data/demo-repository";
 import { rankCandidates } from "../../../../features/matching/match-engine";
+import { MatchBriefingCard } from "../../../../features/matching/match-briefing-card";
+
+const professionLabels = { general_practitioner: "doctor", registered_nurse: "registered nurse", medical_technologist: "laboratory technologist", physiotherapist: "physiotherapist", caregiver: "caregiver" } as const;
+
+function formatShift(value: string) {
+  return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
+}
 
 export default async function MatchResultsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -27,15 +34,15 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
       <div className="matches-shell">
         <section className="matches-heading">
           <div>
-            <p className="eyebrow">Dhanmondi Community Care · ICU night coverage</p>
-            <h1>{eligible.length} eligible professional</h1>
+            <p className="eyebrow">{organisation?.name} · {professionLabels[request.requirement.profession]} coverage</p>
+            <h1>{eligible.length} eligible {eligible.length === 1 ? "professional" : "professionals"}</h1>
             <p>
               Hard requirements were checked first. Scores only compare professionals who passed every requirement.
             </p>
           </div>
           <div className="request-facts" aria-label="Confirmed request summary">
-            <span>20 Jul · 8 PM–8 AM</span>
-            <span>ICU + BLS</span>
+            <span>{formatShift(request.requirement.startsAt)}–{formatShift(request.requirement.endsAt)}</span>
+            <span>{request.requirement.requiredSkills.join(" + ")}</span>
             <span>≤ BDT {request.requirement.maxHourlyRateBdt}/hour</span>
             <span>{organisation?.name}</span>
           </div>
@@ -88,6 +95,8 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
             ))}
           </div>
         </section>
+
+        <MatchBriefingCard requestId={request.id} />
 
         <section className="excluded-section" aria-labelledby="excluded-heading">
           <div className="section-title-row">

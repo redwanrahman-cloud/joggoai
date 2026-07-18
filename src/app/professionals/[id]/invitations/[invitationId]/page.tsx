@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../../data/demo-repository";
 import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
 
+function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
+
 export default async function ProfessionalInvitationPage({ params, searchParams }: {
   params: Promise<{ id: string; invitationId: string }>;
   searchParams: Promise<{ request?: string }>;
@@ -30,7 +32,7 @@ export default async function ProfessionalInvitationPage({ params, searchParams 
         <h1>{organisation.name} invited you to a shift.</h1>
         <p className="lead">Review the complete terms before choosing. The clinic cannot accept on your behalf.</p>
         <dl className="terms-list compact">
-          <div><dt>Shift</dt><dd>20 Jul, 8:00 PM → 21 Jul, 8:00 AM</dd></div>
+          <div><dt>Shift</dt><dd>{formatShift(request.requirement.startsAt)} → {formatShift(request.requirement.endsAt)}</dd></div>
           <div><dt>Location</dt><dd>{request.requirement.area}, Dhaka</dd></div>
           <div><dt>Skills requested</dt><dd>{request.requirement.requiredSkills.join(", ")}</dd></div>
           <div><dt>Payment</dt><dd>BDT {preview.estimatedTotalBdt.toLocaleString()} estimated</dd></div>

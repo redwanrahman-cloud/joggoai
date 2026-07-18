@@ -26,6 +26,10 @@ Target length: 2 minutes 55 seconds. Record at 1080p with audible narration and 
 
 **Say:** “Profession, registration, skills, full-shift availability, and budget are enforced in deterministic code. Only eligible candidates receive a score. Excluded professionals remain visible with the exact reason, so AI cannot hide a failed requirement.”
 
+**Show:** Generate the evidence-grounded staffing briefing.
+
+**Say:** “GPT-5.6 can turn those deterministic results into a concise review plan, but it cannot change eligibility or choose the professional.”
+
 ## 1:30–1:52 — Credential evidence
 
 **Show:** Nusrat Jahan’s profile, reviewed registration, pending ICU letter, and human-decision notice.

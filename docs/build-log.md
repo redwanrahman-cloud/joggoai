@@ -288,3 +288,20 @@ Validation:
 - TypeScript strict checking passed.
 - All twenty-seven tests passed, including the five-role dashboard and matching scenarios.
 - The full Next.js production build completed successfully with the new static dashboard route.
+
+## Phase 13 — Product-freeze review and bounded AI briefing
+
+Completed:
+
+- Visually inspected the deployed landing page and retained its established competition-ready direction.
+- Removed nurse-specific and ICU-specific copy from the doctor, laboratory, physiotherapy, and caregiver downstream journeys.
+- Made profession names, skills, dates, shift duration, initials, credential cautions, and assignment terms derive from the selected request.
+- Added a second bounded GPT-5.6 Sol workflow that turns deterministic match evidence into a concise verification plan.
+- Prevented the model from changing eligibility, inventing evidence, or making the final staffing decision.
+- Added a disclosed deterministic briefing fallback for quota or network failure.
+
+Validation:
+
+- ESLint and strict TypeScript checks passed.
+- All twenty-nine tests passed, including strict model-contract and decision-boundary coverage.
+- Both the Next.js production build and the Sites deployment build completed successfully.

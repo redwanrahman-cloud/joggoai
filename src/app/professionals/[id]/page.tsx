@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { reviewProfessionalCredentials } from "../../../features/credentials/credential-review";
 
+const professionLabels = { general_practitioner: "Doctor", registered_nurse: "Registered nurse", medical_technologist: "Laboratory technologist", physiotherapist: "Physiotherapist", caregiver: "Caregiver" } as const;
+
 const statusLabel = {
   platform_verified: "Reviewed for demo",
   uploaded_pending_review: "Uploaded · pending review",
@@ -56,7 +58,7 @@ export default async function ProfessionalProfilePage({
         <section className="profile-hero">
           <div className="profile-monogram" aria-hidden="true">{initials}</div>
           <div>
-            <p className="eyebrow">Candidate profile · Registered nurse</p>
+            <p className="eyebrow">Candidate profile · {professionLabels[professional.profession]}</p>
             <h1>{professional.displayName}</h1>
             <p>{professional.headline}</p>
             <div className="skill-row">{professional.skills.map((skill) => <span key={skill}>{skill}</span>)}</div>
@@ -73,7 +75,7 @@ export default async function ProfessionalProfilePage({
           <div>
             <p className="eyebrow">Credential review result</p>
             <h2>{reviewTitle}</h2>
-            <p>Registration satisfies the hard requirement. Supporting ICU evidence still requires human review before invitation.</p>
+            <p>{review.status === "ready" ? "Reviewed credential evidence satisfies the demo requirement. Original records must still be checked by the organisation." : "Registration satisfies the hard requirement. Supporting evidence and cautions still require human review before invitation."}</p>
           </div>
           <div className="evidence-counts">
             <span><strong>{review.reviewedEvidenceCount}</strong> reviewed</span>
