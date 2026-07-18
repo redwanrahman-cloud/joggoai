@@ -6,7 +6,7 @@
 - **Track:** Work & Productivity
 - **Tagline:** Verified professionals. Explainable matching. Human decisions.
 - **Repository:** https://github.com/redwanrahman-cloud/joggoai
-- **Demo URL:** https://joggo-ai-bd.najdhotel1.chatgpt.site (latest release pending)
+- **Demo URL:** https://joggo-ai-bd.najdhotel1.chatgpt.site
 - **Video URL:** pending public YouTube upload
 - **Codex `/feedback` session ID:** pending founder retrieval from this main build thread
 
@@ -57,13 +57,13 @@ No account, payment, real data, or secret is required.
 
 ## Final submission checklist
 
-- [ ] Production demo URL works in a private browser window.
+- [x] Production demo URL works without authentication.
 - [ ] Repository is public with MIT licence, or shared with both required judging accounts.
-- [ ] README includes setup, fictional sample data, testing path, Codex contribution, and GPT-5.6 boundaries.
+- [x] README includes setup, fictional sample data, testing path, Codex contribution, and GPT-5.6 boundaries.
 - [ ] Public YouTube demo is under three minutes and includes audio.
 - [ ] Video visibly demonstrates the working product.
 - [ ] Video explains how Codex and GPT-5.6 were used.
-- [ ] Work & Productivity track selected.
+- [x] Work & Productivity track selected for submission.
 - [ ] Main Codex `/feedback` session ID entered.
 - [ ] Demo URL, video URL, and session ID replace every pending placeholder above.
 - [ ] Submission completed before July 21, 2026 at 5:00 PM Pacific Time.

@@ -63,7 +63,7 @@ Target length: 2 minutes 55 seconds. Record at 1080p with audible narration and 
 ## Recording checklist
 
 - Keep the final export below 3:00.
-- Use a public or unlisted YouTube link that judges can open without signing in.
+- Upload to YouTube as a public video. Unlisted does not satisfy the official requirement.
 - Do not show API keys, terminal secrets, email addresses, or unrelated browser tabs.
 - Keep the live-model label visible; if the fallback appears, describe it honestly or rerecord after restoring access.
 - Demonstrate the working product rather than relying on slides.
