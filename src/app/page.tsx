@@ -9,7 +9,7 @@ const milestones = [
 
 export default function HomePage() {
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Joggo AI home">
           <span className="brand-mark" aria-hidden="true">J</span>
@@ -32,6 +32,7 @@ export default function HomePage() {
             </Link>
             <span className="coming-soon">Review before matching</span>
           </div>
+          <p className="demo-route-note">Repeatable demo · no account, payment, or real data required.</p>
         </div>
 
         <aside className="trust-card" aria-label="Product trust principles">

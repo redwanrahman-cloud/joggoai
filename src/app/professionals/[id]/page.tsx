@@ -42,7 +42,7 @@ export default async function ProfessionalProfilePage({
       : `Eligible with ${cautionCount} caution${cautionCount === 1 ? "" : "s"}`;
 
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">J</span>

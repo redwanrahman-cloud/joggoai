@@ -18,7 +18,7 @@ export default async function AssignmentPage({ params, searchParams }: {
   const brief = acceptInvitation(prepareInvitation(request, organisation, professional, repository));
 
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
         <span className="demo-badge">Fictional assignment</span>
@@ -38,7 +38,10 @@ export default async function AssignmentPage({ params, searchParams }: {
           <div><h2>Handover notes</h2><ul>{brief.safetyNotes.map((note) => <li key={note}>{note}</li>)}</ul></div>
           <div className="assignment-id"><small>Demo assignment</small><strong>{brief.assignment.id}</strong><span>Status · confirmed</span></div>
         </div>
-        <Link className="secondary-link" href="/">Return to Joggo AI</Link>
+        <div className="completion-actions">
+          <Link className="primary-action" href="/requests/new">Reset and run demo again</Link>
+          <Link className="secondary-link" href="/">Return to Joggo AI</Link>
+        </div>
       </section>
     </main>
   );

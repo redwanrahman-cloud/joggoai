@@ -15,7 +15,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
   const excluded = matches.filter((match) => !match.eligible);
 
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">J</span>

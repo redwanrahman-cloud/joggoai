@@ -179,3 +179,30 @@ Known limitations:
 - Demo transitions are reproducible route states rather than durable database writes.
 - Authentication, notifications, decline handling, cancellation, attendance, and contact exchange are outside this competition scope.
 - Dates and timestamps remain fixed to the fictional Build Week scenario.
+
+## 2026-07-18 — Phase 7
+
+Completed:
+
+- Added a global skip link and consistent main-content targets across every route.
+- Added visible keyboard focus treatment for links and buttons.
+- Added an accessible route-loading state with polite status announcement.
+- Added recoverable missing-record and runtime-error screens that preserve demo safety boundaries.
+- Added a one-click reset from the confirmed assignment to a fresh staffing request.
+- Added clear landing-page guidance that the repeatable demo needs no account, payment, or real data.
+- Normalised primary action links so interaction styling is consistent across the journey.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Sixteen tests passed across route states, assignment transitions, credential review, matching, extraction, domain invariants, and UI.
+- Next.js production build completed successfully for every static and dynamic route.
+- Browser regression confirmed the skip-link contract, missing-record recovery, final assignment status, and demo reset destination.
+- The mobile 404 recovery state passed at 390×844 with no horizontal overflow or console warnings and errors.
+
+Known limitations:
+
+- Automated end-to-end testing is not yet part of the repository; the competition golden path is browser-validated through Codex sessions.
+- Authentication, durable persistence, external registries, and production observability remain outside this prototype.
+- Final deployment and submission artifacts begin in Phase 8.

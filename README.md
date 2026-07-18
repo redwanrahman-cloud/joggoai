@@ -10,7 +10,7 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 6 is complete. The competition golden journey now runs end to end: request review, explainable matching, credential evidence, clinic-confirmed invitation, professional acceptance, and a final staffing brief. Deterministic transition rules prevent ineligible invitations and ensure an assignment exists only after acceptance.
+Phase 7 is complete. The end-to-end golden journey now includes keyboard navigation foundations, visible focus treatment, accessible loading feedback, recoverable missing/error states, and a one-click deterministic demo reset. The core workflow remains guarded by tested eligibility, credential, invitation, and acceptance rules.
 
 ## Local development
 

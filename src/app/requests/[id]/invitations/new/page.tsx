@@ -32,7 +32,7 @@ export default async function NewInvitationPage({
   }
 
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
         <span className="demo-badge">Clinic confirmation</span>

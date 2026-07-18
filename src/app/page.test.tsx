@@ -11,5 +11,6 @@ describe("HomePage", () => {
     );
     expect(screen.getByText(/A person makes the final staffing decision/i)).toBeInTheDocument();
     expect(screen.getByText(/fictional data only/i)).toBeInTheDocument();
+    expect(screen.getByText(/no account, payment, or real data required/i)).toBeInTheDocument();
   });
 });

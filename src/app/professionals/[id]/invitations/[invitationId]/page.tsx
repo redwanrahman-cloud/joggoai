@@ -19,7 +19,7 @@ export default async function ProfessionalInvitationPage({ params, searchParams 
   if (invitationId !== preview.invitation.id) notFound();
 
   return (
-    <main className="invitation-view">
+    <main className="invitation-view" id="main-content">
       <header className="site-header">
         <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
         <span className="demo-badge">Professional demo view</span>

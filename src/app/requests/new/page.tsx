@@ -3,7 +3,7 @@ import { RequestBuilder } from "../../../features/staffing-request/request-build
 
 export default function NewStaffingRequestPage() {
   return (
-    <main>
+    <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/">
           <span className="brand-mark" aria-hidden="true">J</span>
@@ -15,4 +15,3 @@ export default function NewStaffingRequestPage() {
     </main>
   );
 }
-

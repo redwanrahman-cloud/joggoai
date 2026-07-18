@@ -26,6 +26,21 @@ body {
 
 button, a { font: inherit; }
 
+.skip-link {
+  position: fixed;
+  z-index: 1000;
+  top: 10px;
+  left: 10px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: white;
+  background: var(--ink);
+  font-weight: 800;
+  transform: translateY(-160%);
+}
+.skip-link:focus { transform: translateY(0); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--amber); outline-offset: 4px; }
+
 .site-header {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
@@ -111,17 +126,22 @@ h1 {
 .actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
 .primary-action {
+  display: inline-flex;
+  justify-content: center;
   border: 0;
   border-radius: 14px;
   padding: 15px 20px;
   color: white;
   background: var(--teal-dark);
   font-weight: 750;
+  cursor: pointer;
+  text-decoration: none;
   box-shadow: 0 12px 30px rgb(7 87 79 / 18%);
 }
 
 .primary-action:disabled { cursor: not-allowed; opacity: 0.82; }
 .link-action { display: inline-block; text-decoration: none; }
+.demo-route-note { margin-top: 18px; color: var(--muted); font-size: 0.78rem; }
 .secondary-action { border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; color: var(--ink); background: var(--surface); font-weight: 750; }
 
 .builder-grid { width: min(1180px, calc(100% - 40px)); margin: 32px auto 90px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 24px; align-items: start; }
@@ -272,8 +292,17 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .assignment-id strong, .assignment-id span { display: block; }
 .assignment-id strong { margin: 18px 0 5px; overflow-wrap: anywhere; }
 .assignment-id span { color: var(--teal-dark); font-size: 0.8rem; }
-.secondary-link { display: inline-block; margin-top: 45px; color: white; font-weight: 800; }
+.completion-actions { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 45px; }
+.secondary-link { display: inline-block; color: white; font-weight: 800; }
 .full-width { width: 100%; }
+
+.state-shell { width: min(760px, calc(100% - 40px)); min-height: 80vh; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.state-shell h1 { font-size: clamp(3rem, 8vw, 5.7rem); }
+.state-shell > p:not(.eyebrow) { max-width: 620px; margin: 26px 0; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+.state-code { margin-bottom: 25px; color: var(--teal); font-family: Georgia, serif; font-size: 4rem; font-weight: 700; }
+.text-link { color: var(--teal-dark); font-weight: 800; }
+.loading-mark { width: 56px; aspect-ratio: 1; margin-bottom: 28px; border: 5px solid var(--mint); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.85s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .trust-card {
   position: relative;
