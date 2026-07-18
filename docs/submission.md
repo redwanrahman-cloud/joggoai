@@ -6,7 +6,7 @@
 - **Track:** Work & Productivity
 - **Tagline:** Verified professionals. Explainable matching. Human decisions.
 - **Repository:** https://github.com/redwanrahman-cloud/joggoai
-- **Demo URL:** pending production deployment
+- **Demo URL:** https://joggo-ai-bd.najdhotel1.chatgpt.site (latest release pending)
 - **Video URL:** pending public YouTube upload
 - **Codex `/feedback` session ID:** pending founder retrieval from this main build thread
 
@@ -18,7 +18,7 @@ ShohojSheba helps healthcare organisations turn an urgent staffing request into 
 
 Clinics and diagnostic centres often need temporary staff quickly, but matching a shift against professional registration, skills, availability, location, and compensation can be slow and inconsistent. Ordinary job boards expose profiles; they do not organise evidence or make the decision process accountable.
 
-ShohojSheba demonstrates an end-to-end healthcare staffing workflow for Bangladesh. A clinic describes a shift in everyday language. The system proposes structured requirements for human review, enforces deterministic eligibility constraints, ranks only candidates who passed, and explains every recommendation. The clinic can inspect synthetic credential evidence, see pending or expired records, and confirm an invitation. The professional independently accepts before a confirmed staffing brief is produced.
+ShohojSheba demonstrates an end-to-end healthcare staffing workflow for Bangladesh across doctors, registered nurses, laboratory technologists, physiotherapists, and caregivers. A clinic operations dashboard surfaces urgent requests and credential risks. A clinic describes a shift in everyday language. The system proposes structured requirements for human review, enforces deterministic eligibility constraints, ranks only candidates who passed, and explains every recommendation. The clinic can inspect synthetic credential evidence, see pending or expired records, and confirm an invitation. The professional independently accepts before a confirmed staffing brief is produced.
 
 AI assists with intent and explanation. It cannot override hard requirements, authenticate a government licence, fabricate evidence, send an invitation, or accept work for a person.
 
@@ -43,15 +43,15 @@ The initial audience is small and medium healthcare organisations in Bangladesh 
 ## Judge testing path
 
 1. Open the demo URL.
-2. Select **Start a staffing request**.
-3. Use the prefilled fictional ICU-night request and select **Structure this request**.
-4. Review and confirm the extracted fields.
-5. Open the recommended candidate.
-6. Review the credential evidence and caution.
-7. Confirm and send the invitation.
-8. Accept from the professional demo view.
-9. Review the final confirmed staffing brief.
-10. Select **Reset and run demo again** to repeat.
+2. Open the clinic dashboard and compare the five active profession workflows.
+3. Select the registered-nurse workflow, or start a new request and choose any profession scenario.
+4. Select **Structure this request** and confirm the live GPT-5.6 Sol label.
+5. Review and confirm the extracted fields.
+6. Open the recommended candidate.
+7. Review the credential evidence and caution.
+8. Confirm and send the invitation.
+9. Accept from the professional demo view.
+10. Review the final confirmed staffing brief, then reset to repeat.
 
 No account, payment, real data, or secret is required.
 

@@ -271,3 +271,20 @@ Completed:
 - Saved Sites version 1 and deployed it with owner-only access.
 - Smoke-tested the production landing page, staffing-request page, and live GPT-5.6 Sol extraction route.
 - Recorded the final Sites origin directly in social metadata after the provider rejected a runtime public-origin variable.
+
+## Phase 12 — Multi-profession operations dashboard
+
+Completed:
+
+- Expanded the complete demo from one nurse scenario to doctor, nurse, laboratory technologist, physiotherapist, and caregiver workflows.
+- Added eleven fictional professionals with role-specific credentials, availability, rates, skills, and transparent exclusions.
+- Added a clinic operations dashboard with staffing metrics, five active requests, credential-risk signals, and direct matching paths.
+- Preserved GPT-5.6 Sol for structured request understanding while deterministic code continues to own eligibility.
+- Updated judge-facing documentation to present the broader product coherently.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- All twenty-seven tests passed, including the five-role dashboard and matching scenarios.
+- The full Next.js production build completed successfully with the new static dashboard route.

@@ -27,6 +27,9 @@ export default function HomePage() {
             and understand candidate evidence—while people stay in control.
           </p>
           <div className="actions">
+            <Link className="primary-action link-action" href="/dashboard">
+              Open clinic dashboard
+            </Link>
             <Link className="primary-action link-action" href="/requests/new">
               Start a staffing request
             </Link>

@@ -16,6 +16,10 @@ ShohojSheba demonstrates a safer alternative to a generic job board:
 - AI cannot override a failed hard constraint;
 - the clinic and professional make separate final decisions.
 
+## Multi-profession demo
+
+The clinic dashboard presents five complete staffing journeys: doctor coverage, registered nursing, laboratory technology, physiotherapy, and caregiving. Each role has fictional professionals, credential evidence, availability, rates, eligible matches, and visible hard-rule exclusions.
+
 ## Golden demo journey
 
 1. A clinic describes an overnight staffing need naturally.
@@ -28,7 +32,7 @@ ShohojSheba demonstrates a safer alternative to a generic job board:
 8. The professional independently accepts.
 9. ShohojSheba creates a concise fictional staffing brief.
 
-Start the scripted journey at `/requests/new`. All people, organisations, credentials, and assignments are fictional.
+Start at `/dashboard`, choose any role, or run the full scripted journey from `/requests/new`. All people, organisations, credentials, and assignments are fictional.
 
 ## Safety and product boundaries
 
@@ -77,7 +81,7 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:3000` and select **Start a staffing request**.
+Open `http://localhost:3000/dashboard` to review the clinic operations dashboard.
 
 Optional server-side model configuration:
 

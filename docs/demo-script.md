@@ -1,65 +1,65 @@
 # Three-minute demo video script
 
-Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and readable browser zoom.
+Target length: 2 minutes 55 seconds. Record at 1080p with audible narration and readable browser zoom.
 
 ## 0:00–0:18 — Problem
 
 **Show:** ShohojSheba landing page.
 
-**Say:** “Clinics sometimes need qualified temporary staff urgently. But comparing registration, skills, availability, and compensation manually is slow and difficult to audit.”
+**Say:** “Clinics sometimes need qualified temporary staff urgently. Comparing registration, skills, availability, and compensation manually is slow and difficult to audit.”
 
-## 0:18–0:32 — Product promise
+## 0:18–0:38 — Product and scope
 
-**Show:** Trust card and start button.
+**Show:** Open the clinic dashboard and scan the doctor, nurse, laboratory, physiotherapy, and caregiver rows.
 
-**Say:** “ShohojSheba turns a plain-language staffing need into an explainable shortlist while keeping every important decision with people.”
+**Say:** “ShohojSheba gives clinics one view of urgent coverage across five healthcare roles. Each workflow turns a plain-language need into an explainable shortlist while keeping every important decision with people.”
 
-## 0:32–0:58 — Request extraction and review
+## 0:38–1:02 — GPT-5.6 extraction and review
 
-**Show:** Prefilled request, structure it, then point to the live GPT-5.6 Sol label and editable fields.
+**Show:** Start a nurse request, select **Structure this request**, and point to the live GPT-5.6 Sol label and editable fields.
 
-**Say:** “The clinic describes the shift naturally. GPT‑5.6 Sol converts it into validated structured requirements through the Responses API. The API key remains server-side, and a human reviews every field before matching. A clearly labelled fallback keeps the journey safe if live access is unavailable.”
+**Say:** “The clinic describes the shift naturally. GPT-5.6 Sol converts it into validated structured requirements through the Responses API. The key remains server-side, and a human reviews every field. A disclosed fallback keeps the demo available if live access fails.”
 
-## 0:58–1:28 — Explainable matching
+## 1:02–1:30 — Explainable matching
 
-**Show:** Confirm requirements, recommended candidate, evidence, score, and excluded candidates.
+**Show:** Confirm requirements, the recommended candidate, evidence, score, and excluded candidates.
 
-**Say:** “Hard constraints—profession, registration, skills, full-shift availability, and budget—run in deterministic code. Only eligible candidates receive a score. Excluded professionals remain visible with the exact reason, so AI cannot hide a failed requirement.”
+**Say:** “Profession, registration, skills, full-shift availability, and budget are enforced in deterministic code. Only eligible candidates receive a score. Excluded professionals remain visible with the exact reason, so AI cannot hide a failed requirement.”
 
-## 1:28–1:53 — Credential evidence
+## 1:30–1:52 — Credential evidence
 
 **Show:** Nusrat Jahan’s profile, reviewed registration, pending ICU letter, and human-decision notice.
 
-**Say:** “Credential evidence is separated by provenance and review status. ShohojSheba can organise records and flag gaps, but it never claims that AI authenticated a government licence.”
+**Say:** “Credential evidence is separated by provenance and review status. ShohojSheba organises records and flags gaps, but never claims that AI authenticated a government licence.”
 
-## 1:53–2:18 — Two-sided human decisions
+## 1:52–2:16 — Two-sided human decisions
 
 **Show:** Clinic confirmation, then professional invitation and acceptance.
 
-**Say:** “The clinic explicitly confirms the invitation. The professional then reviews the same terms and independently accepts. Neither action is performed by the model.”
+**Say:** “The clinic explicitly confirms the invitation. The professional reviews the same terms and independently accepts. Neither action is performed by the model.”
 
-## 2:18–2:34 — Outcome
+## 2:16–2:31 — Outcome
 
 **Show:** Confirmed staffing brief.
 
-**Say:** “Only after acceptance does ShohojSheba produce the confirmed fictional staffing brief, including both parties, shift, rate, and safety notes.”
+**Say:** “Only after acceptance does ShohojSheba produce a confirmed fictional staffing brief with both parties, shift, rate, and safety notes.”
 
-## 2:34–2:52 — Codex development
+## 2:31–2:50 — Codex development
 
-**Show:** GitHub commit history, build log, or Codex diff view.
+**Show:** GitHub commit history, build log, tests, or Codex diff view.
 
-**Say:** “I supplied the healthcare workflow and product decisions. Codex was the primary engineering workspace for the architecture, implementation, tests, browser QA, repairs, and documentation. The dated repository history records every Build Week phase.”
+**Say:** “I supplied the healthcare workflow and product decisions. Codex was the primary engineering workspace for architecture, implementation, testing, repair, and documentation. The dated repository history records every Build Week phase.”
 
-## 2:52–3:00 — Close
+## 2:50–2:55 — Close
 
-**Show:** Social card or landing headline.
+**Show:** Dashboard or social card.
 
 **Say:** “ShohojSheba: verified professionals, explainable matching, human decisions.”
 
 ## Recording checklist
 
 - Keep the final export below 3:00.
-- Use a public, unlisted-or-public YouTube link that judges can open without signing in.
+- Use a public or unlisted YouTube link that judges can open without signing in.
 - Do not show API keys, terminal secrets, email addresses, or unrelated browser tabs.
-- Keep the live-model label visible; if the fallback appears, describe it honestly and rerecord after restoring live access.
-- Demonstrate the product rather than relying on slides.
+- Keep the live-model label visible; if the fallback appears, describe it honestly or rerecord after restoring access.
+- Demonstrate the working product rather than relying on slides.
