@@ -10,7 +10,7 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 4 is complete. After confirming a staffing request, the clinic receives an explainable shortlist where deterministic hard requirements control eligibility and transparent scoring only compares candidates who passed. Ineligible fictional professionals remain visible with exact exclusion reasons.
+Phase 5 is complete. After confirming a staffing request, the clinic receives an explainable shortlist where deterministic hard requirements control eligibility. The recommended candidate opens into an evidence-first profile that separates reviewed, pending, expired, and missing credentials, explains every finding, and preserves the human invitation decision.
 
 ## Local development
 

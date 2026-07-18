@@ -81,7 +81,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
                   </div>
                   <div className="candidate-actions">
                     <span className="credential-chip">Demo registration reviewed</span>
-                    <button className="primary-action" type="button" disabled>Review candidate · Phase 5</button>
+                    <Link className="primary-action link-action" href={`/professionals/${match.professional.id}?request=${request.id}`}>Review candidate</Link>
                   </div>
                 </div>
               </article>
@@ -109,4 +109,3 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
     </main>
   );
 }
-

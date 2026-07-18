@@ -47,3 +47,9 @@ Request extraction returns one validated contract whether it comes from GPT-5.6 
 Status: accepted on 2026-07-18.
 
 Profession, verified registration, required skills, full-shift availability, and budget are hard constraints. A candidate who fails any hard constraint receives no match score and cannot appear in the recommended shortlist. Transparent scoring uses reliability, experience, completed demo assignments, and area fit only after eligibility is established.
+
+## ADR-009: Credential review reports evidence provenance, not authenticity
+
+Status: accepted on 2026-07-18.
+
+The candidate profile labels every credential by its evidence source and review state. Joggo AI may organise evidence, identify expiry and missing support, and prepare a human checklist, but it must not claim that AI authenticated a government registration. The competition build uses visibly synthetic records and keeps invitation disabled until the next human-controlled workflow phase.

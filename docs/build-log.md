@@ -125,3 +125,29 @@ Known limitations:
 - Distance and travel time are not calculated; area differences appear as explicit uncertainty flags.
 - Match explanations are deterministic until the live GPT-5.6 explanation gateway is enabled.
 - Candidate review and credential-document inspection begin in Phase 5.
+
+## 2026-07-18 — Phase 5
+
+Completed:
+
+- Added a candidate profile connected directly from the recommended match.
+- Added synthetic credential evidence cards with issuer, masked reference, expiry, source, and review state.
+- Added deterministic credential review findings for reviewed, pending, missing, and expired evidence.
+- Added blocking behavior for missing, expired, or unreviewed professional registration.
+- Added an evidence provenance boundary stating that Joggo AI does not authenticate government records.
+- Kept the invitation action visibly disabled for the Phase 6 human-controlled assignment workflow.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Eleven tests passed across credential review, matching, extraction, domain invariants, and UI.
+- Tests prove expired registration blocks a candidate and pending supporting evidence produces a caution.
+- Next.js production build completed successfully with the dynamic candidate-profile route.
+- Browser review passed at desktop and a 390×844 mobile viewport with no horizontal overflow or console warnings and errors.
+
+Known limitations:
+
+- Credential review is deterministic and uses fictional records; no government or external registry is connected.
+- Uploaded document contents are represented by synthetic metadata rather than live file extraction.
+- Invitation and assignment state begin in Phase 6.
