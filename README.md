@@ -10,7 +10,22 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 0 is complete: environment inspection, product boundaries, architecture, staged plan, and repository working rules. Application implementation has not started.
+Phase 1 is complete. The repository now contains a responsive, typed Next.js application shell, the initial Joggo AI visual language, strict quality tooling, and a foundation test. Business workflows begin in Phase 2 with the domain model and synthetic demo data.
+
+## Local development
+
+Requirements: Node.js 22 or newer and pnpm 11.
+
+```bash
+pnpm install
+pnpm dev
+```
+
+Run the complete quality gate with:
+
+```bash
+pnpm check
+```
 
 See:
 
@@ -19,4 +34,3 @@ See:
 - `docs/implementation-plan.md`
 - `docs/decisions.md`
 - `docs/build-log.md`
-
