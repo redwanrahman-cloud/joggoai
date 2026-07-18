@@ -30,3 +30,8 @@ Status: accepted on 2026-07-18.
 
 The scripted demo must remain functional when credentials, quota, or network access fail. Fallback output is visibly identified and uses the same validation contract as live model output.
 
+## ADR-006: Repository boundary before durable persistence
+
+Status: accepted on 2026-07-18.
+
+The competition build uses a typed repository backed by deterministic, fictional in-memory data. This avoids deployment-specific database behavior while the golden workflow is still changing. Domain services depend on the repository interface, so a durable adapter can be introduced later without rewriting the workflow.

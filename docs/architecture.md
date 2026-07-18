@@ -4,13 +4,13 @@
 
 - Next.js with TypeScript for the web application and server routes
 - Tailwind CSS for a focused design system
-- Prisma with SQLite for a fast, portable local demo data store
+- A typed repository boundary with deterministic in-memory demo data
 - Zod schemas at every AI and server boundary
 - OpenAI Responses API for request extraction and explanation generation
 - Vitest for unit and integration tests
 - Playwright for the golden browser journey
 
-This stack is provisional until the foundation milestone confirms dependency availability and deployment compatibility.
+The repository boundary keeps the competition build portable and deterministic. A durable database adapter can replace the in-memory implementation after the core workflow is proven.
 
 ## System shape
 
@@ -19,7 +19,7 @@ The application is a single deployable web app for the competition demo:
 - Presentation: clinic and professional dashboards
 - Application services: requests, matching, credentials, and assignments
 - Domain rules: eligibility, scoring inputs, status transitions, and audit events
-- Data access: Prisma repository over SQLite locally
+- Data access: typed repository backed by deterministic fictional seed data
 - AI gateway: one isolated OpenAI client with validated structured outputs
 
 ## Core entities
@@ -59,4 +59,3 @@ The model may parse a request and explain evidence. It must not override failed 
 - File type and size controls before any credential upload work
 - Neutral, non-clinical language and no patient records
 - Visible demo-data labels
-

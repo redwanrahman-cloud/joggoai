@@ -14,9 +14,9 @@ Exit: lint, type check, tests, and production build pass; no business workflow y
 
 ## Phase 2 — Domain and synthetic data
 
-Implement the schema, migrations, typed repositories, and credible fictional clinic/professional/credential/availability seed data.
+Implement the domain schema, typed repository boundary, invariants, and credible fictional clinic/professional/credential/availability seed data. Use a deterministic in-memory adapter for the competition workflow; defer durable migrations until the workflow is proven.
 
-Exit: repeatable database setup and domain-rule unit tests pass.
+Exit: repeatable dataset setup and domain-rule unit tests pass.
 
 ## Phase 3 — Staffing request vertical slice
 
@@ -53,4 +53,3 @@ Exit: all quality gates pass and a clean demo can be repeated reliably.
 Prepare README evidence, architecture diagrams if useful, public deployment, demo script, screenshots, three-minute video plan, and submission copy.
 
 Exit: every official submission field and artifact is checked against the current rules.
-

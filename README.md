@@ -10,7 +10,7 @@ The MVP is deliberately limited to one polished healthcare staffing journey. It 
 
 ## Current status
 
-Phase 1 is complete. The repository now contains a responsive, typed Next.js application shell, the initial Joggo AI visual language, strict quality tooling, and a foundation test. Business workflows begin in Phase 2 with the domain model and synthetic demo data.
+Phase 2 is complete. The repository contains a responsive typed application shell, the initial Joggo AI visual language, a healthcare staffing domain model, a deterministic fictional Dhaka dataset, repository access, and cross-entity safety invariants. The interactive staffing-request workflow begins in Phase 3.
 
 ## Local development
 
