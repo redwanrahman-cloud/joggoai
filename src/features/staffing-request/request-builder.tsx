@@ -6,10 +6,18 @@ import type { Profession, StaffingRequirement } from "../../domain/types";
 import type { ExtractionResult } from "./extraction";
 import { extractStaffingRequestFallback, validateStaffingRequirement } from "./extraction";
 
-const defaultRequest =
-  "We need a registered nurse in Dhanmondi tomorrow from 8 PM to 8 AM with ICU and BLS experience, up to BDT 350 per hour.";
+const scenarios: Array<{ profession: Profession; label: string; detail: string; requestId: string; request: string }> = [
+  { profession: "general_practitioner", label: "Doctor coverage", detail: "Evening clinic locum", requestId: "request-doctor-evening", request: "We need a general practitioner in Dhanmondi tomorrow from 5 PM to 9 PM with general medicine and emergency assessment experience, up to BDT 1,200 per hour." },
+  { profession: "registered_nurse", label: "Registered nurse", detail: "Overnight ICU coverage", requestId: "request-icu-night", request: "We need a registered nurse in Dhanmondi tomorrow from 8 PM to 8 AM with ICU and BLS experience, up to BDT 350 per hour." },
+  { profession: "medical_technologist", label: "Lab technologist", detail: "Morning diagnostics shift", requestId: "request-lab-day", request: "We need a medical technologist in Mirpur tomorrow from 9 AM to 5 PM with phlebotomy and sample handling experience, up to BDT 300 per hour." },
+  { profession: "physiotherapist", label: "Physiotherapist", detail: "Rehabilitation coverage", requestId: "request-physio-day", request: "We need a physiotherapist in Dhanmondi tomorrow from 10 AM to 4 PM with musculoskeletal rehabilitation and post-operative mobility experience, up to BDT 500 per hour." },
+  { profession: "caregiver", label: "Caregiver", detail: "Supervised night support", requestId: "request-caregiver-night", request: "We need a caregiver in Dhanmondi tomorrow from 8 PM to 8 AM with elder care and mobility assistance experience, up to BDT 220 per hour." },
+];
+
+const defaultRequest = scenarios[1].request;
 
 const professionLabels: Record<Profession, string> = {
+  general_practitioner: "General practitioner",
   registered_nurse: "Registered nurse",
   medical_technologist: "Medical technologist",
   physiotherapist: "Physiotherapist",
@@ -24,6 +32,28 @@ export function RequestBuilder() {
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const errors = useMemo(() => (requirement ? validateStaffingRequirement(requirement) : []), [requirement]);
+  const matchingRequestId = requirement
+    ? scenarios.find((scenario) => scenario.profession === requirement.profession)?.requestId ?? "request-icu-night"
+    : "request-icu-night";
+
+  function chooseScenario(request: string) {
+    setRequestText(request);
+    setRequirement(null);
+    setWarnings([]);
+    setSource(null);
+    setConfirmed(false);
+  }
+
+  function formatShift(value: string) {
+    return new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Dhaka",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    }).format(new Date(value));
+  }
 
   async function analyseRequest() {
     setIsAnalysing(true);
@@ -63,7 +93,7 @@ export function RequestBuilder() {
           The confirmed request requires a {professionLabels[requirement.profession].toLowerCase()} in {requirement.area} with {requirement.requiredSkills.join(" and ")} experience.
         </p>
         <div className="confirmation-actions">
-          <Link className="primary-action link-action" href="/requests/request-icu-night/matches">View eligible matches</Link>
+          <Link className="primary-action link-action" href={`/requests/${matchingRequestId}/matches`}>View eligible matches</Link>
           <button className="secondary-action" type="button" onClick={() => setConfirmed(false)}>Edit requirements</button>
         </div>
       </section>
@@ -76,6 +106,19 @@ export function RequestBuilder() {
         <p className="eyebrow">Step 1 · Describe the shift</p>
         <h1>What coverage do you need?</h1>
         <p className="panel-intro">Write naturally. You will review every extracted detail before anything is saved or matched.</p>
+        <div className="scenario-picker" aria-label="Demo staffing scenarios">
+          {scenarios.map((scenario) => (
+            <button
+              className={requestText === scenario.request ? "scenario-option active" : "scenario-option"}
+              key={scenario.profession}
+              type="button"
+              onClick={() => chooseScenario(scenario.request)}
+            >
+              <strong>{scenario.label}</strong>
+              <span>{scenario.detail}</span>
+            </button>
+          ))}
+        </div>
         <label className="field-label" htmlFor="request-text">Staffing request</label>
         <textarea
           id="request-text"
@@ -125,8 +168,8 @@ export function RequestBuilder() {
             </div>
             <div className="shift-summary">
               <span>Shift window</span>
-              <strong>20 Jul, 8:00 PM → 21 Jul, 8:00 AM</strong>
-              <small>Asia/Dhaka · resolved for the scripted demo scenario</small>
+              <strong>{formatShift(requirement.startsAt)} → {formatShift(requirement.endsAt)}</strong>
+              <small>Asia/Dhaka · extracted from the selected staffing scenario</small>
             </div>
             {warnings.map((warning) => <p className="review-warning" key={warning}>{warning}</p>)}
             {errors.map((error) => <p className="validation-error" key={error}>{error}</p>)}

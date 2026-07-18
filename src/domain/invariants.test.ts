@@ -20,8 +20,9 @@ describe("demo domain data", () => {
   it("returns repository list copies so callers cannot mutate the seed collection", () => {
     const repository = createDemoRepository();
     const firstRead = repository.listProfessionals();
+    const originalCount = firstRead.length;
     firstRead.pop();
 
-    expect(repository.listProfessionals()).toHaveLength(4);
+    expect(repository.listProfessionals()).toHaveLength(originalCount);
   });
 });

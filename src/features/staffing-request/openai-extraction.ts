@@ -15,7 +15,7 @@ const staffingRequirementSchema = {
   type: "object",
   additionalProperties: false,
   properties: {
-    profession: { type: "string", enum: ["registered_nurse", "medical_technologist", "physiotherapist", "caregiver"] },
+    profession: { type: "string", enum: ["general_practitioner", "registered_nurse", "medical_technologist", "physiotherapist", "caregiver"] },
     area: { type: "string" },
     startsAt: { type: "string" },
     endsAt: { type: "string" },

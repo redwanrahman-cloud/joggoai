@@ -35,5 +35,17 @@ describe("deterministic candidate matching", () => {
     expect(outpatientNurse?.eligible).toBe(false);
     expect(outpatientNurse?.hardConstraintFailures).toContain("Missing required skills: ICU.");
   });
-});
 
+  it.each([
+    ["request-doctor-evening", "pro-dr-ayesha-karim"],
+    ["request-lab-day", "pro-tahmid-hasan"],
+    ["request-physio-day", "pro-sabiha-noor"],
+    ["request-caregiver-night", "pro-rokeya-begum"],
+  ])("provides a trusted match and transparent exclusion for %s", (requestId, expectedProfessionalId) => {
+    const scenarioRequest = repository.getStaffingRequest(requestId);
+    expect(scenarioRequest).toBeDefined();
+    const matches = rankCandidates(scenarioRequest!, repository);
+    expect(matches.find((match) => match.eligible)?.professional.id).toBe(expectedProfessionalId);
+    expect(matches.some((match) => !match.eligible && match.hardConstraintFailures.length > 0)).toBe(true);
+  });
+});

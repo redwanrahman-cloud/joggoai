@@ -8,6 +8,7 @@ export interface ExtractionResult {
 }
 
 const professionTerms: Array<[RegExp, Profession]> = [
+  [/general practitioner|\bdoctor\b|\bphysician\b|\bgp\b/i, "general_practitioner"],
   [/medical technologist|lab(?:oratory)? technologist/i, "medical_technologist"],
   [/physiotherapist|physical therapist/i, "physiotherapist"],
   [/caregiver|care attendant/i, "caregiver"],
@@ -56,4 +57,3 @@ export function validateStaffingRequirement(requirement: StaffingRequirement): s
   if (requirement.requiredSkills.length === 0) errors.push("Add at least one required skill.");
   return errors;
 }
-

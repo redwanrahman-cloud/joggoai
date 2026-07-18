@@ -18,5 +18,13 @@ describe("staffing request extraction fallback", () => {
     const result = extractStaffingRequestFallback("Need help tomorrow");
     expect(validateStaffingRequirement(result.requirement)).toContain("Add at least one required skill.");
   });
-});
 
+  it.each([
+    ["Need a doctor with general medicine and emergency assessment experience", "general_practitioner"],
+    ["Need a medical technologist with phlebotomy and sample handling experience", "medical_technologist"],
+    ["Need a physiotherapist with rehabilitation experience", "physiotherapist"],
+    ["Need a caregiver with elder care and mobility assistance experience", "caregiver"],
+  ])("recognises profession in: %s", (input, profession) => {
+    expect(extractStaffingRequestFallback(input).requirement.profession).toBe(profession);
+  });
+});

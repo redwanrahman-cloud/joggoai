@@ -1,6 +1,7 @@
 export type EntityId = string;
 
 export type Profession =
+  | "general_practitioner"
   | "registered_nurse"
   | "medical_technologist"
   | "physiotherapist"
@@ -154,4 +155,3 @@ export interface DemoDataSet {
   assignments: Assignment[];
   aiRunAudits: AiRunAudit[];
 }
-
