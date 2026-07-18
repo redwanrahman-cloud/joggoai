@@ -45,8 +45,8 @@ export default async function ProfessionalProfilePage({
     <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/">
-          <span className="brand-mark" aria-hidden="true">J</span>
-          <span>Joggo AI</span>
+          <span className="brand-mark" aria-hidden="true">S</span>
+          <span>ShohojSheba</span>
         </Link>
         <span className="demo-badge">Synthetic credential review</span>
       </header>
@@ -93,7 +93,7 @@ export default async function ProfessionalProfilePage({
                 <article className="credential-card" key={credential.id}>
                   <div className={`credential-status ${credential.status}`}>{statusLabel[credential.status]}</div>
                   <div className="document-preview" aria-hidden="true">
-                    <span>JOGGO AI · SYNTHETIC DOCUMENT</span>
+                    <span>SHOHOJSHEBA · SYNTHETIC DOCUMENT</span>
                     <strong>{credential.type.replaceAll("_", " ")}</strong>
                     <small>Not a real credential</small>
                   </div>
@@ -124,7 +124,7 @@ export default async function ProfessionalProfilePage({
             </div>
             <div className="review-boundary">
               <strong>Human decision required</strong>
-              <p>Joggo AI organises evidence and flags gaps. It does not authenticate a government record or make the hiring decision.</p>
+              <p>ShohojSheba organises evidence and flags gaps. It does not authenticate a government record or make the hiring decision.</p>
             </div>
             <Link className="primary-action full-width" href={`/requests/${request.id}/invitations/new?professional=${professional.id}`}>
               Review invitation

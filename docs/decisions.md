@@ -52,7 +52,7 @@ Profession, verified registration, required skills, full-shift availability, and
 
 Status: accepted on 2026-07-18.
 
-The candidate profile labels every credential by its evidence source and review state. Joggo AI may organise evidence, identify expiry and missing support, and prepare a human checklist, but it must not claim that AI authenticated a government registration. The competition build uses visibly synthetic records and keeps invitation disabled until the next human-controlled workflow phase.
+The candidate profile labels every credential by its evidence source and review state. ShohojSheba may organise evidence, identify expiry and missing support, and prepare a human checklist, but it must not claim that AI authenticated a government registration. The competition build uses visibly synthetic records and keeps invitation disabled until the next human-controlled workflow phase.
 
 ## ADR-010: Demo state transitions are deterministic and URL-addressable
 

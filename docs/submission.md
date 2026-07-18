@@ -2,7 +2,7 @@
 
 ## Submission identity
 
-- **Project:** Joggo AI
+- **Project:** ShohojSheba
 - **Track:** Work & Productivity
 - **Tagline:** Verified professionals. Explainable matching. Human decisions.
 - **Repository:** https://github.com/redwanrahman-cloud/joggoai
@@ -12,13 +12,13 @@
 
 ## Short description
 
-Joggo AI helps healthcare organisations turn an urgent staffing request into a reviewed, explainable shortlist of qualified fictional professionals—then keeps both invitation and acceptance under human control.
+ShohojSheba helps healthcare organisations turn an urgent staffing request into a reviewed, explainable shortlist of qualified fictional professionals—then keeps both invitation and acceptance under human control.
 
 ## Full description
 
 Clinics and diagnostic centres often need temporary staff quickly, but matching a shift against professional registration, skills, availability, location, and compensation can be slow and inconsistent. Ordinary job boards expose profiles; they do not organise evidence or make the decision process accountable.
 
-Joggo AI demonstrates an end-to-end healthcare staffing workflow for Bangladesh. A clinic describes a shift in everyday language. The system proposes structured requirements for human review, enforces deterministic eligibility constraints, ranks only candidates who passed, and explains every recommendation. The clinic can inspect synthetic credential evidence, see pending or expired records, and confirm an invitation. The professional independently accepts before a confirmed staffing brief is produced.
+ShohojSheba demonstrates an end-to-end healthcare staffing workflow for Bangladesh. A clinic describes a shift in everyday language. The system proposes structured requirements for human review, enforces deterministic eligibility constraints, ranks only candidates who passed, and explains every recommendation. The clinic can inspect synthetic credential evidence, see pending or expired records, and confirm an invitation. The professional independently accepts before a confirmed staffing brief is produced.
 
 AI assists with intent and explanation. It cannot override hard requirements, authenticate a government licence, fabricate evidence, send an invitation, or accept work for a person.
 
@@ -26,7 +26,7 @@ AI assists with intent and explanation. It cannot override hard requirements, au
 
 The project was built from a fresh repository during Build Week with Codex as the primary development environment. The main Codex thread created the architecture, typed domain model, application routes, matching and credential services, UI, automated tests, browser validation, documentation, and iterative repairs. Dated commits and the build log separate each implementation phase.
 
-The product boundary targets GPT-5.6 Sol through the Responses API for structured staffing-request extraction and evidence-grounded language. A disclosed deterministic fallback keeps the public demo repeatable when an API key or live model is unavailable. Deterministic application code—not the model—owns eligibility and state transitions.
+GPT-5.6 Sol is integrated through the Responses API for structured staffing-request extraction using a strict JSON schema, low reasoning effort, and server-side credentials. The live path was validated on July 18, 2026. A disclosed deterministic fallback keeps the public demo repeatable when API quota or network access is unavailable. Deterministic application code—not the model—owns eligibility and state transitions.
 
 ## What makes it different
 

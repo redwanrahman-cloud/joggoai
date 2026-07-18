@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { Profession, StaffingRequirement } from "../../domain/types";
+import type { ExtractionResult } from "./extraction";
 import { extractStaffingRequestFallback, validateStaffingRequirement } from "./extraction";
 
 const defaultRequest =
@@ -19,13 +20,31 @@ export function RequestBuilder() {
   const [requestText, setRequestText] = useState(defaultRequest);
   const [requirement, setRequirement] = useState<StaffingRequirement | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
+  const [source, setSource] = useState<ExtractionResult["source"] | null>(null);
+  const [isAnalysing, setIsAnalysing] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
   const errors = useMemo(() => (requirement ? validateStaffingRequirement(requirement) : []), [requirement]);
 
-  function analyseRequest() {
-    const result = extractStaffingRequestFallback(requestText);
+  async function analyseRequest() {
+    setIsAnalysing(true);
+    let result: ExtractionResult;
+    try {
+      const response = await fetch("/api/staffing-request/extract", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: requestText }),
+      });
+      if (!response.ok) throw new Error("Extraction request failed.");
+      result = await response.json() as ExtractionResult;
+    } catch {
+      result = extractStaffingRequestFallback(requestText);
+      result.warnings.unshift("The extraction service was unreachable; the local deterministic fallback was used.");
+    } finally {
+      setIsAnalysing(false);
+    }
     setRequirement(result.requirement);
     setWarnings(result.warnings);
+    setSource(result.source);
     setConfirmed(false);
   }
 
@@ -64,8 +83,8 @@ export function RequestBuilder() {
           onChange={(event) => setRequestText(event.target.value)}
           rows={8}
         />
-        <button className="primary-action" type="button" onClick={analyseRequest} disabled={!requestText.trim()}>
-          Structure this request
+        <button className="primary-action" type="button" onClick={analyseRequest} disabled={!requestText.trim() || isAnalysing}>
+          {isAnalysing ? "Structuring with GPT-5.6 Sol…" : "Structure this request"}
         </button>
         <p className="privacy-note">Use staffing details only. Never include patient names or medical records.</p>
       </section>
@@ -80,9 +99,9 @@ export function RequestBuilder() {
           </div>
         ) : (
           <>
-            <div className="fallback-notice">
-              <strong>Deterministic demo fallback</strong>
-              <span>Live model access is not configured. Review all suggested fields.</span>
+            <div className={source === "live_model" ? "live-model-notice" : "fallback-notice"}>
+              <strong>{source === "live_model" ? "Live GPT-5.6 Sol extraction" : "Deterministic demo fallback"}</strong>
+              <span>{source === "live_model" ? "Structured with the OpenAI Responses API. Human review is still required." : "Live model access was unavailable. Review all suggested fields."}</span>
             </div>
             <div className="field-grid">
               <label>

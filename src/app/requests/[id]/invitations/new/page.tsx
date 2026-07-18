@@ -34,7 +34,7 @@ export default async function NewInvitationPage({
   return (
     <main id="main-content">
       <header className="site-header">
-        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
+        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">S</span><span>ShohojSheba</span></Link>
         <span className="demo-badge">Clinic confirmation</span>
       </header>
       <div className="decision-shell">

@@ -11,9 +11,9 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Joggo AI home">
-          <span className="brand-mark" aria-hidden="true">J</span>
-          <span>Joggo AI</span>
+        <a className="brand" href="#top" aria-label="ShohojSheba home">
+          <span className="brand-mark" aria-hidden="true">S</span>
+          <span>ShohojSheba</span>
         </a>
         <span className="demo-badge">Build Week demo</span>
       </header>
@@ -23,7 +23,7 @@ export default function HomePage() {
           <p className="eyebrow">Healthcare staffing · Bangladesh</p>
           <h1>Turn an urgent staffing need into a trusted shortlist.</h1>
           <p className="hero-text">
-            Joggo AI helps clinics structure requests, check hard requirements,
+            ShohojSheba helps clinics structure requests, check hard requirements,
             and understand candidate evidence—while people stay in control.
           </p>
           <div className="actions">

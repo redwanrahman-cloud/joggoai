@@ -6,8 +6,8 @@ export default function NewStaffingRequestPage() {
     <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/">
-          <span className="brand-mark" aria-hidden="true">J</span>
-          <span>Joggo AI</span>
+          <span className="brand-mark" aria-hidden="true">S</span>
+          <span>ShohojSheba</span>
         </Link>
         <span className="demo-badge">Fictional demo data</span>
       </header>

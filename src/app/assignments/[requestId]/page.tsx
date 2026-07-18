@@ -20,7 +20,7 @@ export default async function AssignmentPage({ params, searchParams }: {
   return (
     <main id="main-content">
       <header className="site-header">
-        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
+        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">S</span><span>ShohojSheba</span></Link>
         <span className="demo-badge">Fictional assignment</span>
       </header>
       <section className="success-shell">
@@ -40,7 +40,7 @@ export default async function AssignmentPage({ params, searchParams }: {
         </div>
         <div className="completion-actions">
           <Link className="primary-action" href="/requests/new">Reset and run demo again</Link>
-          <Link className="secondary-link" href="/">Return to Joggo AI</Link>
+          <Link className="secondary-link" href="/">Return to ShohojSheba</Link>
         </div>
       </section>
     </main>

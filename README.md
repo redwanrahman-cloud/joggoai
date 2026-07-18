@@ -1,14 +1,14 @@
-# Joggo AI
+# ShohojSheba
 
 > Verified professionals. Explainable matching. Human decisions.
 
-Joggo AI is an OpenAI Build Week project for trustworthy temporary healthcare staffing in Bangladesh. It turns a clinic's plain-language shift request into reviewed requirements, an explainable shortlist, evidence-aware credential review, and a human-controlled invitation and assignment.
+ShohojSheba is an OpenAI Build Week project for trustworthy temporary healthcare staffing in Bangladesh. It turns a clinic's plain-language shift request into reviewed requirements, an explainable shortlist, evidence-aware credential review, and a human-controlled invitation and assignment.
 
 ## The problem
 
 Small clinics and diagnostic centres may need qualified temporary staff with little notice. Translating an urgent need into requirements, comparing availability and skills, reviewing credential evidence, and coordinating both sides is slow and inconsistent.
 
-Joggo AI demonstrates a safer alternative to a generic job board:
+ShohojSheba demonstrates a safer alternative to a generic job board:
 
 - hard requirements control eligibility;
 - every recommendation shows its evidence and uncertainty;
@@ -26,7 +26,7 @@ Joggo AI demonstrates a safer alternative to a generic job board:
 6. The clinic reviews synthetic credential evidence and pending items.
 7. The clinic confirms an invitation.
 8. The professional independently accepts.
-9. Joggo AI creates a concise fictional staffing brief.
+9. ShohojSheba creates a concise fictional staffing brief.
 
 Start the scripted journey at `/requests/new`. All people, organisations, credentials, and assignments are fictional.
 
@@ -38,7 +38,7 @@ The competition scope intentionally excludes payments, real registration checks,
 
 ## GPT-5.6 design
 
-The request-extraction boundary is designed for `gpt-5.6-sol` through the OpenAI Responses API with a validated structured output. The scripted Build Week journey currently uses a visibly labelled deterministic fallback when `OPENAI_API_KEY` is not configured, so judges can run it reliably without secrets or network access.
+The staffing-request workflow uses `gpt-5.6-sol` through the OpenAI Responses API with a strict JSON schema and domain validation. The server-only integration was validated against the live model on July 18, 2026. A visibly labelled deterministic fallback keeps the scripted journey runnable when `OPENAI_API_KEY`, quota, or network access is unavailable.
 
 The model is allowed to parse intent and explain evidence. It is never allowed to change eligibility, fabricate credential evidence, send an invitation, or accept on behalf of a person.
 

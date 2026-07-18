@@ -6,7 +6,7 @@ Clinics and diagnostic centres may need qualified temporary staff on short notic
 
 ## Demo promise
 
-Joggo AI turns a clinic's plain-language staffing request into an explainable, human-controlled shortlist of suitable fictional professionals.
+ShohojSheba turns a clinic's plain-language staffing request into an explainable, human-controlled shortlist of suitable fictional professionals.
 
 ## Primary user
 

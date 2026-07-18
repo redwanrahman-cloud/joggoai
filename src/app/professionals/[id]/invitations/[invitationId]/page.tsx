@@ -21,7 +21,7 @@ export default async function ProfessionalInvitationPage({ params, searchParams 
   return (
     <main className="invitation-view" id="main-content">
       <header className="site-header">
-        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">J</span><span>Joggo AI</span></Link>
+        <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">S</span><span>ShohojSheba</span></Link>
         <span className="demo-badge">Professional demo view</span>
       </header>
       <section className="invitation-card">

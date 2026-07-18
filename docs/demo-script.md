@@ -4,7 +4,7 @@ Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and 
 
 ## 0:00–0:18 — Problem
 
-**Show:** Joggo AI landing page.
+**Show:** ShohojSheba landing page.
 
 **Say:** “Clinics sometimes need qualified temporary staff urgently. But comparing registration, skills, availability, and compensation manually is slow and difficult to audit.”
 
@@ -12,13 +12,13 @@ Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and 
 
 **Show:** Trust card and start button.
 
-**Say:** “Joggo AI turns a plain-language staffing need into an explainable shortlist while keeping every important decision with people.”
+**Say:** “ShohojSheba turns a plain-language staffing need into an explainable shortlist while keeping every important decision with people.”
 
 ## 0:32–0:58 — Request extraction and review
 
-**Show:** Prefilled request, structure it, then point to the editable fields and fallback label.
+**Show:** Prefilled request, structure it, then point to the live GPT-5.6 Sol label and editable fields.
 
-**Say:** “The clinic describes the shift naturally. GPT‑5.6 Sol is the target for structured extraction through the Responses API. This public demo also has a clearly labelled deterministic fallback, so it remains reliable without exposing an API key. A human reviews every field before matching.”
+**Say:** “The clinic describes the shift naturally. GPT‑5.6 Sol converts it into validated structured requirements through the Responses API. The API key remains server-side, and a human reviews every field before matching. A clearly labelled fallback keeps the journey safe if live access is unavailable.”
 
 ## 0:58–1:28 — Explainable matching
 
@@ -30,7 +30,7 @@ Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and 
 
 **Show:** Nusrat Jahan’s profile, reviewed registration, pending ICU letter, and human-decision notice.
 
-**Say:** “Credential evidence is separated by provenance and review status. Joggo AI can organise records and flag gaps, but it never claims that AI authenticated a government licence.”
+**Say:** “Credential evidence is separated by provenance and review status. ShohojSheba can organise records and flag gaps, but it never claims that AI authenticated a government licence.”
 
 ## 1:53–2:18 — Two-sided human decisions
 
@@ -42,7 +42,7 @@ Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and 
 
 **Show:** Confirmed staffing brief.
 
-**Say:** “Only after acceptance does Joggo AI produce the confirmed fictional staffing brief, including both parties, shift, rate, and safety notes.”
+**Say:** “Only after acceptance does ShohojSheba produce the confirmed fictional staffing brief, including both parties, shift, rate, and safety notes.”
 
 ## 2:34–2:52 — Codex development
 
@@ -54,12 +54,12 @@ Target length: 2 minutes 40 seconds. Record at 1080p with audible narration and 
 
 **Show:** Social card or landing headline.
 
-**Say:** “Joggo AI: verified professionals, explainable matching, human decisions.”
+**Say:** “ShohojSheba: verified professionals, explainable matching, human decisions.”
 
 ## Recording checklist
 
 - Keep the final export below 3:00.
 - Use a public, unlisted-or-public YouTube link that judges can open without signing in.
 - Do not show API keys, terminal secrets, email addresses, or unrelated browser tabs.
-- Keep the fallback label visible and describe it honestly.
+- Keep the live-model label visible; if the fallback appears, describe it honestly and rerecord after restoring live access.
 - Demonstrate the product rather than relying on slides.

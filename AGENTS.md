@@ -1,4 +1,4 @@
-# Joggo AI repository guidance
+# ShohojSheba repository guidance
 
 ## Mission
 

@@ -25,7 +25,7 @@ Known limitations:
 Completed:
 
 - Scaffolded a strict TypeScript and Next.js application foundation.
-- Added a responsive landing experience and initial Joggo AI design language.
+- Added a responsive landing experience and initial ShohojSheba design language.
 - Made the synthetic-data and human-decision boundaries visible in the interface.
 - Added ESLint, TypeScript, Vitest, Testing Library, and production-build scripts.
 - Pinned the package-manager version and generated the dependency lockfile.
@@ -134,7 +134,7 @@ Completed:
 - Added synthetic credential evidence cards with issuer, masked reference, expiry, source, and review state.
 - Added deterministic credential review findings for reviewed, pending, missing, and expired evidence.
 - Added blocking behavior for missing, expired, or unreviewed professional registration.
-- Added an evidence provenance boundary stating that Joggo AI does not authenticate government records.
+- Added an evidence provenance boundary stating that ShohojSheba does not authenticate government records.
 - Kept the invitation action visibly disabled for the Phase 6 human-controlled assignment workflow.
 
 Validation:
@@ -217,8 +217,8 @@ Completed:
 - Added a timed demo-video storyboard designed to remain below three minutes.
 - Added a deployment and post-deployment smoke-test checklist.
 - Added an MIT licence for public repository judging.
-- Created and inspected a project-specific social preview card with exact Joggo AI messaging.
-- Registered the Joggo AI Sites project and persisted its opaque project identifier.
+- Created and inspected a project-specific social preview card with exact ShohojSheba messaging.
+- Registered the ShohojSheba Sites project and persisted its opaque project identifier.
 - Updated social metadata and made the test runner reliable in constrained environments.
 
 Validation:
@@ -231,9 +231,21 @@ Validation:
 
 Remaining submission actions:
 
-- Configure an OpenAI API key locally before implementing and validating the live GPT-5.6 Sol gateway.
+- Preserve the validated server-only GPT-5.6 Sol key locally and configure it in the deployment environment.
 - Publish this exact commit before saving a Sites version.
 - Complete the production deployment and run the documented smoke test.
 - Record and upload the public YouTube video.
 - Retrieve the main Codex `/feedback` session ID.
 - Replace pending deployment, video, and session placeholders and submit on Devpost.
+
+## Phase 9 — Live GPT-5.6 Sol activation and ShohojSheba brand
+
+Completed:
+
+- Added a server-only Responses API gateway with strict structured output and domain validation.
+- Added automated coverage for the live request contract and failure handling.
+- Validated the live `gpt-5.6-sol` path with a fictional Dhanmondi ICU/BLS nurse request.
+- Confirmed the model returned the expected profession, area, overnight shift, skills, rate, confidence, and an explicit credential assumption warning.
+- Preserved the disclosed deterministic fallback for missing credentials, quota, or network access.
+- Renamed the product from Joggo AI to ShohojSheba across the interface, metadata, documentation, and social preview asset.
+- Revalidated ESLint, TypeScript, all eighteen tests, and the production build.
