@@ -9,6 +9,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:sites": "vinext build",
+    "dev:sites": "vinext dev",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
@@ -22,15 +24,23 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@cloudflare/vite-plugin": "1.37.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.0",
     "jsdom": "^27.0.0",
+    "react-server-dom-webpack": "19.2.7",
     "typescript": "^5.9.0",
-    "vitest": "^4.0.0"
-  }
+    "vinext": "0.0.50",
+    "vite": "8.0.13",
+    "vitest": "^4.0.0",
+    "wrangler": "4.92.0"
+  },
+  "type": "module"
 }

@@ -12,11 +12,14 @@ The public scripted demo must work without `OPENAI_API_KEY`. If a live model key
 ## Pre-deployment
 
 - [ ] `pnpm check` passes.
+- [ ] `pnpm build:sites` produces `dist/server/index.js`, client assets, and copied hosting metadata.
 - [ ] `.env.local` is ignored.
 - [ ] No real patient, professional, clinic, or credential data exists.
 - [ ] No secret appears in `git diff` or tracked files.
 - [ ] Social preview image renders correctly.
 - [ ] Final site origin is configured.
+
+`pnpm build:sites` is the Cloudflare-compatible production build used by OpenAI Sites. The standard `pnpm build` remains the local Next.js production check.
 
 ## Post-deployment smoke test
 

@@ -4,6 +4,7 @@
 node_modules/
 node_modules.broken*/
 .next/
+.wrangler/
 dist/
 coverage/
 *.tsbuildinfo

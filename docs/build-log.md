@@ -249,3 +249,15 @@ Completed:
 - Preserved the disclosed deterministic fallback for missing credentials, quota, or network access.
 - Renamed the product from Joggo AI to ShohojSheba across the interface, metadata, documentation, and social preview asset.
 - Revalidated ESLint, TypeScript, all eighteen tests, and the production build.
+
+## Phase 10 — Sites deployment adaptation
+
+Completed:
+
+- Preserved the standard Next.js development and production-build commands.
+- Added a separate vinext/Cloudflare Sites build target and worker entry.
+- Added automatic hosting-metadata packaging without exposing local environment files.
+- Updated the existing private Sites project title to ShohojSheba.
+- Verified the owner-only access policy before deployment.
+- Ran ESLint, TypeScript, all eighteen tests, and the complete Sites build successfully.
+- Confirmed the artifact contains the required worker entry, client assets, and `.openai/hosting.json`.
