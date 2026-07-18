@@ -126,7 +126,9 @@ export default async function ProfessionalProfilePage({
               <strong>Human decision required</strong>
               <p>Joggo AI organises evidence and flags gaps. It does not authenticate a government record or make the hiring decision.</p>
             </div>
-            <button className="primary-action full-width" type="button" disabled>Send invitation · Phase 6</button>
+            <Link className="primary-action full-width" href={`/requests/${request.id}/invitations/new?professional=${professional.id}`}>
+              Review invitation
+            </Link>
           </aside>
         </div>
       </div>

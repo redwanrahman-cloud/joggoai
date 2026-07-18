@@ -53,3 +53,9 @@ Profession, verified registration, required skills, full-shift availability, and
 Status: accepted on 2026-07-18.
 
 The candidate profile labels every credential by its evidence source and review state. Joggo AI may organise evidence, identify expiry and missing support, and prepare a human checklist, but it must not claim that AI authenticated a government registration. The competition build uses visibly synthetic records and keeps invitation disabled until the next human-controlled workflow phase.
+
+## ADR-010: Demo state transitions are deterministic and URL-addressable
+
+Status: accepted on 2026-07-18.
+
+The competition journey represents invitation and assignment stages as reproducible routes backed by typed transition functions. This makes the demo reliable without pretending that in-memory state is durable. Domain rules still prevent invitations to ineligible professionals and prevent assignment creation before professional acceptance. Durable persistence, authentication, notifications, and concurrency controls remain post-competition work.

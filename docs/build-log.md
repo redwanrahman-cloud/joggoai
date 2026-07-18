@@ -151,3 +151,31 @@ Known limitations:
 - Credential review is deterministic and uses fictional records; no government or external registry is connected.
 - Uploaded document contents are represented by synthetic metadata rather than live file extraction.
 - Invitation and assignment state begin in Phase 6.
+
+## 2026-07-18 — Phase 6
+
+Completed:
+
+- Added typed invitation preparation and professional acceptance transitions.
+- Prevented invitations when matching hard constraints fail or credential review is blocked.
+- Added a clinic-side final invitation review with rate, shift, skills, and caution disclosure.
+- Added a professional-side invitation inbox view with explicit acceptance control.
+- Added confirmed assignment creation only after acceptance.
+- Added a final staffing brief with both parties, shift, agreed rate, handover notes, and status.
+- Completed the golden journey from staffing request through confirmed coverage.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- Fourteen tests passed across assignment transitions, credential review, matching, extraction, domain invariants, and UI.
+- Tests prove ineligible candidates cannot be invited and assignment creation follows acceptance.
+- Next.js production build completed with clinic invitation, professional invitation, and assignment routes.
+- The full browser journey passed through all three new screens.
+- The final brief passed at a 390×844 mobile viewport with four summary cards, confirmed status, and no horizontal overflow.
+
+Known limitations:
+
+- Demo transitions are reproducible route states rather than durable database writes.
+- Authentication, notifications, decline handling, cancellation, attendance, and contact exchange are outside this competition scope.
+- Dates and timestamps remain fixed to the fictional Build Week scenario.
