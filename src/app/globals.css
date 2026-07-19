@@ -361,6 +361,15 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .compare-status.eligible { color: var(--teal-dark); background: var(--mint); }
 .compare-status.near { color: #79510e; background: #fff0d4; }
 .comparison-gap { color: #8a540d; background: #fff9ec; font-weight: 800; }
+.comparison-decision { margin-top: 36px; }
+.comparison-decision .section-title-row p:not(.eyebrow) { max-width: 700px; margin-bottom: 0; color: var(--muted); line-height: 1.6; }
+.comparison-decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.comparison-decision-grid article { display: flex; align-items: flex-start; flex-direction: column; padding: 24px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+.comparison-decision-grid article.eligible { border-top: 5px solid var(--teal); }
+.comparison-decision-grid article.near { border-top: 5px solid var(--amber); }
+.comparison-decision-grid h3 { margin: 14px 0 8px; font-family: Georgia, serif; font-size: 1.55rem; font-weight: 500; }
+.comparison-decision-grid p { flex: 1; margin: 0 0 20px; color: var(--muted); font-size: 0.82rem; line-height: 1.55; }
+.comparison-decision-grid a { width: 100%; text-align: center; text-decoration: none; }
 .compare-boundary { margin: 20px 0 0; padding: 16px 18px; border-left: 4px solid var(--teal); color: var(--teal-dark); background: var(--mint); font-size: 0.82rem; }
 
 .profile-builder-grid { width: min(1320px, calc(100% - 40px)); margin: 28px auto 100px; display: grid; grid-template-columns: minmax(340px, 0.8fr) minmax(0, 1.2fr); gap: 24px; align-items: start; }
@@ -525,6 +534,7 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
   .profile-content-grid { grid-template-columns: 1fr; }
   .profile-gap-banner { grid-template-columns: 1fr; }
   .profile-builder-grid { grid-template-columns: 1fr; }
+  .comparison-decision-grid { grid-template-columns: 1fr; }
   .findings-panel { position: static; }
   .decision-grid { grid-template-columns: 1fr; }
   .decision-aside { position: static; }

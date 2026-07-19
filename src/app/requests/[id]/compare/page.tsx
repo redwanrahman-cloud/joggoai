@@ -102,6 +102,36 @@ export default async function CompareProfessionalsPage({
             </tbody>
           </table>
         </div>
+        <section className="comparison-decision" aria-labelledby="comparison-decision-heading">
+          <div className="section-title-row">
+            <div>
+              <p className="eyebrow">Human selection</p>
+              <h2 id="comparison-decision-heading">Choose how to continue.</h2>
+              <p>Select an eligible professional for credential review, or inspect the unresolved gaps on a near match.</p>
+            </div>
+          </div>
+          <div className="comparison-decision-grid">
+            {selected.map((match) => (
+              <article className={match.eligible ? "eligible" : "near"} key={match.professional.id}>
+                <span className={match.eligible ? "compare-status eligible" : "compare-status near"}>
+                  {match.eligible ? "Ready for review" : "Gaps unresolved"}
+                </span>
+                <h3>{match.professional.displayName}</h3>
+                <p>
+                  {match.eligible
+                    ? "All confirmed staffing requirements are met. Verify the credential evidence before inviting."
+                    : match.hardConstraintFailures.join(" ")}
+                </p>
+                <Link
+                  className={match.eligible ? "primary-action link-action" : "secondary-action"}
+                  href={`/professionals/${match.professional.id}?request=${request.id}`}
+                >
+                  {match.eligible ? "Select and continue" : "Review profile gaps"}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
         <p className="compare-boundary"><strong>Human decision required.</strong> Comparison organises fictional evidence; it does not authenticate credentials or replace the clinic’s review.</p>
       </div>
     </main>

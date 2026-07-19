@@ -347,3 +347,19 @@ Validation:
 - The comparison displayed three professionals; a near-match profile exposed no invitation action.
 - Professional onboarding retained its complete three-step journey at phone width.
 - No browser console errors were observed.
+
+## 2026-07-20 — Phase 16: Comparison selection handoff
+
+Completed:
+
+- Added an explicit human-selection section after the comparison table.
+- Eligible professionals now offer a clear “Select and continue” action into credential review.
+- Near matches offer only “Review profile gaps” and cannot bypass eligibility or proceed directly to invitation.
+- Preserved the verify-before-invite sequence in the clinic coordinator journey.
+
+Validation:
+
+- ESLint, strict TypeScript checking, and the production build passed.
+- All thirty-five tests passed, including selection and near-match boundary coverage.
+- Desktop and 390px browser checks showed both decision actions with no horizontal overflow.
+- The comparison page exposed no direct invitation action.
