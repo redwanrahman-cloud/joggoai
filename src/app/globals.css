@@ -460,8 +460,9 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .trust-card h2 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 2.1rem;
+  font-size: clamp(1.7rem, 2.3vw, 2rem);
   line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
 .trust-card ul { margin: 28px 0; padding: 0; list-style: none; }
@@ -519,6 +520,9 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
   .builder-grid { width: min(100% - 28px, 1180px); }
   .dashboard-shell { width: min(100% - 28px, 1320px); }
   .dashboard-header { align-items: flex-start; padding: 20px 0; }
+  .dashboard-header { flex-direction: column; }
+  .dashboard-header-actions { width: 100%; display: grid; grid-template-columns: 1fr; }
+  .dashboard-header-actions .link-action { width: 100%; text-align: center; }
   .dashboard-header-actions .demo-badge { display: none; }
   .dashboard-welcome { padding-top: 42px; }
   .metric-grid { grid-template-columns: 1fr 1fr; }
