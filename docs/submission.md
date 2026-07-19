@@ -8,7 +8,7 @@
 - **Repository:** https://github.com/redwanrahman-cloud/joggoai
 - **Demo URL:** https://joggo-ai-bd.najdhotel1.chatgpt.site
 - **Video URL:** pending public YouTube upload
-- **Codex `/feedback` session ID:** pending founder retrieval from this main build thread
+- **Codex `/feedback` session ID:** `019f752b-aa0b-7943-9b37-495eab4ba506`
 
 ## Short description
 
@@ -64,6 +64,6 @@ No account, payment, real data, or secret is required.
 - [ ] Video visibly demonstrates the working product.
 - [ ] Video explains how Codex and GPT-5.6 were used.
 - [x] Work & Productivity track selected for submission.
-- [ ] Main Codex `/feedback` session ID entered.
+- [x] Main Codex `/feedback` session ID entered.
 - [ ] Demo URL, video URL, and session ID replace every pending placeholder above.
 - [ ] Submission completed before July 21, 2026 at 5:00 PM Pacific Time.
