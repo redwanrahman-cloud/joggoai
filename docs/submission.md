@@ -58,7 +58,7 @@ No account, payment, real data, or secret is required.
 ## Final submission checklist
 
 - [x] Production demo URL works without authentication.
-- [ ] Repository is public with MIT licence, or shared with both required judging accounts.
+- [x] Repository is public with MIT licence, or shared with both required judging accounts.
 - [x] README includes setup, fictional sample data, testing path, Codex contribution, and GPT-5.6 boundaries.
 - [ ] Public YouTube demo is under three minutes and includes audio.
 - [ ] Video visibly demonstrates the working product.
