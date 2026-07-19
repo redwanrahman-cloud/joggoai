@@ -21,6 +21,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
   const matches = rankCandidates(request, repository);
   const eligible = matches.filter((match) => match.eligible);
   const nearMatches = matches.filter((match) => isNearMatch(request, match));
+  const comparisonIds = [...eligible, ...nearMatches].slice(0, 3).map((match) => match.professional.id).join(",");
 
   return (
     <main id="main-content">
@@ -56,7 +57,12 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
         <section aria-labelledby="eligible-heading">
           <div className="section-title-row">
             <h2 id="eligible-heading">Recommended shortlist</h2>
-            <span>{eligible.length === 1 ? "Hard requirements met" : `${eligible.length} qualified matches`}</span>
+            <div className="section-title-actions">
+              <span>{eligible.length === 1 ? "Hard requirements met" : `${eligible.length} qualified matches`}</span>
+              <Link className="secondary-action compact-action" href={`/requests/${request.id}/compare?professionals=${comparisonIds}`}>
+                Compare professionals
+              </Link>
+            </div>
           </div>
           <div className="candidate-list">
             {eligible.map((match, index) => (
@@ -114,13 +120,16 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
             </div>
             <div className="excluded-grid">
               {nearMatches.map((match) => (
-              <article className="excluded-card" key={match.professional.id}>
+              <article className="excluded-card near-match-card" key={match.professional.id}>
                 <p className="excluded-label">{getCriteriaFitPercentage(match)}% criteria fit</p>
                 <h3>{match.professional.displayName}</h3>
                 <p>{match.professional.headline}</p>
                 <h4>Requirement gaps</h4>
                 <ul>{match.hardConstraintFailures.map((failure) => <li key={failure}>{failure}</li>)}</ul>
                 <p className="near-match-note">Update the confirmed requirements before this professional can be invited.</p>
+                <Link className="secondary-action full-width" href={`/professionals/${match.professional.id}?request=${request.id}`}>
+                  View profile and evidence
+                </Link>
               </article>
               ))}
             </div>

@@ -31,7 +31,6 @@ describe("deterministic candidate matching", () => {
   it("excludes a candidate who lacks any required skill", () => {
     const matches = rankCandidates(request!, repository);
     const outpatientNurse = matches.find(({ professional }) => professional.id === "pro-farhana-islam");
-
     expect(outpatientNurse?.eligible).toBe(false);
     expect(outpatientNurse?.hardConstraintFailures).toContain("Missing required skills: ICU.");
   });
@@ -39,12 +38,15 @@ describe("deterministic candidate matching", () => {
   it("surfaces only safe same-profession alternatives as near matches", () => {
     const matches = rankCandidates(request!, repository);
     const outpatientNurse = matches.find(({ professional }) => professional.id === "pro-farhana-islam");
+    const criticalCareNurse = matches.find(({ professional }) => professional.id === "pro-lamia-sultana");
     const expiredNurse = matches.find(({ professional }) => professional.id === "pro-samira-rahman");
     const doctor = matches.find(({ professional }) => professional.id === "pro-dr-ayesha-karim");
 
     expect(outpatientNurse).toBeDefined();
     expect(getCriteriaFitPercentage(outpatientNurse!)).toBe(80);
     expect(isNearMatch(request!, outpatientNurse!)).toBe(true);
+    expect(getCriteriaFitPercentage(criticalCareNurse!)).toBe(80);
+    expect(isNearMatch(request!, criticalCareNurse!)).toBe(true);
     expect(isNearMatch(request!, expiredNurse!)).toBe(false);
     expect(isNearMatch(request!, doctor!)).toBe(false);
   });

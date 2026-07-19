@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { reviewProfessionalCredentials } from "../../../features/credentials/credential-review";
+import { evaluateCandidate, getCriteriaFitPercentage } from "../../../features/matching/match-engine";
 
 const professionLabels = { general_practitioner: "Doctor", registered_nurse: "Registered nurse", medical_technologist: "Laboratory technologist", physiotherapist: "Physiotherapist", caregiver: "Caregiver" } as const;
 
@@ -28,6 +29,7 @@ export default async function ProfessionalProfilePage({
   if (!professional || !request) notFound();
 
   const credentials = repository.listCredentials(id);
+  const match = evaluateCandidate(request, professional, repository);
   const review = reviewProfessionalCredentials(professional, credentials);
   const initials = professional.displayName
     .split(" ")
@@ -70,6 +72,16 @@ export default async function ProfessionalProfilePage({
             <span><strong>BDT {professional.expectedHourlyRateBdt}</strong> per hour</span>
           </div>
         </section>
+
+        {!match.eligible && (
+          <section className="profile-gap-banner" aria-labelledby="profile-gap-heading">
+            <div>
+              <p className="eyebrow">Near match · {getCriteriaFitPercentage(match)}% criteria fit</p>
+              <h2 id="profile-gap-heading">Requirements still need attention</h2>
+            </div>
+            <ul>{match.hardConstraintFailures.map((failure) => <li key={failure}>{failure}</li>)}</ul>
+          </section>
+        )}
 
         <section className="review-summary-card">
           <div>
@@ -128,9 +140,18 @@ export default async function ProfessionalProfilePage({
               <strong>Human decision required</strong>
               <p>ShohojSheba organises evidence and flags gaps. It does not authenticate a government record or make the hiring decision.</p>
             </div>
-            <Link className="primary-action full-width" href={`/requests/${request.id}/invitations/new?professional=${professional.id}`}>
-              Review invitation
-            </Link>
+            {match.eligible ? (
+              <Link className="primary-action full-width" href={`/requests/${request.id}/invitations/new?professional=${professional.id}`}>
+                Review invitation
+              </Link>
+            ) : (
+              <>
+                <Link className="primary-action full-width" href={`/requests/${request.id}/compare`}>
+                  Compare with shortlist
+                </Link>
+                <p className="action-boundary">Invitation stays unavailable until the confirmed requirements are updated.</p>
+              </>
+            )}
           </aside>
         </div>
       </div>
