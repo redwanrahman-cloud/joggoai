@@ -236,7 +236,7 @@ Remaining submission actions:
 - Complete the production deployment and run the documented smoke test.
 - Record and upload the public YouTube video.
 - Retrieve the main Codex `/feedback` session ID.
-- Replace pending deployment, video, and session placeholders and submit on Devpost.
+- Submit the completed public links and Codex feedback ID on Devpost.
 
 ## Phase 9 — Live GPT-5.6 Sol activation and ShohojSheba brand
 
@@ -305,3 +305,23 @@ Validation:
 - ESLint and strict TypeScript checks passed.
 - All twenty-nine tests passed, including strict model-contract and decision-boundary coverage.
 - Both the Next.js production build and the Sites deployment build completed successfully.
+
+## Phase 14 — Final submission-readiness audit
+
+Completed:
+
+- Re-ran the full desktop journey from natural-language request through matching, credential review, invitation, professional acceptance, and confirmed assignment.
+- Confirmed live GPT-5.6 Sol extraction on the deployed staffing-request workflow.
+- Tested all seven judge-facing routes at a phone-sized viewport with no horizontal overflow.
+- Reviewed tracked files for secrets and confirmed the local environment file remains ignored.
+- Excluded disposable Sites staging directories from linting and source control.
+- Polished the confirmed-request summary so role-specific skill names read naturally.
+- Verified the public site, public demo video, repository links, and Codex feedback ID are recorded in the submission brief.
+
+Validation:
+
+- ESLint passed with zero warnings.
+- TypeScript strict checking passed.
+- All twenty-nine tests passed.
+- The Next.js production build completed successfully.
+- The public browser journey completed without console errors.

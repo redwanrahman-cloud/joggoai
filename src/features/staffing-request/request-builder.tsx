@@ -90,7 +90,7 @@ export function RequestBuilder() {
         <p className="eyebrow">Requirements confirmed</p>
         <h1>Your staffing request is ready for matching.</h1>
         <p>
-          The confirmed request requires a {professionLabels[requirement.profession].toLowerCase()} in {requirement.area} with {requirement.requiredSkills.join(" and ")} experience.
+          The confirmed request requires a {professionLabels[requirement.profession].toLowerCase()} in {requirement.area}, requiring {requirement.requiredSkills.join(" and ")}.
         </p>
         <div className="confirmation-actions">
           <Link className="primary-action link-action" href={`/requests/${matchingRequestId}/matches`}>View eligible matches</Link>

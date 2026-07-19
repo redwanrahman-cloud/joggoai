@@ -7,6 +7,7 @@ export default defineConfig([
   ...nextTypeScript,
   globalIgnores([
     ".next/**",
+    ".sites-stage-*/**",
     "coverage/**",
     "dist/**",
     "node_modules.broken*/**",
