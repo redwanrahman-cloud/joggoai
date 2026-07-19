@@ -5,6 +5,7 @@ import { rankCandidates } from "../../../../features/matching/match-engine";
 import { MatchBriefingCard } from "../../../../features/matching/match-briefing-card";
 
 const professionLabels = { general_practitioner: "doctor", registered_nurse: "registered nurse", medical_technologist: "laboratory technologist", physiotherapist: "physiotherapist", caregiver: "caregiver" } as const;
+const professionPluralLabels = { general_practitioner: "doctors", registered_nurse: "registered nurses", medical_technologist: "laboratory technologists", physiotherapist: "physiotherapists", caregiver: "caregivers" } as const;
 
 function formatShift(value: string) {
   return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
@@ -35,7 +36,11 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
         <section className="matches-heading">
           <div>
             <p className="eyebrow">{organisation?.name} · {professionLabels[request.requirement.profession]} coverage</p>
-            <h1>{eligible.length} eligible {eligible.length === 1 ? "professional" : "professionals"}</h1>
+            <h1>
+              {eligible.length === 1
+                ? `Eligible ${professionLabels[request.requirement.profession]}`
+                : `Eligible ${professionPluralLabels[request.requirement.profession]}`}
+            </h1>
             <p>
               Hard requirements were checked first. Scores only compare professionals who passed every requirement.
             </p>
@@ -51,7 +56,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
         <section aria-labelledby="eligible-heading">
           <div className="section-title-row">
             <h2 id="eligible-heading">Recommended shortlist</h2>
-            <span>{eligible.length} passed all hard requirements</span>
+            <span>{eligible.length === 1 ? "Hard requirements met" : `${eligible.length} qualified matches`}</span>
           </div>
           <div className="candidate-list">
             {eligible.map((match, index) => (
