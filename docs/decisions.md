@@ -59,3 +59,9 @@ The candidate profile labels every credential by its evidence source and review 
 Status: accepted on 2026-07-18.
 
 The competition journey represents invitation and assignment stages as reproducible routes backed by typed transition functions. This makes the demo reliable without pretending that in-memory state is durable. Domain rules still prevent invitations to ineligible professionals and prevent assignment creation before professional acceptance. Durable persistence, authentication, notifications, and concurrency controls remain post-competition work.
+
+## ADR-011: Guided journeys make decision boundaries visible
+
+Status: accepted on 2026-07-20.
+
+Clinic coordination is presented as one visible sequence: request, shortlist, compare, verify, and invite. Professional registration is presented as resume intake, profile review, and evidence completion. The shortlist places comparison beside the strongest recommendation and describes safe near matches immediately afterward. This improves discoverability without relaxing hard eligibility: near matches retain explicit gaps and remain impossible to invite until the confirmed requirements change.

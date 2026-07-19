@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { reviewProfessionalCredentials } from "../../../features/credentials/credential-review";
 import { evaluateCandidate, getCriteriaFitPercentage } from "../../../features/matching/match-engine";
+import { FlowTrail } from "../../../components/flow-trail";
 
 const professionLabels = { general_practitioner: "Doctor", registered_nurse: "Registered nurse", medical_technologist: "Laboratory technologist", physiotherapist: "Physiotherapist", caregiver: "Caregiver" } as const;
 
@@ -56,6 +57,17 @@ export default async function ProfessionalProfilePage({
       </header>
 
       <div className="profile-shell">
+        <FlowTrail
+          current={4}
+          label="Clinic coordinator journey"
+          steps={[
+            { label: "Request", href: "/requests/new" },
+            { label: "Shortlist", href: `/requests/${request.id}/matches` },
+            { label: "Compare", href: `/requests/${request.id}/compare` },
+            { label: "Verify" },
+            { label: "Invite" },
+          ]}
+        />
         <Link className="back-link" href={`/requests/${request.id}/matches`}>← Back to matches</Link>
         <section className="profile-hero">
           <div className="profile-monogram" aria-hidden="true">{initials}</div>

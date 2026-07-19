@@ -6,7 +6,10 @@ export default function ProfessionalJoinPage() {
     <main id="main-content">
       <header className="site-header">
         <Link className="brand" href="/"><span className="brand-mark" aria-hidden="true">S</span><span>ShohojSheba</span></Link>
-        <span className="demo-badge">Professional onboarding · fictional demo</span>
+        <div className="header-route-actions">
+          <Link href="/dashboard">Clinic coordinator view</Link>
+          <span className="demo-badge">Professional onboarding · fictional demo</span>
+        </div>
       </header>
       <ProfileBuilder />
     </main>

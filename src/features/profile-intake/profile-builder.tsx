@@ -26,6 +26,15 @@ export function ProfileBuilder() {
   }
 
   return (
+    <>
+    <nav className="profile-flow" aria-label="Professional registration journey">
+      <p>Professional registration journey</p>
+      <ol>
+        <li className="current"><span>1</span>Share resume</li>
+        <li className={result ? "complete" : "upcoming"}><span>2</span>Review profile</li>
+        <li className={result ? "current" : "upcoming"}><span>3</span>Complete evidence</li>
+      </ol>
+    </nav>
     <div className="profile-builder-grid">
       <section className="intake-panel">
         <p className="eyebrow">Step 1 · Share your professional history</p>
@@ -61,14 +70,18 @@ export function ProfileBuilder() {
               <div className="skill-row light-skills">{result.profile.skills.map((skill) => <span key={skill}>{skill}</span>)}</div>
             </div>
             <div className="intake-review-columns">
-              <section><h3>Document readiness</h3><div className="evidence-checklist">{result.evidenceChecklist.map((item) => <article key={item.label}><span className={`evidence-status ${item.status}`}>{statusLabels[item.status]}</span><strong>{item.label}</strong><p>{item.guidance}</p></article>)}</div></section>
+              <section id="document-readiness"><h3>Document readiness</h3><div className="evidence-checklist">{result.evidenceChecklist.map((item) => <article key={item.label}><span className={`evidence-status ${item.status}`}>{statusLabels[item.status]}</span><strong>{item.label}</strong><p>{item.guidance}</p></article>)}</div></section>
               <section><h3>Improve your profile</h3><ol className="advice-list">{result.profileAdvice.map((advice) => <li key={advice}>{advice}</li>)}</ol></section>
             </div>
             {result.warnings.map((warning) => <p className="review-warning" key={warning}>{warning}</p>)}
-            <button className="primary-action" type="button" disabled>Save after human review</button>
+            <div className="profile-next-actions">
+              <a className="primary-action link-action" href="#document-readiness">Complete missing evidence</a>
+              <p>Demo boundary: profile saving and account creation are intentionally not enabled.</p>
+            </div>
           </>
         )}
       </section>
     </div>
+    </>
   );
 }

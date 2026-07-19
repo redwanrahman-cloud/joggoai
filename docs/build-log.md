@@ -325,3 +325,25 @@ Validation:
 - All twenty-nine tests passed.
 - The Next.js production build completed successfully.
 - The public browser journey completed without console errors.
+
+## 2026-07-20 — Phase 15: Connected human decision journeys
+
+Completed:
+
+- Audited the clinic coordinator and professional registration journeys as end-to-end human workflows.
+- Added a persistent coordinator trail across shortlist, comparison, credential review, and invitation.
+- Reframed shortlist results around one recommended match and two safe near matches.
+- Moved the three-person comparison action above the recommendation and placed near matches directly after it.
+- Added a professional registration trail from resume intake through human profile review and evidence completion.
+- Added a clear route between professional onboarding and the clinic coordinator dashboard.
+- Preserved the rule that near matches cannot be invited and AI does not authenticate credentials.
+
+Validation:
+
+- ESLint passed with zero warnings and strict TypeScript checking passed.
+- All thirty-four tests passed, including new journey hierarchy and navigation coverage.
+- The Next.js production build completed successfully.
+- Browser checks passed at 390px and 1280px widths with no horizontal overflow.
+- The comparison displayed three professionals; a near-match profile exposed no invitation action.
+- Professional onboarding retained its complete three-step journey at phone width.
+- No browser console errors were observed.

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../../data/demo-repository";
 import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
+import { FlowTrail } from "../../../../../components/flow-trail";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
 
@@ -40,6 +41,17 @@ export default async function NewInvitationPage({
         <span className="demo-badge">Clinic confirmation</span>
       </header>
       <div className="decision-shell">
+        <FlowTrail
+          current={5}
+          label="Clinic coordinator journey"
+          steps={[
+            { label: "Request", href: "/requests/new" },
+            { label: "Shortlist", href: `/requests/${request.id}/matches` },
+            { label: "Compare", href: `/requests/${request.id}/compare` },
+            { label: "Verify", href: `/professionals/${professional.id}?request=${request.id}` },
+            { label: "Invite" },
+          ]}
+        />
         <Link className="back-link" href={`/professionals/${professional.id}?request=${request.id}`}>← Back to candidate</Link>
         <div className="decision-grid">
           <section className="decision-main">

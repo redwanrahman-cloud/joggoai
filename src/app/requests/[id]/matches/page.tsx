@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../data/demo-repository";
 import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
 import { MatchBriefingCard } from "../../../../features/matching/match-briefing-card";
+import { FlowTrail } from "../../../../components/flow-trail";
 
 const professionLabels = { general_practitioner: "doctor", registered_nurse: "registered nurse", medical_technologist: "laboratory technologist", physiotherapist: "physiotherapist", caregiver: "caregiver" } as const;
-const professionPluralLabels = { general_practitioner: "doctors", registered_nurse: "registered nurses", medical_technologist: "laboratory technologists", physiotherapist: "physiotherapists", caregiver: "caregivers" } as const;
 
 function formatShift(value: string) {
   return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
@@ -22,6 +22,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
   const eligible = matches.filter((match) => match.eligible);
   const nearMatches = matches.filter((match) => isNearMatch(request, match));
   const comparisonIds = [...eligible, ...nearMatches].slice(0, 3).map((match) => match.professional.id).join(",");
+  const compareHref = `/requests/${request.id}/compare?professionals=${comparisonIds}`;
 
   return (
     <main id="main-content">
@@ -34,16 +35,25 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
       </header>
 
       <div className="matches-shell">
+        <FlowTrail
+          current={2}
+          label="Clinic coordinator journey"
+          steps={[
+            { label: "Request", href: "/requests/new" },
+            { label: "Shortlist" },
+            { label: "Compare", href: compareHref },
+            { label: "Verify" },
+            { label: "Invite" },
+          ]}
+        />
         <section className="matches-heading">
           <div>
             <p className="eyebrow">{organisation?.name} · {professionLabels[request.requirement.profession]} coverage</p>
-            <h1>
-              {eligible.length === 1
-                ? `Eligible ${professionLabels[request.requirement.profession]}`
-                : `Eligible ${professionPluralLabels[request.requirement.profession]}`}
-            </h1>
+            <h1>{eligible.length} recommended {eligible.length === 1 ? "match" : "matches"}</h1>
             <p>
-              Hard requirements were checked first. Scores only compare professionals who passed every requirement.
+              {nearMatches.length > 0
+                ? `${nearMatches.length} safe near ${nearMatches.length === 1 ? "match is" : "matches are"} ready for side-by-side review.`
+                : "Hard requirements were checked first. Scores compare professionals who passed every requirement."}
             </p>
           </div>
           <div className="request-facts" aria-label="Confirmed request summary">
@@ -54,13 +64,22 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
           </div>
         </section>
 
+        <section className="decision-bar" aria-labelledby="next-decision-heading">
+          <div>
+            <p className="eyebrow">Recommended next step</p>
+            <h2 id="next-decision-heading">Compare the top {Math.min(3, eligible.length + nearMatches.length)} before choosing.</h2>
+            <p>See the strongest match beside safe alternatives, with every requirement gap kept visible.</p>
+          </div>
+          <Link className="primary-action link-action" href={compareHref}>Compare top professionals</Link>
+        </section>
+
         <section aria-labelledby="eligible-heading">
           <div className="section-title-row">
             <h2 id="eligible-heading">Recommended shortlist</h2>
             <div className="section-title-actions">
               <span>{eligible.length === 1 ? "Hard requirements met" : `${eligible.length} qualified matches`}</span>
-              <Link className="secondary-action compact-action" href={`/requests/${request.id}/compare?professionals=${comparisonIds}`}>
-                Compare professionals
+              <Link className="secondary-action compact-action" href={compareHref}>
+                Open comparison
               </Link>
             </div>
           </div>
@@ -107,14 +126,12 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
           </div>
         </section>
 
-        <MatchBriefingCard requestId={request.id} />
-
         {nearMatches.length > 0 && (
           <section className="excluded-section" aria-labelledby="alternatives-heading">
             <div className="section-title-row">
               <div>
-                <h2 id="alternatives-heading">Potential alternatives</h2>
-                <p>Same profession and reviewed registration, with gaps to resolve before inviting.</p>
+                <h2 id="alternatives-heading">Near matches worth comparing</h2>
+                <p>Same profession and reviewed registration, with clearly marked gaps to resolve before inviting.</p>
               </div>
               <span>{nearMatches.length} near {nearMatches.length === 1 ? "match" : "matches"}</span>
             </div>
@@ -135,6 +152,8 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
             </div>
           </section>
         )}
+
+        <MatchBriefingCard requestId={request.id} />
       </div>
     </main>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../data/demo-repository";
 import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
+import { FlowTrail } from "../../../../components/flow-trail";
 
 function requirementStatus(passed: boolean) {
   return passed ? "Meets requirement" : "Gap to resolve";
@@ -54,6 +55,17 @@ export default async function CompareProfessionalsPage({
         <span className="demo-badge">Human decision support</span>
       </header>
       <div className="compare-shell">
+        <FlowTrail
+          current={3}
+          label="Clinic coordinator journey"
+          steps={[
+            { label: "Request", href: "/requests/new" },
+            { label: "Shortlist", href: `/requests/${request.id}/matches` },
+            { label: "Compare" },
+            { label: "Verify" },
+            { label: "Invite" },
+          ]}
+        />
         <Link className="back-link" href={`/requests/${request.id}/matches`}>← Back to matches</Link>
         <section className="compare-heading">
           <p className="eyebrow">Side-by-side review · up to three professionals</p>
