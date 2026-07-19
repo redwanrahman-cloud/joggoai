@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createDemoRepository } from "../../data/demo-repository";
-import { rankCandidates } from "./match-engine";
+import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "./match-engine";
 
 describe("deterministic candidate matching", () => {
   const repository = createDemoRepository();
@@ -34,6 +34,19 @@ describe("deterministic candidate matching", () => {
 
     expect(outpatientNurse?.eligible).toBe(false);
     expect(outpatientNurse?.hardConstraintFailures).toContain("Missing required skills: ICU.");
+  });
+
+  it("surfaces only safe same-profession alternatives as near matches", () => {
+    const matches = rankCandidates(request!, repository);
+    const outpatientNurse = matches.find(({ professional }) => professional.id === "pro-farhana-islam");
+    const expiredNurse = matches.find(({ professional }) => professional.id === "pro-samira-rahman");
+    const doctor = matches.find(({ professional }) => professional.id === "pro-dr-ayesha-karim");
+
+    expect(outpatientNurse).toBeDefined();
+    expect(getCriteriaFitPercentage(outpatientNurse!)).toBe(80);
+    expect(isNearMatch(request!, outpatientNurse!)).toBe(true);
+    expect(isNearMatch(request!, expiredNurse!)).toBe(false);
+    expect(isNearMatch(request!, doctor!)).toBe(false);
   });
 
   it.each([

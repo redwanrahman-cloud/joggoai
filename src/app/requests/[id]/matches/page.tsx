@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../data/demo-repository";
-import { rankCandidates } from "../../../../features/matching/match-engine";
+import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
 import { MatchBriefingCard } from "../../../../features/matching/match-briefing-card";
 
 const professionLabels = { general_practitioner: "doctor", registered_nurse: "registered nurse", medical_technologist: "laboratory technologist", physiotherapist: "physiotherapist", caregiver: "caregiver" } as const;
@@ -20,7 +20,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
   const organisation = repository.getOrganisation(request.organisationId);
   const matches = rankCandidates(request, repository);
   const eligible = matches.filter((match) => match.eligible);
-  const excluded = matches.filter((match) => !match.eligible);
+  const nearMatches = matches.filter((match) => isNearMatch(request, match));
 
   return (
     <main id="main-content">
@@ -103,22 +103,29 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
 
         <MatchBriefingCard requestId={request.id} />
 
-        <section className="excluded-section" aria-labelledby="excluded-heading">
-          <div className="section-title-row">
-            <h2 id="excluded-heading">Excluded by hard requirements</h2>
-            <span>{excluded.length} candidates</span>
-          </div>
-          <div className="excluded-grid">
-            {excluded.map((match) => (
+        {nearMatches.length > 0 && (
+          <section className="excluded-section" aria-labelledby="alternatives-heading">
+            <div className="section-title-row">
+              <div>
+                <h2 id="alternatives-heading">Potential alternatives</h2>
+                <p>Same profession and reviewed registration, with gaps to resolve before inviting.</p>
+              </div>
+              <span>{nearMatches.length} near {nearMatches.length === 1 ? "match" : "matches"}</span>
+            </div>
+            <div className="excluded-grid">
+              {nearMatches.map((match) => (
               <article className="excluded-card" key={match.professional.id}>
-                <p className="excluded-label">Not eligible</p>
+                <p className="excluded-label">{getCriteriaFitPercentage(match)}% criteria fit</p>
                 <h3>{match.professional.displayName}</h3>
                 <p>{match.professional.headline}</p>
+                <h4>Requirement gaps</h4>
                 <ul>{match.hardConstraintFailures.map((failure) => <li key={failure}>{failure}</li>)}</ul>
+                <p className="near-match-note">Update the confirmed requirements before this professional can be invited.</p>
               </article>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

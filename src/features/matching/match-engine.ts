@@ -11,6 +11,25 @@ export interface CandidateMatch {
   uncertainties: string[];
 }
 
+const MATCH_CRITERIA_COUNT = 5;
+
+export function getCriteriaFitPercentage(match: CandidateMatch): number {
+  return Math.round((match.evidence.length / MATCH_CRITERIA_COUNT) * 100);
+}
+
+export function isNearMatch(
+  request: StaffingRequest,
+  match: CandidateMatch,
+  minimumFitPercentage = 60,
+): boolean {
+  return (
+    !match.eligible &&
+    match.professional.profession === request.requirement.profession &&
+    match.registration?.status === request.requirement.requiredCredentialStatus &&
+    getCriteriaFitPercentage(match) >= minimumFitPercentage
+  );
+}
+
 function normalise(value: string): string {
   return value.trim().toLowerCase();
 }
@@ -90,4 +109,3 @@ export function rankCandidates(request: StaffingRequest, repository: DemoReposit
     .map((professional) => evaluateCandidate(request, professional, repository))
     .sort((left, right) => Number(right.eligible) - Number(left.eligible) || right.score - left.score);
 }
-

@@ -258,6 +258,8 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .excluded-label { color: #9a5a11; }
 .excluded-card h3 { font-size: 1.45rem; }
 .excluded-card ul { margin-top: 18px; }
+.excluded-card h4 { margin: 22px 0 0; font-size: 0.86rem; }
+.near-match-note { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.82rem; }
 .ai-briefing { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: center; margin: 42px 0 0; padding: 28px; border: 1px solid rgb(14 118 108 / 25%); border-radius: 22px; background: var(--mint); }
 .ai-briefing h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.7rem); font-weight: 500; }
 .ai-briefing > div > p:not(.eyebrow) { margin-bottom: 0; color: var(--teal-dark); }
