@@ -12,7 +12,7 @@
 
 ## Short description
 
-ShohojSheba helps healthcare organisations turn an urgent staffing request into a reviewed, explainable shortlist of qualified fictional professionals—then keeps both invitation and acceptance under human control.
+ShohojSheba helps healthcare organisations turn an urgent staffing request into a reviewed, explainable shortlist of qualified fictional professionals, while keeping both invitation and acceptance under human control.
 
 ## Full description
 
@@ -26,7 +26,7 @@ AI assists with intent and explanation. It cannot override hard requirements, au
 
 The project was built from a fresh repository during Build Week with Codex as the primary development environment. The main Codex thread created the architecture, typed domain model, application routes, matching and credential services, UI, automated tests, browser validation, documentation, and iterative repairs. Dated commits and the build log separate each implementation phase.
 
-GPT-5.6 Sol is integrated through the Responses API for two bounded tasks: structured staffing-request extraction and an evidence-grounded shortlist briefing. Both use strict JSON schemas, server-side credentials, and disclosed deterministic fallbacks. The briefing receives only the results of deterministic matching and cannot change eligibility. Deterministic application code—not the model—owns eligibility and state transitions.
+GPT-5.6 Sol is integrated through the Responses API for two bounded tasks: structured staffing-request extraction and an evidence-grounded shortlist briefing. Both use strict JSON schemas, server-side credentials, and disclosed deterministic fallbacks. The briefing receives only the results of deterministic matching and cannot change eligibility. Deterministic application code, not the model, owns eligibility and state transitions.
 
 ## What makes it different
 
@@ -39,6 +39,10 @@ GPT-5.6 Sol is integrated through the Responses API for two bounded tasks: struc
 ## Potential impact
 
 The initial audience is small and medium healthcare organisations in Bangladesh that need temporary or replacement coverage. The same evidence-first architecture can later support diagnostic centres, home-care agencies, hospitals, and other regulated professional categories without turning the first product into an unfocused marketplace.
+
+## Future vision
+
+This Build Week submission deliberately proves the shared verification, request, matching, and human-approval engine through healthcare staffing first. The longer-term ShohojSheba platform can extend that engine to verified legal, accounting, engineering, and education services. Each profession would receive its own credential requirements, ethical boundaries, pricing model, and booking workflow rather than being forced into one generic freelancing marketplace.
 
 ## Judge testing path
 
