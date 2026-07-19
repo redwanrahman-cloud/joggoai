@@ -363,3 +363,23 @@ Validation:
 - All thirty-five tests passed, including selection and near-match boundary coverage.
 - Desktop and 390px browser checks showed both decision actions with no horizontal overflow.
 - The comparison page exposed no direct invitation action.
+
+## 2026-07-20 — Phase 17: Conditional matches and amended contracts
+
+Completed:
+
+- Added a conditional-match workflow for negotiable assignment-scope gaps.
+- Preserved request version 1 and generated an auditable version 2 with unsupported duties explicitly removed.
+- Required clinic confirmation that removed duties will not be assigned and that the coordinator has authority to propose the change.
+- Recalculated eligibility against the revised request before enabling credential review or invitation.
+- Carried the amended scope through clinic invitation review, professional acceptance, and the final assignment brief.
+- Kept wrong-profession, registration, and other unresolved failures outside the negotiation path.
+- Added direct “Propose adjusted terms” actions from comparison and near-match profiles.
+
+Validation:
+
+- ESLint, strict TypeScript checking, and the production build passed.
+- All thirty-seven tests passed, including negotiable-scope and non-negotiable-failure coverage.
+- Browser-tested Mehnaz Akter from v2 proposal through credential review, invitation, professional acceptance, and confirmed assignment.
+- The amended invitation contained only “Sample handling” and excluded “Phlebotomy.”
+- The new journey passed at 390px without horizontal overflow or browser console errors.

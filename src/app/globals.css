@@ -338,6 +338,9 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .profile-gap-banner { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; margin: 24px 0; padding: 24px 28px; border: 1px solid #e3bd7a; border-radius: 20px; background: #fff4df; }
 .profile-gap-banner h2 { margin: 0; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; }
 .profile-gap-banner ul { margin: 0; color: #79510e; line-height: 1.6; }
+.adjustment-active-banner { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; margin: 24px 0; padding: 24px 28px; border: 1px solid rgb(14 118 108 / 30%); border-radius: 20px; background: var(--mint); }
+.adjustment-active-banner h2 { margin: 0; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; }
+.adjustment-active-banner > p { margin: 0; color: var(--teal-dark); line-height: 1.6; }
 .action-boundary { margin: 12px 0 0; color: var(--muted); font-size: 0.76rem; line-height: 1.5; text-align: center; }
 
 .compare-shell { width: min(1240px, calc(100% - 40px)); margin: 28px auto 100px; }
@@ -411,6 +414,29 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .advice-list li::before { position: absolute; left: 14px; top: 14px; content: counter(advice); width: 24px; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--teal); font-weight: 850; }
 
 .decision-shell { width: min(1120px, calc(100% - 40px)); margin: 28px auto 100px; }
+.adjustment-heading { max-width: 850px; padding: 42px 0; }
+.adjustment-heading h1 { font-size: clamp(3.2rem, 7vw, 6rem); }
+.adjustment-heading > p:not(.eyebrow) { color: var(--muted); font-size: 1.08rem; line-height: 1.7; }
+.scope-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.scope-comparison article { padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--surface); }
+.scope-comparison article.revised { border-top: 6px solid var(--teal); }
+.scope-comparison article > span { color: var(--muted); font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.scope-comparison h2 { margin: 12px 0 18px; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; }
+.scope-comparison ul { margin: 0; padding-left: 20px; color: var(--muted); line-height: 1.8; }
+.removed-scope { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); }
+.removed-scope strong { width: 100%; font-size: 0.78rem; }
+.removed-scope span { padding: 7px 10px; border-radius: 999px; color: #8b2a2a; background: #fde8e8; font-size: 0.72rem; font-weight: 800; text-decoration: line-through; }
+.adjustment-audit { margin: 18px 0; padding: 20px 24px; border-left: 5px solid var(--amber); background: #fff4df; }
+.adjustment-audit p { margin: 6px 0; color: #79510e; line-height: 1.55; }
+.adjustment-audit span { color: var(--muted); font-size: 0.75rem; }
+.adjustment-confirmation { padding: clamp(26px, 5vw, 46px); border-radius: 24px; color: white; background: var(--ink); }
+.adjustment-confirmation h2 { margin: 6px 0 24px; font-family: Georgia, serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500; }
+.adjustment-confirmation label { display: flex; gap: 12px; align-items: flex-start; margin: 14px 0; color: #d7dfdc; line-height: 1.5; }
+.adjustment-confirmation input { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 2px; accent-color: var(--amber); }
+.adjustment-confirmation button { margin-top: 16px; }
+.adjustment-confirmation > p:last-child { color: #aebbb7; font-size: 0.76rem; }
+.amended-contract-note { display: grid; gap: 5px; margin: 22px 0; padding: 16px 18px; border-left: 5px solid var(--teal); color: var(--teal-dark); background: var(--mint); }
+.amended-contract-note span { font-size: 0.8rem; line-height: 1.5; }
 .decision-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 28px; align-items: start; margin-top: 24px; }
 .decision-main, .decision-aside, .invitation-card { border: 1px solid var(--line); border-radius: 24px; background: var(--surface); }
 .decision-main { padding: clamp(28px, 5vw, 56px); }
@@ -533,6 +559,7 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
   .profile-summary { grid-column: 1 / -1; }
   .profile-content-grid { grid-template-columns: 1fr; }
   .profile-gap-banner { grid-template-columns: 1fr; }
+  .adjustment-active-banner, .scope-comparison { grid-template-columns: 1fr; }
   .profile-builder-grid { grid-template-columns: 1fr; }
   .comparison-decision-grid { grid-template-columns: 1fr; }
   .findings-panel { position: static; }

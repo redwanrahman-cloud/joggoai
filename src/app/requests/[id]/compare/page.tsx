@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../data/demo-repository";
 import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
 import { FlowTrail } from "../../../../components/flow-trail";
+import { createScopeAdjustment } from "../../../../features/adjustments/scope-adjustment";
 
 function requirementStatus(passed: boolean) {
   return passed ? "Meets requirement" : "Gap to resolve";
@@ -31,6 +32,15 @@ export default async function CompareProfessionalsPage({
       })
     : safePool.slice(0, 3);
   if (selected.length === 0) notFound();
+  const adjustableIds = new Set(selected.flatMap((match) => {
+    if (match.eligible) return [];
+    try {
+      createScopeAdjustment(request, match.professional, repository);
+      return [match.professional.id];
+    } catch {
+      return [];
+    }
+  }));
 
   const rows = [
     { label: "Overall fit", render: (index: number) => selected[index].eligible ? `${selected[index].score}% recommended` : `${getCriteriaFitPercentage(selected[index])}% criteria fit` },
@@ -124,9 +134,11 @@ export default async function CompareProfessionalsPage({
                 </p>
                 <Link
                   className={match.eligible ? "primary-action link-action" : "secondary-action"}
-                  href={`/professionals/${match.professional.id}?request=${request.id}`}
+                  href={match.eligible || !adjustableIds.has(match.professional.id)
+                    ? `/professionals/${match.professional.id}?request=${request.id}`
+                    : `/requests/${request.id}/adjustments/new?professional=${match.professional.id}`}
                 >
-                  {match.eligible ? "Select and continue" : "Review profile gaps"}
+                  {match.eligible ? "Select and continue" : adjustableIds.has(match.professional.id) ? "Propose adjusted terms" : "Review profile gaps"}
                 </Link>
               </article>
             ))}

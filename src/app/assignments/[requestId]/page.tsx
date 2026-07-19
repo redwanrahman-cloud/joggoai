@@ -2,19 +2,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { acceptInvitation, prepareInvitation } from "../../../features/assignments/assignment-workflow";
+import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../features/adjustments/scope-adjustment";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
 
 export default async function AssignmentPage({ params, searchParams }: {
   params: Promise<{ requestId: string }>;
-  searchParams: Promise<{ professional?: string }>;
+  searchParams: Promise<{ professional?: string; adjustment?: string }>;
 }) {
   const { requestId } = await params;
-  const { professional: professionalId = "pro-nusrat-jahan" } = await searchParams;
+  const { professional: professionalId = "pro-nusrat-jahan", adjustment } = await searchParams;
   const repository = createDemoRepository();
-  const request = repository.getStaffingRequest(requestId);
+  const baseRequest = repository.getStaffingRequest(requestId);
   const professional = repository.getProfessional(professionalId);
-  if (!request || !professional) notFound();
+  if (!baseRequest || !professional) notFound();
+  let request;
+  try {
+    request = resolveEffectiveRequest(baseRequest, professional, repository, adjustment);
+  } catch {
+    notFound();
+  }
+  const hasAdjustment = adjustment === SCOPE_ADJUSTMENT_KEY;
   const organisation = repository.getOrganisation(request.organisationId);
   if (!organisation) notFound();
   const brief = acceptInvitation(prepareInvitation(request, organisation, professional, repository));
@@ -30,6 +38,7 @@ export default async function AssignmentPage({ params, searchParams }: {
         <p className="eyebrow">Invitation accepted · assignment confirmed</p>
         <h1>The shift is covered.</h1>
         <p className="lead">Both sides reviewed the terms. Here is the final staffing brief.</p>
+        {hasAdjustment && <div className="amended-contract-note"><strong>Amended contract accepted · request v2</strong><span>The confirmed assignment excludes duties removed during negotiation.</span></div>}
         <div className="brief-grid">
           <article><small>Professional</small><strong>{professional.displayName}</strong><span>{professional.headline}</span></article>
           <article><small>Organisation</small><strong>{organisation.name}</strong><span>{organisation.area}, Dhaka</span></article>

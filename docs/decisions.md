@@ -65,3 +65,9 @@ The competition journey represents invitation and assignment stages as reproduci
 Status: accepted on 2026-07-20.
 
 Clinic coordination is presented as one visible sequence: request, shortlist, compare, verify, and invite. Professional registration is presented as resume intake, profile review, and evidence completion. The shortlist places comparison beside the strongest recommendation and describes safe near matches immediately afterward. This improves discoverability without relaxing hard eligibility: near matches retain explicit gaps and remain impossible to invite until the confirmed requirements change.
+
+## ADR-012: Conditional matches require versioned, mutually accepted terms
+
+Status: accepted on 2026-07-20.
+
+A near match may proceed only when every remaining gap is negotiable and a revised request makes the candidate eligible. The first supported negotiation is removal of an unsupported duty from the assignment scope. The original request remains preserved, request version 2 explicitly records excluded duties, an authorised clinic user confirms the change, and the professional later accepts the amended invitation. Wrong profession, missing registration, and unresolved non-scope failures cannot use this path. This creates flexibility without a generic safety override.

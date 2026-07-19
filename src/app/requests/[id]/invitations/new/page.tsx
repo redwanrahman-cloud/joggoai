@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../../data/demo-repository";
 import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
 import { FlowTrail } from "../../../../../components/flow-trail";
+import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
 
@@ -11,14 +12,21 @@ export default async function NewInvitationPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ professional?: string }>;
+  searchParams: Promise<{ professional?: string; adjustment?: string }>;
 }) {
   const { id } = await params;
-  const { professional: professionalId = "pro-nusrat-jahan" } = await searchParams;
+  const { professional: professionalId = "pro-nusrat-jahan", adjustment } = await searchParams;
   const repository = createDemoRepository();
-  const request = repository.getStaffingRequest(id);
+  const baseRequest = repository.getStaffingRequest(id);
   const professional = repository.getProfessional(professionalId);
-  if (!request || !professional) notFound();
+  if (!baseRequest || !professional) notFound();
+  let request;
+  try {
+    request = resolveEffectiveRequest(baseRequest, professional, repository, adjustment);
+  } catch {
+    notFound();
+  }
+  const hasAdjustment = adjustment === SCOPE_ADJUSTMENT_KEY;
   const organisation = repository.getOrganisation(request.organisationId);
   if (!organisation) notFound();
 
@@ -52,12 +60,13 @@ export default async function NewInvitationPage({
             { label: "Invite" },
           ]}
         />
-        <Link className="back-link" href={`/professionals/${professional.id}?request=${request.id}`}>← Back to candidate</Link>
+        <Link className="back-link" href={`/professionals/${professional.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`}>← Back to candidate</Link>
         <div className="decision-grid">
           <section className="decision-main">
             <p className="eyebrow">Final human review</p>
             <h1>Confirm the invitation</h1>
             <p className="lead">Nothing is sent until the clinic coordinator confirms these terms.</p>
+            {hasAdjustment && <div className="amended-contract-note"><strong>Amended contract · request v2</strong><span>Removed duties are excluded from this invitation and remain recorded in the audit trail.</span></div>}
             <div className="party-card">
               <span className="profile-monogram" aria-hidden="true">{professional.displayName.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
               <div><small>Inviting</small><h2>{professional.displayName}</h2><p>{professional.headline}</p></div>
@@ -81,7 +90,7 @@ export default async function NewInvitationPage({
               <li>The professional may accept or decline.</li>
             </ul>
             <div className="review-boundary"><strong>Human action</strong><p>This confirmation—not an AI score—creates the invitation.</p></div>
-            <Link className="primary-action full-width" href={`/professionals/${professional.id}/invitations/${preview.invitation.id}?request=${request.id}`}>
+            <Link className="primary-action full-width" href={`/professionals/${professional.id}/invitations/${preview.invitation.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`}>
               Confirm and send invitation
             </Link>
           </aside>

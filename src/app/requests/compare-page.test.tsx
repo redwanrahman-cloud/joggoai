@@ -14,9 +14,9 @@ describe("CompareProfessionalsPage", () => {
       "href",
       "/professionals/pro-dr-ayesha-karim?request=request-doctor-evening",
     );
-    expect(screen.getByRole("link", { name: "Review profile gaps" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Propose adjusted terms" })).toHaveAttribute(
       "href",
-      "/professionals/pro-dr-imran-kabir?request=request-doctor-evening",
+      "/requests/request-doctor-evening/adjustments/new?professional=pro-dr-imran-kabir",
     );
     expect(screen.queryByRole("link", { name: /invite/i })).not.toBeInTheDocument();
   });
