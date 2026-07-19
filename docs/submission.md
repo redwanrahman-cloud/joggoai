@@ -7,7 +7,7 @@
 - **Tagline:** Verified professionals. Explainable matching. Human decisions.
 - **Repository:** https://github.com/redwanrahman-cloud/joggoai
 - **Demo URL:** https://joggo-ai-bd.najdhotel1.chatgpt.site
-- **Video URL:** pending public YouTube upload
+- **Video URL:** https://youtu.be/upS79H9Lcow
 - **Codex `/feedback` session ID:** `019f752b-aa0b-7943-9b37-495eab4ba506`
 
 ## Short description
@@ -64,10 +64,10 @@ No account, payment, real data, or secret is required.
 - [x] Production demo URL works without authentication.
 - [x] Repository is public with MIT licence, or shared with both required judging accounts.
 - [x] README includes setup, fictional sample data, testing path, Codex contribution, and GPT-5.6 boundaries.
-- [ ] Public YouTube demo is under three minutes and includes audio.
-- [ ] Video visibly demonstrates the working product.
-- [ ] Video explains how Codex and GPT-5.6 were used.
+- [x] Public YouTube demo is under three minutes and includes audio.
+- [x] Video visibly demonstrates the working product.
+- [x] Video explains how Codex and GPT-5.6 were used.
 - [x] Work & Productivity track selected for submission.
 - [x] Main Codex `/feedback` session ID entered.
-- [ ] Demo URL, video URL, and session ID replace every pending placeholder above.
+- [x] Demo URL, video URL, and session ID replace every pending placeholder above.
 - [ ] Submission completed before July 21, 2026 at 5:00 PM Pacific Time.
