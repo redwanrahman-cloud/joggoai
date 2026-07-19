@@ -33,7 +33,9 @@ export default function HomePage() {
             <Link className="primary-action link-action" href="/requests/new">
               Start a staffing request
             </Link>
-            <span className="coming-soon">Review before matching</span>
+            <Link className="secondary-action link-action" href="/professionals/join">
+              Build a professional profile
+            </Link>
           </div>
           <p className="demo-route-note">Repeatable demo · no account, payment, or real data required.</p>
         </div>

@@ -30,7 +30,7 @@ export default function DashboardPage() {
     <main id="main-content" className="dashboard-shell">
       <header className="dashboard-header">
         <Link className="brand" href="/" aria-label="ShohojSheba home"><span className="brand-mark" aria-hidden="true">S</span><span>ShohojSheba</span></Link>
-        <div className="dashboard-header-actions"><span className="demo-badge">Dhanmondi Community Care</span><Link className="primary-action link-action" href="/requests/new">+ New staffing request</Link></div>
+        <div className="dashboard-header-actions"><Link className="secondary-action link-action" href="/professionals/join">Professional profile builder</Link><Link className="primary-action link-action" href="/requests/new">+ New staffing request</Link></div>
       </header>
 
       <section className="dashboard-welcome">
