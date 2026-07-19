@@ -5,15 +5,13 @@ import { createDemoRepository } from "../../../../../data/demo-repository";
 import { AdjustmentConfirmation } from "../../../../../features/adjustments/adjustment-confirmation";
 import { createScopeAdjustment, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
 
-export default async function NewScopeAdjustmentPage({ params, searchParams }: {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ professional?: string }>;
+export default async function ScopeAdjustmentPage({ params }: {
+  params: Promise<{ id: string; professionalId: string }>;
 }) {
-  const { id } = await params;
-  const { professional: professionalId } = await searchParams;
+  const { id, professionalId } = await params;
   const repository = createDemoRepository();
   const request = repository.getStaffingRequest(id);
-  const professional = professionalId ? repository.getProfessional(professionalId) : undefined;
+  const professional = repository.getProfessional(professionalId);
   if (!request || !professional) notFound();
 
   let proposal;

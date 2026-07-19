@@ -136,7 +136,7 @@ export default async function CompareProfessionalsPage({
                   className={match.eligible ? "primary-action link-action" : "secondary-action"}
                   href={match.eligible || !adjustableIds.has(match.professional.id)
                     ? `/professionals/${match.professional.id}?request=${request.id}`
-                    : `/requests/${request.id}/adjustments/new?professional=${match.professional.id}`}
+                    : `/requests/${request.id}/adjustments/${match.professional.id}`}
                 >
                   {match.eligible ? "Select and continue" : adjustableIds.has(match.professional.id) ? "Propose adjusted terms" : "Review profile gaps"}
                 </Link>

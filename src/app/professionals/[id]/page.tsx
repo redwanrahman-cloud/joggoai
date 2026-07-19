@@ -183,7 +183,7 @@ export default async function ProfessionalProfilePage({
               </Link>
             ) : scopeAdjustmentAvailable ? (
               <>
-                <Link className="primary-action full-width" href={`/requests/${request.id}/adjustments/new?professional=${professional.id}`}>
+                <Link className="primary-action full-width" href={`/requests/${request.id}/adjustments/${professional.id}`}>
                   Propose adjusted terms
                 </Link>
                 <Link className="secondary-action full-width" href={`/requests/${request.id}/compare`}>

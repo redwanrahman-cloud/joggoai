@@ -16,7 +16,7 @@ describe("CompareProfessionalsPage", () => {
     );
     expect(screen.getByRole("link", { name: "Propose adjusted terms" })).toHaveAttribute(
       "href",
-      "/requests/request-doctor-evening/adjustments/new?professional=pro-dr-imran-kabir",
+      "/requests/request-doctor-evening/adjustments/pro-dr-imran-kabir",
     );
     expect(screen.queryByRole("link", { name: /invite/i })).not.toBeInTheDocument();
   });
