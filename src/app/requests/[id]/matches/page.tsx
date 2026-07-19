@@ -77,9 +77,13 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
           <div className="section-title-row">
             <h2 id="eligible-heading">Recommended shortlist</h2>
             <div className="section-title-actions">
-              <span>{eligible.length === 1 ? "Hard requirements met" : `${eligible.length} qualified matches`}</span>
+              <span>
+                {nearMatches.length > 0
+                  ? `${nearMatches.length} near ${nearMatches.length === 1 ? "match" : "matches"} available to compare`
+                  : "No safe near matches available"}
+              </span>
               <Link className="secondary-action compact-action" href={compareHref}>
-                Open comparison
+                Compare professionals
               </Link>
             </div>
           </div>
