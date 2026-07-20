@@ -38,7 +38,7 @@ export function createScopeAdjustment(
   const retainedSkills = request.requirement.requiredSkills.filter(
     (skill) => !removedSkills.some((removed) => normalise(removed) === normalise(skill)),
   );
-  const auditNote = `Request v2 removes ${removedSkills.join(", ")} from this assignment. The professional must not perform the removed duties.`;
+  const auditNote = `The amended assignment removes ${removedSkills.join(", ")} from the confirmed scope. The professional must not perform the removed duties.`;
   const revisedRequest: StaffingRequest = {
     ...request,
     requirement: {

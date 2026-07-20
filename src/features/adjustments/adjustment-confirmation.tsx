@@ -15,7 +15,7 @@ export function AdjustmentConfirmation({ continueHref }: { continueHref: string 
       <label><input type="checkbox" checked={scopeConfirmed} onChange={(event) => setScopeConfirmed(event.target.checked)} /> The removed duties will not be assigned to this professional.</label>
       <label><input type="checkbox" checked={authorityConfirmed} onChange={(event) => setAuthorityConfirmed(event.target.checked)} /> I am authorised to propose this revised scope for professional acceptance.</label>
       <button className="primary-action" type="button" disabled={!scopeConfirmed || !authorityConfirmed} onClick={() => router.push(continueHref)}>
-        Confirm v2 and continue
+        Confirm amended assignment
       </button>
       <p>The professional will review and accept or decline these amended terms in the invitation step.</p>
     </section>

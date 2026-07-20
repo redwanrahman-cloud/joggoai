@@ -49,7 +49,7 @@ export default async function ProfessionalInvitationPage({ params, searchParams 
         <p className="eyebrow">Hello, {professional.displayName}</p>
         <h1>{organisation.name} invited you to a shift.</h1>
         <p className="lead">Review the complete terms before choosing. The clinic cannot accept on your behalf.</p>
-        {hasAdjustment && <div className="amended-contract-note"><strong>Amended assignment · request v2</strong><span>You are accepting the revised duties shown below. Removed duties are not part of this contract.</span></div>}
+        {hasAdjustment && <div className="amended-contract-note"><strong>Amended assignment terms</strong><span>You are accepting the revised duties shown below. Removed duties are not part of this contract.</span></div>}
         <dl className="terms-list compact">
           <div><dt>Shift</dt><dd>{formatShift(request.requirement.startsAt)} → {formatShift(request.requirement.endsAt)}</dd></div>
           <div><dt>Location</dt><dd>{request.requirement.area}, Dhaka</dd></div>

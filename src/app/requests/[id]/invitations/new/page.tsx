@@ -69,7 +69,7 @@ export default async function NewInvitationPage({
             <p className="eyebrow">Final human review</p>
             <h1>Confirm the invitation</h1>
             <p className="lead">Nothing is sent until the clinic coordinator confirms these terms.</p>
-            {hasAdjustment && <div className="amended-contract-note"><strong>Amended contract · request v2</strong><span>Removed duties are excluded from this invitation and remain recorded in the audit trail.</span></div>}
+            {hasAdjustment && <div className="amended-contract-note"><strong>Amended assignment terms</strong><span>Removed duties are excluded from this invitation and remain recorded in the audit trail.</span></div>}
             <div className="party-card">
               <span className="profile-monogram" aria-hidden="true">{professional.displayName.split(" ").map((part) => part[0]).join("").slice(0, 2).toUpperCase()}</span>
               <div><small>Inviting</small><h2>{professional.displayName}</h2><p>{professional.headline}</p></div>

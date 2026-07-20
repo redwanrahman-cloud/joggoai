@@ -44,24 +44,24 @@ export default async function ScopeAdjustmentPage({ params, searchParams }: {
         ]} />
         <Link className="back-link" href={requestHref(`/professionals/${professional.id}?request=${request.id}`)}>← Back to profile</Link>
         <section className="adjustment-heading">
-          <p className="eyebrow">Conditional match · request version 2</p>
+          <p className="eyebrow">Conditional match · amended assignment</p>
           <h1>Negotiate the scope, not the safety rules.</h1>
           <p>{professional.displayName} can move forward only if both sides agree that the removed duties are outside this assignment.</p>
         </section>
         <div className="scope-comparison">
           <article>
-            <span>Original request · v1</span>
+            <span>Original confirmed requirements</span>
             <h2>Required duties</h2>
             <ul>{proposal.originalRequest.requirement.requiredSkills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
           </article>
           <article className="revised">
-            <span>Proposed contract · v2</span>
+            <span>Proposed amended assignment</span>
             <h2>Revised duties</h2>
             <ul>{proposal.revisedRequest.requirement.requiredSkills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
             <div className="removed-scope"><strong>Explicitly excluded</strong>{proposal.removedSkills.map((skill) => <span key={skill}>{skill}</span>)}</div>
           </article>
         </div>
-        <div className="adjustment-audit"><strong>Audit note</strong><p>{proposal.auditNote}</p><span>Original request remains preserved. This proposal creates version 2.</span></div>
+        <div className="adjustment-audit"><strong>Audit note</strong><p>{proposal.auditNote}</p><span>The original requirements remain preserved alongside this separate amended assignment.</span></div>
         <AdjustmentConfirmation continueHref={continueHref} />
       </div>
     </main>

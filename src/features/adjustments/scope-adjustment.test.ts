@@ -4,7 +4,7 @@ import { evaluateCandidate } from "../matching/match-engine";
 import { createScopeAdjustment } from "./scope-adjustment";
 
 describe("scope adjustment", () => {
-  it("creates an eligible v2 request by explicitly removing unsupported duties", () => {
+  it("creates an eligible amended assignment by explicitly removing unsupported duties", () => {
     const repository = createDemoRepository();
     const request = repository.getStaffingRequest("request-lab-day")!;
     const professional = repository.getProfessional("pro-mehnaz-akter")!;

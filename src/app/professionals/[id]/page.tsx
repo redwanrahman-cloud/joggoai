@@ -118,7 +118,7 @@ export default async function ProfessionalProfilePage({
 
         {hasAcceptedAdjustment && (
           <section className="adjustment-active-banner" aria-labelledby="adjustment-active-heading">
-            <div><p className="eyebrow">Conditional terms confirmed · request v2</p><h2 id="adjustment-active-heading">Eligible under the revised assignment scope</h2></div>
+            <div><p className="eyebrow">Amended assignment confirmed</p><h2 id="adjustment-active-heading">Eligible under the amended requirements</h2></div>
             <p>Removed duties are excluded from this contract. Credential review and professional acceptance are still required.</p>
           </section>
         )}

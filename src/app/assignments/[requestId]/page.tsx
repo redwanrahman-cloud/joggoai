@@ -40,7 +40,7 @@ export default async function AssignmentPage({ params, searchParams }: {
         <p className="eyebrow">Invitation accepted · assignment confirmed</p>
         <h1>The shift is covered.</h1>
         <p className="lead">Both sides reviewed the terms. Here is the final staffing brief.</p>
-        {hasAdjustment && <div className="amended-contract-note"><strong>Amended contract accepted · request v2</strong><span>The confirmed assignment excludes duties removed during negotiation.</span></div>}
+        {hasAdjustment && <div className="amended-contract-note"><strong>Amended assignment accepted</strong><span>The confirmed assignment excludes duties removed during negotiation.</span></div>}
         <div className="brief-grid">
           <article><small>Professional</small><strong>{professional.displayName}</strong><span>{professional.headline}</span></article>
           <article><small>Organisation</small><strong>{organisation.name}</strong><span>{organisation.area}, Dhaka</span></article>
