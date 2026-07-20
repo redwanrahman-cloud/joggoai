@@ -20,7 +20,7 @@ The application is a single deployable web app for the competition demo:
 - Application services: requests, matching, credentials, and assignments
 - Domain rules: eligibility, scoring inputs, status transitions, and audit events
 - Data access: typed repository backed by deterministic fictional seed data
-- AI gateway: one isolated OpenAI client with validated structured outputs
+- AI gateways: isolated OpenAI Responses API clients for request extraction, evidence-grounded briefing, and professional profile intake
 
 ## Core entities
 
@@ -38,7 +38,7 @@ The application is a single deployable web app for the competition demo:
 
 ## Matching boundary
 
-Hard constraints are evaluated deterministically: profession, required credential state, shift coverage, required skills, and location/service area. Soft factors can contribute to a transparent score: relevant experience, distance band, reliability, and compensation fit.
+Hard constraints are evaluated deterministically: profession, required credential state, shift coverage, required skills, and maximum hourly rate. Area differences remain visible as uncertainty because a profile location does not prove travel feasibility. Transparent scoring begins only after eligibility and uses experience, reliability, completed demo assignments, and area fit.
 
 The model may parse a request and explain evidence. It must not override failed hard constraints or fabricate evidence. Stored match records retain the inputs and explanation used for the demo audit trail.
 
@@ -49,6 +49,8 @@ The model may parse a request and explain evidence. It must not override failed 
 - Use bounded enums and explicit unknown states.
 - Store prompt/version metadata without secrets or sensitive content.
 - Provide deterministic seeded extraction for the scripted demo when no API key or model response is available.
+- Keep match briefings grounded only in deterministic results and prevent them from altering eligibility.
+- Treat resume-derived profile claims as unverified until a human reviews supporting evidence.
 - Never place an API key in browser code or Git.
 
 ## Security and privacy baseline

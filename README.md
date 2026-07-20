@@ -2,75 +2,104 @@
 
 > Verified professionals. Explainable matching. Human decisions.
 
-ShohojSheba is an OpenAI Build Week project for trustworthy temporary healthcare staffing in Bangladesh. It turns a clinic's plain-language shift request into reviewed requirements, an explainable shortlist, evidence-aware credential review, and a human-controlled invitation and assignment.
+ShohojSheba is an OpenAI Build Week project for accountable temporary healthcare staffing in Bangladesh. It helps a clinic turn an urgent staffing need into reviewed requirements, an evidence-based shortlist, a human-approved invitation, and a two-sided assignment decision.
 
-## The problem
+- **Live demo:** https://joggo-ai-bd.najdhotel1.chatgpt.site
+- **Final video:** https://youtu.be/qmo_5rDfucg
+- **Judge starting point:** https://joggo-ai-bd.najdhotel1.chatgpt.site/dashboard
+- **Submission track:** Work & Productivity
 
-Small clinics and diagnostic centres may need qualified temporary staff with little notice. Translating an urgent need into requirements, comparing availability and skills, reviewing credential evidence, and coordinating both sides is slow and inconsistent.
+All people, organisations, credentials, availability windows, invitations, and assignments in the demo are fictional.
 
-ShohojSheba demonstrates a safer alternative to a generic job board:
+## Why this problem matters
 
-- hard requirements control eligibility;
-- every recommendation shows its evidence and uncertainty;
-- credential records disclose their source and review state;
-- AI cannot override a failed hard constraint;
-- the clinic and professional make separate final decisions.
+Small clinics and diagnostic centres may need qualified temporary staff with little notice. A coordinator must translate the need into exact requirements, find available professionals, compare credentials and skills, keep unresolved gaps visible, agree on safe terms, and obtain acceptance from both sides.
 
-## Multi-profession demo
+Ordinary job boards expose profiles. ShohojSheba demonstrates the accountable decision workflow around them.
 
-The clinic dashboard presents five complete staffing journeys: doctor coverage, registered nursing, laboratory technology, physiotherapy, and caregiving. Each role has fictional professionals, credential evidence, availability, rates, eligible matches, and visible hard-rule exclusions.
+## What the product demonstrates
 
-## Golden demo journey
+The clinic dashboard contains complete scenarios for five healthcare roles: doctors, registered nurses, laboratory technologists, physiotherapists, and caregivers.
 
-1. A clinic describes an overnight staffing need naturally.
-2. The request is converted into editable structured requirements.
-3. A human confirms the requirements before matching.
-4. Deterministic rules exclude candidates who fail profession, registration, skill, availability, or budget requirements.
-5. Eligible candidates receive a transparent score and evidence-based explanation.
-6. The clinic reviews synthetic credential evidence and pending items.
-7. The clinic confirms an invitation.
-8. The professional independently accepts.
-9. ShohojSheba creates a concise fictional staffing brief.
+Across those scenarios, ShohojSheba can:
 
-Start at `/dashboard`, choose any role, or run the full scripted journey from `/requests/new`. All people, organisations, credentials, and assignments are fictional.
+1. structure a plain-language staffing request with GPT-5.6 Sol;
+2. require human review before any requirement is confirmed;
+3. enforce profession, reviewed registration, skills, full-shift availability, and budget in deterministic code;
+4. rank only professionals who passed every hard rule;
+5. show safe near matches with every unresolved gap;
+6. compare three professionals side by side;
+7. negotiate a missing-duty gap through a separately confirmed amended assignment;
+8. organise synthetic credential evidence without claiming government verification;
+9. let the clinic send an invitation and the professional independently accept or decline;
+10. produce a final fictional staffing brief only after acceptance; and
+11. turn a doctor or nurse resume into an evidence-aware profile draft with GPT-5.6 Sol.
 
-## Safety and product boundaries
+## Three bounded GPT-5.6 workflows
 
-This prototype is not a medical service, licence authority, autonomous hiring system, or public marketplace. It contains no real patient or professional data. It does not claim that AI authenticated a government record. Final identity, credential, and employment checks remain the organisation's responsibility.
+ShohojSheba uses `gpt-5.6-sol` through the OpenAI Responses API for three narrow tasks.
 
-The competition scope intentionally excludes payments, real registration checks, authentication, contact exchange, attendance, disputes, and other profession verticals.
+### 1. Staffing-request extraction
 
-## GPT-5.6 design
+The model converts natural language into a strict JSON staffing requirement. Application validation checks the result, and the coordinator reviews every field before matching.
 
-The staffing-request workflow uses `gpt-5.6-sol` through the OpenAI Responses API with a strict JSON schema and domain validation. The server-only integration was validated against the live model on July 18, 2026. A visibly labelled deterministic fallback keeps the scripted journey runnable when `OPENAI_API_KEY`, quota, or network access is unavailable.
+### 2. Evidence-grounded match briefing
 
-The model is allowed to parse intent and produce an evidence-grounded staffing briefing after deterministic matching. It is never allowed to change eligibility, fabricate credential evidence, send an invitation, or accept on behalf of a person. The briefing has a disclosed deterministic fallback and always states that a person makes the final decision.
+The model receives deterministic match results and produces a concise review plan. It cannot alter eligibility, invent credentials, or choose a professional.
 
-## Built with Codex
+### 3. Professional profile intake
 
-The application was created in a fresh repository during OpenAI Build Week with Codex as the primary engineering workspace. The founder supplied the product vision, clinic-domain judgment, workflow decisions, and final review. Codex performed the repository setup, architecture, implementation, testing, browser QA, responsive review, documentation, and repair loops.
+The model organises pasted doctor or nurse resume text into a draft profile, missing-evidence checklist, and ethical improvement advice. Extracted claims remain unverified until a person reviews the documents.
 
-The dated commit history records each controlled phase:
+Every AI boundary uses a strict JSON schema, server-side credentials, explicit warnings, and a visibly disclosed deterministic fallback. The demo remains usable if model access, quota, or the network is unavailable.
 
-- foundation and product boundaries;
-- application scaffold and fictional domain data;
-- reviewed staffing-request extraction;
-- deterministic eligibility and explainable matching;
-- credential evidence and candidate review;
-- invitation, acceptance, and assignment journey;
-- accessibility, recovery, and demo repeatability;
-- deployment and submission preparation.
+## Safety and decision boundaries
 
-See [`docs/build-log.md`](docs/build-log.md) and [`docs/decisions.md`](docs/decisions.md) for the detailed evidence trail.
+- Eligibility rules are deterministic and cannot be overridden by AI.
+- A score is assigned only after every hard requirement passes.
+- Location differences are disclosed as uncertainty rather than silently treated as proof of travel feasibility.
+- Near matches cannot be invited until a valid amended assignment resolves every negotiable gap.
+- Profession, registration, availability, and budget failures cannot be negotiated away.
+- The clinic confirms the invitation; the professional separately accepts or declines.
+- ShohojSheba never claims that AI authenticated a government credential.
+- No patient information or real professional data is used.
+
+## Fast judge walkthrough
+
+No account, payment method, API key, or test data setup is required.
+
+### Primary journey
+
+1. Open the [clinic dashboard](https://joggo-ai-bd.najdhotel1.chatgpt.site/dashboard).
+2. Open any of the five active staffing scenarios.
+3. Review the recommended match and the three near matches.
+4. Compare three professionals side by side.
+5. Open a candidate to inspect credential evidence and the human review checklist.
+6. Continue through invitation review, professional acceptance, and the final staffing brief.
+
+### Standout journey: amended assignment
+
+1. Open the laboratory scenario.
+2. Review Adnan Rahim, who lacks one requested duty but passes the non-negotiable requirements.
+3. Select **Propose adjusted terms**.
+4. Confirm that the removed duty will not be assigned.
+5. Continue to invitation review and verify that only the amended duty remains.
+
+### Professional-side AI journey
+
+Open the [professional profile builder](https://joggo-ai-bd.najdhotel1.chatgpt.site/professionals/join), use the fictional resume, and review the structured draft, evidence checklist, and improvement advice.
 
 ## Technical structure
 
 - Next.js App Router, React, and strict TypeScript
-- Typed repository boundary with deterministic in-memory demo data
-- Pure domain services for matching, credential review, invitations, and assignments
+- Plain CSS with shared responsive design tokens
+- Typed repository boundary backed by deterministic fictional data
+- Pure domain services for matching, credential review, amended assignments, invitations, and assignments
+- OpenAI Responses API with strict structured outputs
 - Vitest and Testing Library
-- ESLint, strict TypeScript validation, and production builds
-- Responsive and accessibility-focused interface
+- ESLint, strict TypeScript checking, Next.js production builds, and Sites deployment builds
+
+The competition build intentionally uses an in-memory repository so every judge receives the same repeatable state. The domain services depend on a repository interface, allowing durable persistence to replace the demo adapter later.
 
 ## Run locally
 
@@ -81,15 +110,15 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:3000/dashboard` to review the clinic operations dashboard.
+Open `http://localhost:3000/dashboard`.
 
-Optional server-side model configuration:
+Live GPT-5.6 access is optional for local testing:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Set `OPENAI_API_KEY` only in `.env.local` or the deployment environment. Never prefix it with `NEXT_PUBLIC_` and never commit it.
+Set `OPENAI_API_KEY` only in `.env.local` or the deployment environment. Never prefix it with `NEXT_PUBLIC_` and never commit it. Without a key, the application clearly labels its deterministic competition fallbacks.
 
 ## Validate
 
@@ -97,16 +126,37 @@ Set `OPENAI_API_KEY` only in `.env.local` or the deployment environment. Never p
 pnpm check
 ```
 
-The command runs linting, strict type checking, all tests, and the production build.
+The command runs linting, strict type checking, all automated tests, and the Next.js production build. The final submission freeze passed 48 tests, the Next.js build, the Sites build, live checks of all three GPT-5.6 workflows, and responsive checks across eight judge-facing routes.
 
-## Submission materials
+## How Codex accelerated the build
 
-- [`docs/submission.md`](docs/submission.md) — Devpost-ready project copy and checklist
-- [`docs/demo-script.md`](docs/demo-script.md) — video storyboard under three minutes
-- [`docs/deployment.md`](docs/deployment.md) — deployment and environment checklist
-- [`docs/product-brief.md`](docs/product-brief.md) — scope and success criteria
-- [`docs/architecture.md`](docs/architecture.md) — system and safety boundaries
-- [`docs/implementation-plan.md`](docs/implementation-plan.md) — staged build plan
+This project began in a fresh repository during Build Week. The founder supplied the product vision, Bangladesh healthcare context, workflow judgment, and final decisions. Codex was the primary engineering workspace and:
+
+- turned the product brief into a typed architecture and staged implementation plan;
+- implemented the end-to-end clinic and professional journeys;
+- created deterministic eligibility and credential boundaries around GPT-5.6;
+- wrote and repeatedly expanded automated regression coverage;
+- ran browser-based desktop and mobile QA;
+- diagnosed cross-route continuity, timestamp, caching, and deployment-runtime failures;
+- preserved the dated commit and decision trail; and
+- prepared the deployment and submission evidence.
+
+Important human decisions are recorded in [`docs/decisions.md`](docs/decisions.md). The chronological evidence trail is in [`docs/build-log.md`](docs/build-log.md).
+
+## Competition evidence
+
+- [`docs/submission.md`](docs/submission.md) — Devpost-ready copy and compliance checklist
+- [`docs/demo-script.md`](docs/demo-script.md) — final under-three-minute video plan
+- [`docs/architecture.md`](docs/architecture.md) — system and AI decision boundaries
+- [`docs/build-log.md`](docs/build-log.md) — dated Build Week implementation record
+- [`docs/decisions.md`](docs/decisions.md) — product and engineering decisions
+- Codex feedback session ID: `019f752b-aa0b-7943-9b37-495eab4ba506`
+
+## Deliberate competition scope
+
+This is a working competition prototype, not a production medical service, licence authority, autonomous hiring system, or public marketplace. Authentication, payments, real registry integrations, durable storage, contact exchange, attendance, disputes, and production notifications remain future work.
+
+The longer-term platform can extend its evidence-first engine to legal, accounting, engineering, and education services, with profession-specific verification and ethical rules rather than one generic freelancing workflow.
 
 ## Licence
 

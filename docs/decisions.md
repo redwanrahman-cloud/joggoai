@@ -66,14 +66,26 @@ Status: accepted on 2026-07-20.
 
 Clinic coordination is presented as one visible sequence: request, shortlist, compare, verify, and invite. Professional registration is presented as resume intake, profile review, and evidence completion. The shortlist places comparison beside the strongest recommendation and describes safe near matches immediately afterward. This improves discoverability without relaxing hard eligibility: near matches retain explicit gaps and remain impossible to invite until the confirmed requirements change.
 
-## ADR-012: Conditional matches require versioned, mutually accepted terms
+## ADR-012: Conditional matches require separately recorded, mutually accepted terms
 
 Status: accepted on 2026-07-20.
 
-A near match may proceed only when every remaining gap is negotiable and a revised request makes the candidate eligible. The first supported negotiation is removal of an unsupported duty from the assignment scope. The original request remains preserved, request version 2 explicitly records excluded duties, an authorised clinic user confirms the change, and the professional later accepts the amended invitation. Wrong profession, missing registration, and unresolved non-scope failures cannot use this path. This creates flexibility without a generic safety override.
+A near match may proceed only when every remaining gap is negotiable and an amended assignment makes the candidate eligible. The first supported negotiation is removal of an unsupported duty from the assignment scope. The original requirements remain preserved, the amended assignment explicitly records excluded duties, an authorised clinic user confirms the change, and the professional later accepts the amended invitation. Wrong profession, missing registration, availability, budget, and unresolved non-scope failures cannot use this path. This creates flexibility without a generic safety override.
 
 ## ADR-013: Confirmed demo requirements remain URL-addressable
 
 Status: accepted on 2026-07-20.
 
 The competition build carries the human-confirmed requirement as validated, URL-addressable demo state. Every downstream ranking, comparison, credential review, invitation, briefing, and assignment reconstructs the same requirement instead of silently returning to a seeded scenario. Malformed state is ignored in favour of the known fictional seed. Durable server-side persistence and signed state remain production work.
+
+## ADR-014: User-facing language describes the staffing decision, not internal versioning
+
+Status: accepted on 2026-07-20.
+
+Internal audit metadata may retain a version number, but clinic and professional screens use “original confirmed requirements,” “proposed amended assignment,” and “amended assignment accepted.” This makes the workflow understandable without weakening the original-versus-amended audit trail.
+
+## ADR-015: Route validation returns explicit domain results
+
+Status: accepted on 2026-07-20.
+
+Judge-facing invitation routes use non-throwing domain validation and render a helpful review state for invalid selections. This prevents hosting-runtime control-flow signals from being mistaken for a missing fictional record while preserving every eligibility and credential rule.

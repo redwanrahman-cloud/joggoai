@@ -425,3 +425,65 @@ Completed:
 Validation:
 
 - Added category-wide tests for near-match volume, profession alignment, reviewed registration, and visible eligibility gaps.
+
+## 2026-07-20 — Phase 21: Professional amended-assignment language
+
+Completed:
+
+- Replaced user-facing “v2” labels with original confirmed requirements, proposed amended assignment, confirmed amended assignment, and accepted amended assignment.
+- Preserved the original-versus-amended audit trail without exposing internal version terminology as the staffing decision.
+- Added a direct continuation from amended-assignment confirmation into credential and invitation review.
+
+Validation:
+
+- All forty-seven tests passed at this phase.
+- Next.js and Sites production builds passed.
+- Live browser verification confirmed the updated language after refreshing cached client assets.
+
+## 2026-07-20 — Phase 22: Deployment-safe amended invitations
+
+Completed:
+
+- Diagnosed a hosting-runtime control-flow conflict that rendered valid amended invitations as generic missing-record pages.
+- Moved valid/invalid decision results into non-throwing domain validation.
+- Added a helpful review state for genuinely invalid invitation combinations.
+- Added regression coverage for Adnan Rahim’s amended laboratory assignment.
+
+Validation:
+
+- All forty-eight tests passed.
+- The valid amended invitation rendered successfully in the local Sites production runtime.
+- An invalid cross-profession adjustment returned the controlled review state.
+- The deployed Adnan Rahim invitation was verified with only “Sample handling” retained.
+
+## 2026-07-20 — Phase 23: Submission freeze audit
+
+Completed:
+
+- Froze feature development and audited the repository, live product, public links, and submission materials.
+- Confirmed that request extraction, match briefing, and professional profile intake each returned `live_model` from the deployed GPT-5.6 Sol integration.
+- Reconciled the README, architecture, decision log, Devpost copy, and final video script with the feature-complete product.
+- Scanned tracked files for secrets and confirmed server-only environment handling.
+
+Validation:
+
+- Forty-eight automated tests passed.
+- Next.js and Sites production builds passed.
+- Landing, dashboard, request, shortlist, comparison, candidate, amended invitation, and professional onboarding routes showed no horizontal overflow at 390px.
+
+## 2026-07-20 — Phase 24: Final submission media and documentation
+
+Completed:
+
+- Recorded a feature-complete 1080p walkthrough of the deployed application.
+- Added an energetic AI-generated narration with a visible disclosure and natural ShohojSheba pronunciation.
+- Synchronized the clinic request, matching, comparison, amended assignment, acceptance, profile intake, and Codex evidence with the narration.
+- Published the final 2:55 video publicly at https://youtu.be/qmo_5rDfucg.
+- Reconciled the README, demo script, architecture, decision log, build log, and Devpost-ready submission copy.
+
+Validation:
+
+- Final media duration: 2 minutes 54.88 seconds.
+- Audio inspection found no overlapping narration and only two natural pauses longer than 1.2 seconds.
+- Representative frames confirmed readable coverage of every narrated product stage.
+- The final repository quality gate passed all forty-eight tests, linting, strict TypeScript, and the production build.

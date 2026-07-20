@@ -1,69 +1,70 @@
-# Three-minute demo video script
+# Final three-minute demo video
 
-Target length: 2 minutes 55 seconds. Record at 1080p with audible narration and readable browser zoom.
+- **Public video:** https://youtu.be/qmo_5rDfucg
+- **Final runtime:** 2 minutes 55 seconds
+- **Format:** real 1080p screen recording of the deployed application
+- **Narration:** AI-generated Marin voice with an on-screen disclosure
+- **Pronunciation:** Sho-hoj She-ba, following the natural Bangla pronunciation of “সহজ সেবা”
 
-## 0:00–0:18 — Problem
+## 0:00–0:16 — Urgent staffing problem
 
-**Show:** ShohojSheba landing page.
+**Show:** ShohojSheba landing page and accountable-decision promise.
 
-**Say:** “Clinics sometimes need qualified temporary staff urgently. Comparing registration, skills, availability, and compensation manually is slow and difficult to audit.”
+**Narration:** “When a clinic loses tomorrow's nurse, doctor, or technician, the search becomes urgent phone calls, uncertain availability, and qualifications that are hard to compare. ShohojSheba turns that stressful search into a trusted staffing decision.”
 
-## 0:18–0:38 — Product and scope
+## 0:16–0:44 — Bangladesh market and stakeholder value
 
-**Show:** Open the clinic dashboard and scan the doctor, nurse, laboratory, physiotherapy, and caregiver rows.
+**Show:** Clinic dashboard with doctor, nurse, laboratory technologist, physiotherapist, and caregiver workflows.
 
-**Say:** “ShohojSheba gives clinics one view of urgent coverage across five healthcare roles. Each workflow turns a plain-language need into an explainable shortlist while keeping every important decision with people.”
+**Narration:** “Bangladesh's clinics, diagnostic centres, and care providers need faster access to qualified temporary staff. ShohojSheba begins one verified workforce network for doctors, nurses, laboratory technologists, physiotherapists, and caregivers. For clinics, that means faster coverage. For professionals, fairer access to opportunities. And for patients, more reliable continuity of care.”
 
-## 0:38–1:02 — GPT-5.6 extraction and review
+## 0:44–1:01 — GPT-5.6 request extraction
 
-**Show:** Start a nurse request, select **Structure this request**, and point to the live GPT-5.6 Sol label and editable fields.
+**Show:** Laboratory scenario, live GPT-5.6 Sol extraction, editable structured requirements, and human confirmation.
 
-**Say:** “The clinic describes the shift naturally. GPT-5.6 Sol converts it into validated structured requirements through the Responses API. The key remains server-side, and a human reviews every field. A disclosed fallback keeps the demo available if live access fails.”
+**Narration:** “A coordinator describes the shift naturally. GPT-5.6 Sol structures the profession, skills, location, time, credentials, and budget. Every proposed detail stays visible and editable, and a person must confirm it before matching.”
 
-## 1:02–1:30 — Explainable matching
+## 1:01–1:25 — Explainable matching and comparison
 
-**Show:** Confirm requirements, the recommended candidate, evidence, score, and excluded candidates.
+**Show:** Recommended professional, visible near matches, and three-person comparison.
 
-**Say:** “Profession, registration, skills, full-shift availability, and budget are enforced in deterministic code. Only eligible candidates receive a score. Excluded professionals remain visible with the exact reason, so AI cannot hide a failed requirement.”
+**Narration:** “ShohojSheba checks professionals against those confirmed requirements. The strongest eligible candidate comes with clear evidence. Near matches stay visible with exact gaps, and the coordinator can compare three people side by side—registration, experience, reliability, availability, skills, and rate.”
 
-**Show:** Generate the evidence-grounded staffing briefing.
+## 1:25–1:44 — Safe amended assignment
 
-**Say:** “GPT-5.6 can turn those deterministic results into a concise review plan, but it cannot change eligibility or choose the professional.”
+**Show:** Original and revised duties, audit note, required declarations, and amended-scope confirmation.
 
-## 1:30–1:52 — Credential evidence
+**Narration:** “Real staffing is rarely perfect. This professional meets the essential rules but lacks one requested duty. The clinic cannot ignore it. Instead, a separate amended assignment removes that unsupported responsibility, preserves the original request, and records exactly what changed.”
 
-**Show:** Nusrat Jahan’s profile, reviewed registration, pending ICU letter, and human-decision notice.
+## 1:44–2:01 — Two-sided confirmation
 
-**Say:** “Credential evidence is separated by provenance and review status. ShohojSheba organises records and flags gaps, but never claims that AI authenticated a government licence.”
+**Show:** Clinic invitation review, professional acceptance, and final staffing brief.
 
-## 1:52–2:16 — Two-sided human decisions
+**Narration:** “The clinic sends the revised invitation, and the professional independently accepts or declines. Only after both sides agree is the assignment confirmed, with requirements, credential notes, amended scope, and human decisions preserved in one staffing brief.”
 
-**Show:** Clinic confirmation, then professional invitation and acceptance.
+## 2:01–2:20 — AI-assisted professional onboarding
 
-**Say:** “The clinic explicitly confirms the invitation. The professional reviews the same terms and independently accepts. Neither action is performed by the model.”
+**Show:** Fictional resume input, live profile analysis, structured draft, missing evidence, and improvement guidance.
 
-## 2:16–2:31 — Outcome
+**Narration:** “Professionals get AI assistance too. GPT-5.6 turns a resume into a structured profile, identifies missing evidence, and recommends improvements—without inventing qualifications or treating unverified documents as valid.”
 
-**Show:** Confirmed staffing brief.
+## 2:20–2:40 — Codex evidence
 
-**Say:** “Only after acceptance does ShohojSheba produce a confirmed fictional staffing brief with both parties, shift, rate, and safety notes.”
+**Show:** Dated GitHub commit history from the Build Week implementation.
 
-## 2:31–2:50 — Codex development
+**Narration:** “I brought the healthcare workflow and product vision. Codex was my primary engineering workspace for architecture, implementation, browser testing, forty-eight automated tests, repairs, and deployment. GPT-5.6 powers request understanding, explanations, and professional onboarding.”
 
-**Show:** GitHub commit history, build log, tests, or Codex diff view.
+## 2:40–2:55 — Future vision and close
 
-**Say:** “I supplied the healthcare workflow and product decisions. Codex was the primary engineering workspace for architecture, implementation, testing, repair, and documentation. The dated repository history records every Build Week phase.”
+**Show:** Return to the ShohojSheba landing page.
 
-## 2:50–2:55 — Close
+**Narration:** “Healthcare is only our beginning. ShohojSheba can grow into Bangladesh's trusted network for legal, accounting, engineering, and other essential expertise. Trusted professionals, made easier to find.”
 
-**Show:** Dashboard or social card.
+## Final verification
 
-**Say:** “ShohojSheba: verified professionals, explainable matching, human decisions.”
-
-## Recording checklist
-
-- Keep the final export below 3:00.
-- Upload to YouTube as a public video. Unlisted does not satisfy the official requirement.
-- Do not show API keys, terminal secrets, email addresses, or unrelated browser tabs.
-- Keep the live-model label visible; if the fallback appears, describe it honestly or rerecord after restoring access.
-- Demonstrate the working product rather than relying on slides.
+- Public YouTube visibility confirmed.
+- Runtime remains below three minutes.
+- The deployed application and live-model states are shown.
+- Codex and GPT-5.6 contributions are explicitly explained.
+- No secrets, real patient data, or real professional records appear.
+- The narration is disclosed as AI-generated.
