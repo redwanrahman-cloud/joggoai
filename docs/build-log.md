@@ -400,3 +400,15 @@ Validation:
 - ESLint, strict TypeScript checking, and forty-one automated tests passed before the final production build.
 - Custom requirement decoding rejects malformed and invalid state and safely retains the fictional seeded request.
 - Final README, video, and submission copy remain intentionally deferred until the next full judge walkthrough.
+
+## 2026-07-20 — Phase 19: Equivalent timestamp matching
+
+Completed:
+
+- Replaced lexical ISO timestamp comparison with chronological comparison in the availability rule.
+- Ensured model-produced timestamps with or without fractional seconds resolve to the same shift boundary.
+- Restored the physiotherapist journey from Sabiha Noor's credential review into invitation and professional acceptance.
+
+Validation:
+
+- Added regression coverage for equivalent `10:00:00Z` and `10:00:00.000Z` timestamps.

@@ -70,8 +70,8 @@ export function evaluateCandidate(
   const coversShift = availability.some(
     (window) =>
       window.status === "available" &&
-      window.startsAt <= request.requirement.startsAt &&
-      window.endsAt >= request.requirement.endsAt,
+      Date.parse(window.startsAt) <= Date.parse(request.requirement.startsAt) &&
+      Date.parse(window.endsAt) >= Date.parse(request.requirement.endsAt),
   );
   if (!coversShift) failures.push("Availability does not cover the full confirmed shift.");
   else evidence.push("Availability covers the full confirmed shift.");

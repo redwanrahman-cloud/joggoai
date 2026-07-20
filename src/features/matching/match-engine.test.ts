@@ -63,4 +63,22 @@ describe("deterministic candidate matching", () => {
     expect(matches.find((match) => match.eligible)?.professional.id).toBe(expectedProfessionalId);
     expect(matches.some((match) => !match.eligible && match.hardConstraintFailures.length > 0)).toBe(true);
   });
+
+  it("treats equivalent ISO timestamps as the same shift boundary", () => {
+    const physioRequest = repository.getStaffingRequest("request-physio-day")!;
+    const modelFormattedRequest = {
+      ...physioRequest,
+      requirement: {
+        ...physioRequest.requirement,
+        startsAt: "2026-07-20T04:00:00Z",
+        endsAt: "2026-07-20T10:00:00Z",
+      },
+    };
+
+    const sabiha = rankCandidates(modelFormattedRequest, repository).find(
+      ({ professional }) => professional.id === "pro-sabiha-noor",
+    );
+    expect(sabiha?.eligible).toBe(true);
+    expect(sabiha?.hardConstraintFailures).not.toContain("Availability does not cover the full confirmed shift.");
+  });
 });
