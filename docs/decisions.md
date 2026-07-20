@@ -71,3 +71,9 @@ Clinic coordination is presented as one visible sequence: request, shortlist, co
 Status: accepted on 2026-07-20.
 
 A near match may proceed only when every remaining gap is negotiable and a revised request makes the candidate eligible. The first supported negotiation is removal of an unsupported duty from the assignment scope. The original request remains preserved, request version 2 explicitly records excluded duties, an authorised clinic user confirms the change, and the professional later accepts the amended invitation. Wrong profession, missing registration, and unresolved non-scope failures cannot use this path. This creates flexibility without a generic safety override.
+
+## ADR-013: Confirmed demo requirements remain URL-addressable
+
+Status: accepted on 2026-07-20.
+
+The competition build carries the human-confirmed requirement as validated, URL-addressable demo state. Every downstream ranking, comparison, credential review, invitation, briefing, and assignment reconstructs the same requirement instead of silently returning to a seeded scenario. Malformed state is ignored in favour of the known fictional seed. Durable server-side persistence and signed state remain production work.

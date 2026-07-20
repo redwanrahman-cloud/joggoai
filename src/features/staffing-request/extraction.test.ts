@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractStaffingRequestFallback, validateStaffingRequirement } from "./extraction";
+import { extractStaffingRequestFallback, normaliseExtractedSkills, validateStaffingRequestInput, validateStaffingRequirement } from "./extraction";
 
 describe("staffing request extraction fallback", () => {
   it("extracts the scripted ICU-night request into reviewable requirements", () => {
@@ -26,5 +26,15 @@ describe("staffing request extraction fallback", () => {
     ["Need a caregiver with elder care and mobility assistance experience", "caregiver"],
   ])("recognises profession in: %s", (input, profession) => {
     expect(extractStaffingRequestFallback(input).requirement.profession).toBe(profession);
+  });
+
+  it("normalises model wording into the matching vocabulary", () => {
+    expect(normaliseExtractedSkills(["ICU experience", "Basic Life Support experience", "blood collection"])).toEqual(["ICU", "BLS", "Phlebotomy"]);
+  });
+
+  it("rejects text that is not a usable staffing request", () => {
+    expect(validateStaffingRequestInput("hi")).toMatch(/profession, location, shift/i);
+    expect(validateStaffingRequestInput("Need coverage tomorrow in Dhanmondi with BLS")).toMatch(/healthcare profession/i);
+    expect(validateStaffingRequestInput("Need a nurse tomorrow in Dhanmondi with BLS, BDT 350 per hour")).toBeNull();
   });
 });

@@ -19,5 +19,6 @@ describe("FlowTrail", () => {
     expect(screen.getByRole("navigation", { name: "Clinic coordinator journey" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Request/ })).toHaveAttribute("href", "/requests/new");
     expect(screen.getByText("Shortlist").closest("li")).toHaveClass("current");
+    expect(screen.getByText("Shortlist").closest("li")).toHaveAttribute("aria-current", "step");
   });
 });

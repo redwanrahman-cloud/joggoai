@@ -2,13 +2,15 @@ import { NextResponse } from "next/server";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { rankCandidates } from "../../../features/matching/match-engine";
 import { createFallbackBriefing, createLiveMatchBriefing } from "../../../features/matching/match-briefing";
+import { applyConfirmedRequirement } from "../../../features/staffing-request/confirmed-requirement";
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null) as { requestId?: string } | null;
+  const body = await request.json().catch(() => null) as { requestId?: string; requirement?: string } | null;
   if (!body?.requestId) return NextResponse.json({ error: "requestId is required" }, { status: 400 });
   const repository = createDemoRepository();
-  const staffingRequest = repository.getStaffingRequest(body.requestId);
-  if (!staffingRequest) return NextResponse.json({ error: "Staffing request not found" }, { status: 404 });
+  const storedRequest = repository.getStaffingRequest(body.requestId);
+  if (!storedRequest) return NextResponse.json({ error: "Staffing request not found" }, { status: 404 });
+  const staffingRequest = applyConfirmedRequirement(storedRequest, body.requirement);
   const matches = rankCandidates(staffingRequest, repository);
   const apiKey = process.env.OPENAI_API_KEY;
   if (apiKey) {

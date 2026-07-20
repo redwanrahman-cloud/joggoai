@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Profession, StaffingRequirement } from "../../domain/types";
 import type { ExtractionResult } from "./extraction";
 import { extractStaffingRequestFallback, validateStaffingRequirement } from "./extraction";
+import { encodeConfirmedRequirement, withConfirmedRequirement } from "./confirmed-requirement";
 
 const scenarios: Array<{ profession: Profession; label: string; detail: string; requestId: string; request: string }> = [
   { profession: "general_practitioner", label: "Doctor coverage", detail: "Evening clinic locum", requestId: "request-doctor-evening", request: "We need a general practitioner in Dhanmondi tomorrow from 5 PM to 9 PM with general medicine and emergency assessment experience, up to BDT 1,200 per hour." },
@@ -31,6 +32,7 @@ export function RequestBuilder() {
   const [source, setSource] = useState<ExtractionResult["source"] | null>(null);
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [confirmed, setConfirmed] = useState(false);
+  const [requestError, setRequestError] = useState("");
   const errors = useMemo(() => (requirement ? validateStaffingRequirement(requirement) : []), [requirement]);
   const matchingRequestId = requirement
     ? scenarios.find((scenario) => scenario.profession === requirement.profession)?.requestId ?? "request-icu-night"
@@ -42,6 +44,7 @@ export function RequestBuilder() {
     setWarnings([]);
     setSource(null);
     setConfirmed(false);
+    setRequestError("");
   }
 
   function formatShift(value: string) {
@@ -64,7 +67,14 @@ export function RequestBuilder() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ input: requestText }),
       });
-      if (!response.ok) throw new Error("Extraction request failed.");
+      if (!response.ok) {
+        const body = await response.json().catch(() => null) as { error?: string } | null;
+        if (response.status === 422) {
+          setRequestError(body?.error ?? "Add more staffing details and try again.");
+          return;
+        }
+        throw new Error("Extraction request failed.");
+      }
       result = await response.json() as ExtractionResult;
     } catch {
       result = extractStaffingRequestFallback(requestText);
@@ -76,6 +86,7 @@ export function RequestBuilder() {
     setWarnings(result.warnings);
     setSource(result.source);
     setConfirmed(false);
+    setRequestError("");
   }
 
   function updateRequirement<K extends keyof StaffingRequirement>(key: K, value: StaffingRequirement[K]) {
@@ -93,7 +104,7 @@ export function RequestBuilder() {
           The confirmed request requires a {professionLabels[requirement.profession].toLowerCase()} in {requirement.area}, requiring {requirement.requiredSkills.join(" and ")}.
         </p>
         <div className="confirmation-actions">
-          <Link className="primary-action link-action" href={`/requests/${matchingRequestId}/matches`}>View eligible matches</Link>
+          <Link className="primary-action link-action" href={withConfirmedRequirement(`/requests/${matchingRequestId}/matches`, encodeConfirmedRequirement(requirement))}>View eligible matches</Link>
           <button className="secondary-action" type="button" onClick={() => setConfirmed(false)}>Edit requirements</button>
         </div>
       </section>
@@ -129,6 +140,7 @@ export function RequestBuilder() {
         <button className="primary-action" type="button" onClick={analyseRequest} disabled={!requestText.trim() || isAnalysing}>
           {isAnalysing ? "Structuring with GPT-5.6 Sol…" : "Structure this request"}
         </button>
+        {requestError && <p className="validation-error" role="alert">{requestError}</p>}
         <p className="privacy-note">Use staffing details only. Never include patient names or medical records.</p>
       </section>
 

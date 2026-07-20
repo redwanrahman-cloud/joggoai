@@ -4,6 +4,7 @@ import { createDemoRepository } from "../../../../data/demo-repository";
 import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
 import { MatchBriefingCard } from "../../../../features/matching/match-briefing-card";
 import { FlowTrail } from "../../../../components/flow-trail";
+import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../../features/staffing-request/confirmed-requirement";
 
 const professionLabels = { general_practitioner: "doctor", registered_nurse: "registered nurse", medical_technologist: "laboratory technologist", physiotherapist: "physiotherapist", caregiver: "caregiver" } as const;
 
@@ -11,18 +12,21 @@ function formatShift(value: string) {
   return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value));
 }
 
-export default async function MatchResultsPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function MatchResultsPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ requirement?: string }> }) {
   const { id } = await params;
+  const { requirement: encodedRequirement } = await searchParams ?? {};
   const repository = createDemoRepository();
-  const request = repository.getStaffingRequest(id);
-  if (!request) notFound();
+  const baseRequest = repository.getStaffingRequest(id);
+  if (!baseRequest) notFound();
+  const request = applyConfirmedRequirement(baseRequest, encodedRequirement);
 
   const organisation = repository.getOrganisation(request.organisationId);
   const matches = rankCandidates(request, repository);
   const eligible = matches.filter((match) => match.eligible);
   const nearMatches = matches.filter((match) => isNearMatch(request, match));
   const comparisonIds = [...eligible, ...nearMatches].slice(0, 3).map((match) => match.professional.id).join(",");
-  const compareHref = `/requests/${request.id}/compare?professionals=${comparisonIds}`;
+  const compareHref = withConfirmedRequirement(`/requests/${request.id}/compare?professionals=${comparisonIds}`, encodedRequirement);
+  const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
 
   return (
     <main id="main-content">
@@ -122,7 +126,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
                   </div>
                   <div className="candidate-actions">
                     <span className="credential-chip">Demo registration reviewed</span>
-                    <Link className="primary-action link-action" href={`/professionals/${match.professional.id}?request=${request.id}`}>Review candidate</Link>
+                    <Link className="primary-action link-action" href={requestHref(`/professionals/${match.professional.id}?request=${request.id}`)}>Review candidate</Link>
                   </div>
                 </div>
               </article>
@@ -148,7 +152,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
                 <h4>Requirement gaps</h4>
                 <ul>{match.hardConstraintFailures.map((failure) => <li key={failure}>{failure}</li>)}</ul>
                 <p className="near-match-note">Update the confirmed requirements before this professional can be invited.</p>
-                <Link className="secondary-action full-width" href={`/professionals/${match.professional.id}?request=${request.id}`}>
+                <Link className="secondary-action full-width" href={requestHref(`/professionals/${match.professional.id}?request=${request.id}`)}>
                   View profile and evidence
                 </Link>
               </article>
@@ -157,7 +161,7 @@ export default async function MatchResultsPage({ params }: { params: Promise<{ i
           </section>
         )}
 
-        <MatchBriefingCard requestId={request.id} />
+        <MatchBriefingCard requestId={request.id} requirement={encodedRequirement} />
       </div>
     </main>
   );

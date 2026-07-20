@@ -383,3 +383,20 @@ Validation:
 - Browser-tested Mehnaz Akter from v2 proposal through credential review, invitation, professional acceptance, and confirmed assignment.
 - The amended invitation contained only “Sample handling” and excluded “Phlebotomy.”
 - The new journey passed at 390px without horizontal overflow or browser console errors.
+
+## 2026-07-20 — Phase 18: End-to-end requirement continuity and completion polish
+
+Completed:
+
+- Connected every human-confirmed staffing field to deterministic ranking instead of routing only by profession.
+- Preserved the confirmed requirement through comparison, profile review, scope adjustment, AI briefing, invitation, professional response, and assignment.
+- Normalised common GPT skill wording into the matching vocabulary.
+- Rejected underspecified or non-staffing input with actionable guidance.
+- Added a deterministic invitation-decline outcome and a professional profile-submission confirmation.
+- Added the active-step accessibility state, a mobile comparison hint, and a sticky comparison label column.
+
+Validation:
+
+- ESLint, strict TypeScript checking, and forty-one automated tests passed before the final production build.
+- Custom requirement decoding rejects malformed and invalid state and safely retains the fictional seeded request.
+- Final README, video, and submission copy remain intentionally deferred until the next full judge walkthrough.

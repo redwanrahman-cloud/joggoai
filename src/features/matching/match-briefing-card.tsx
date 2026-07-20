@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { MatchBriefing } from "./match-briefing";
 
-export function MatchBriefingCard({ requestId }: { requestId: string }) {
+export function MatchBriefingCard({ requestId, requirement }: { requestId: string; requirement?: string }) {
   const [briefing, setBriefing] = useState<MatchBriefing | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -12,7 +12,7 @@ export function MatchBriefingCard({ requestId }: { requestId: string }) {
     setLoading(true);
     setError(false);
     try {
-      const response = await fetch("/api/match-briefing", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ requestId }) });
+      const response = await fetch("/api/match-briefing", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ requestId, requirement }) });
       if (!response.ok) throw new Error("Briefing request failed");
       setBriefing(await response.json() as MatchBriefing);
     } catch { setError(true); }

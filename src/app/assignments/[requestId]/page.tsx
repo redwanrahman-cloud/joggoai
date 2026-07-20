@@ -3,19 +3,21 @@ import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../data/demo-repository";
 import { acceptInvitation, prepareInvitation } from "../../../features/assignments/assignment-workflow";
 import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../features/adjustments/scope-adjustment";
+import { applyConfirmedRequirement } from "../../../features/staffing-request/confirmed-requirement";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
 
 export default async function AssignmentPage({ params, searchParams }: {
   params: Promise<{ requestId: string }>;
-  searchParams: Promise<{ professional?: string; adjustment?: string }>;
+  searchParams: Promise<{ professional?: string; adjustment?: string; requirement?: string }>;
 }) {
   const { requestId } = await params;
-  const { professional: professionalId = "pro-nusrat-jahan", adjustment } = await searchParams;
+  const { professional: professionalId = "pro-nusrat-jahan", adjustment, requirement: encodedRequirement } = await searchParams;
   const repository = createDemoRepository();
-  const baseRequest = repository.getStaffingRequest(requestId);
+  const storedRequest = repository.getStaffingRequest(requestId);
   const professional = repository.getProfessional(professionalId);
-  if (!baseRequest || !professional) notFound();
+  if (!storedRequest || !professional) notFound();
+  const baseRequest = applyConfirmedRequirement(storedRequest, encodedRequirement);
   let request;
   try {
     request = resolveEffectiveRequest(baseRequest, professional, repository, adjustment);

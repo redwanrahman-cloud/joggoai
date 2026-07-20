@@ -4,6 +4,7 @@ import { createDemoRepository } from "../../../../data/demo-repository";
 import { getCriteriaFitPercentage, isNearMatch, rankCandidates } from "../../../../features/matching/match-engine";
 import { FlowTrail } from "../../../../components/flow-trail";
 import { createScopeAdjustment } from "../../../../features/adjustments/scope-adjustment";
+import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../../features/staffing-request/confirmed-requirement";
 
 function requirementStatus(passed: boolean) {
   return passed ? "Meets requirement" : "Gap to resolve";
@@ -14,13 +15,15 @@ export default async function CompareProfessionalsPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ professionals?: string }>;
+  searchParams: Promise<{ professionals?: string; requirement?: string }>;
 }) {
   const { id } = await params;
-  const { professionals } = await searchParams;
+  const { professionals, requirement: encodedRequirement } = await searchParams;
   const repository = createDemoRepository();
-  const request = repository.getStaffingRequest(id);
-  if (!request) notFound();
+  const baseRequest = repository.getStaffingRequest(id);
+  if (!baseRequest) notFound();
+  const request = applyConfirmedRequirement(baseRequest, encodedRequirement);
+  const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
 
   const matches = rankCandidates(request, repository);
   const safePool = matches.filter((match) => match.eligible || isNearMatch(request, match));
@@ -70,19 +73,20 @@ export default async function CompareProfessionalsPage({
           label="Clinic coordinator journey"
           steps={[
             { label: "Request", href: "/requests/new" },
-            { label: "Shortlist", href: `/requests/${request.id}/matches` },
+            { label: "Shortlist", href: requestHref(`/requests/${request.id}/matches`) },
             { label: "Compare" },
             { label: "Verify" },
             { label: "Invite" },
           ]}
         />
-        <Link className="back-link" href={`/requests/${request.id}/matches`}>← Back to matches</Link>
+        <Link className="back-link" href={requestHref(`/requests/${request.id}/matches`)}>← Back to matches</Link>
         <section className="compare-heading">
           <p className="eyebrow">Side-by-side review · up to three professionals</p>
           <h1>Compare the evidence, not just the score.</h1>
           <p>Every column uses the same confirmed staffing requirements. Amber gaps remain visible and cannot be overridden by a higher reliability score.</p>
         </section>
 
+        <p className="comparison-scroll-hint">Swipe horizontally to compare every professional.</p>
         <div className="comparison-scroll" role="region" aria-label="Professional comparison" tabIndex={0}>
           <table className="comparison-table">
             <thead>
@@ -93,7 +97,7 @@ export default async function CompareProfessionalsPage({
                     <span className={match.eligible ? "compare-status eligible" : "compare-status near"}>{match.eligible ? "Eligible" : "Near match"}</span>
                     <strong>{match.professional.displayName}</strong>
                     <small>{match.professional.headline}</small>
-                    <Link href={`/professionals/${match.professional.id}?request=${request.id}`}>View full profile</Link>
+                    <Link href={requestHref(`/professionals/${match.professional.id}?request=${request.id}`)}>View full profile</Link>
                   </th>
                 ))}
               </tr>
@@ -134,9 +138,9 @@ export default async function CompareProfessionalsPage({
                 </p>
                 <Link
                   className={match.eligible ? "primary-action link-action" : "secondary-action"}
-                  href={match.eligible || !adjustableIds.has(match.professional.id)
+                  href={requestHref(match.eligible || !adjustableIds.has(match.professional.id)
                     ? `/professionals/${match.professional.id}?request=${request.id}`
-                    : `/requests/${request.id}/adjustments/${match.professional.id}`}
+                    : `/requests/${request.id}/adjustments/${match.professional.id}`)}
                 >
                   {match.eligible ? "Select and continue" : adjustableIds.has(match.professional.id) ? "Propose adjusted terms" : "Review profile gaps"}
                 </Link>

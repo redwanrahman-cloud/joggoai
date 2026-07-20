@@ -4,15 +4,20 @@ import { FlowTrail } from "../../../../../components/flow-trail";
 import { createDemoRepository } from "../../../../../data/demo-repository";
 import { AdjustmentConfirmation } from "../../../../../features/adjustments/adjustment-confirmation";
 import { createScopeAdjustment, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
+import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../../../features/staffing-request/confirmed-requirement";
 
-export default async function ScopeAdjustmentPage({ params }: {
+export default async function ScopeAdjustmentPage({ params, searchParams }: {
   params: Promise<{ id: string; professionalId: string }>;
+  searchParams?: Promise<{ requirement?: string }>;
 }) {
   const { id, professionalId } = await params;
+  const { requirement: encodedRequirement } = await searchParams ?? {};
   const repository = createDemoRepository();
-  const request = repository.getStaffingRequest(id);
+  const storedRequest = repository.getStaffingRequest(id);
   const professional = repository.getProfessional(professionalId);
-  if (!request || !professional) notFound();
+  if (!storedRequest || !professional) notFound();
+  const request = applyConfirmedRequirement(storedRequest, encodedRequirement);
+  const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
 
   let proposal;
   try {
@@ -21,7 +26,7 @@ export default async function ScopeAdjustmentPage({ params }: {
     notFound();
   }
 
-  const continueHref = `/professionals/${professional.id}?request=${request.id}&adjustment=${SCOPE_ADJUSTMENT_KEY}`;
+  const continueHref = requestHref(`/professionals/${professional.id}?request=${request.id}&adjustment=${SCOPE_ADJUSTMENT_KEY}`);
 
   return (
     <main id="main-content">
@@ -31,13 +36,13 @@ export default async function ScopeAdjustmentPage({ params }: {
       </header>
       <div className="decision-shell">
         <FlowTrail current={3} label="Conditional selection journey" steps={[
-          { label: "Identify gap", href: `/professionals/${professional.id}?request=${request.id}` },
+          { label: "Identify gap", href: requestHref(`/professionals/${professional.id}?request=${request.id}`) },
           { label: "Revise scope" },
           { label: "Clinic confirms" },
           { label: "Verify" },
           { label: "Professional accepts" },
         ]} />
-        <Link className="back-link" href={`/professionals/${professional.id}?request=${request.id}`}>← Back to profile</Link>
+        <Link className="back-link" href={requestHref(`/professionals/${professional.id}?request=${request.id}`)}>← Back to profile</Link>
         <section className="adjustment-heading">
           <p className="eyebrow">Conditional match · request version 2</p>
           <h1>Negotiate the scope, not the safety rules.</h1>

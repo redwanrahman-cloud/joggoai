@@ -4,6 +4,7 @@ import { createDemoRepository } from "../../../../../data/demo-repository";
 import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
 import { FlowTrail } from "../../../../../components/flow-trail";
 import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
+import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../../../features/staffing-request/confirmed-requirement";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
 
@@ -12,14 +13,16 @@ export default async function NewInvitationPage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ professional?: string; adjustment?: string }>;
+  searchParams: Promise<{ professional?: string; adjustment?: string; requirement?: string }>;
 }) {
   const { id } = await params;
-  const { professional: professionalId = "pro-nusrat-jahan", adjustment } = await searchParams;
+  const { professional: professionalId = "pro-nusrat-jahan", adjustment, requirement: encodedRequirement } = await searchParams;
   const repository = createDemoRepository();
-  const baseRequest = repository.getStaffingRequest(id);
+  const storedRequest = repository.getStaffingRequest(id);
   const professional = repository.getProfessional(professionalId);
-  if (!baseRequest || !professional) notFound();
+  if (!storedRequest || !professional) notFound();
+  const baseRequest = applyConfirmedRequirement(storedRequest, encodedRequirement);
+  const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
   let request;
   try {
     request = resolveEffectiveRequest(baseRequest, professional, repository, adjustment);
@@ -54,13 +57,13 @@ export default async function NewInvitationPage({
           label="Clinic coordinator journey"
           steps={[
             { label: "Request", href: "/requests/new" },
-            { label: "Shortlist", href: `/requests/${request.id}/matches` },
-            { label: "Compare", href: `/requests/${request.id}/compare` },
-            { label: "Verify", href: `/professionals/${professional.id}?request=${request.id}` },
+            { label: "Shortlist", href: requestHref(`/requests/${request.id}/matches`) },
+            { label: "Compare", href: requestHref(`/requests/${request.id}/compare`) },
+            { label: "Verify", href: requestHref(`/professionals/${professional.id}?request=${request.id}`) },
             { label: "Invite" },
           ]}
         />
-        <Link className="back-link" href={`/professionals/${professional.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`}>← Back to candidate</Link>
+        <Link className="back-link" href={requestHref(`/professionals/${professional.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`)}>← Back to candidate</Link>
         <div className="decision-grid">
           <section className="decision-main">
             <p className="eyebrow">Final human review</p>
@@ -90,7 +93,7 @@ export default async function NewInvitationPage({
               <li>The professional may accept or decline.</li>
             </ul>
             <div className="review-boundary"><strong>Human action</strong><p>This confirmation—not an AI score—creates the invitation.</p></div>
-            <Link className="primary-action full-width" href={`/professionals/${professional.id}/invitations/${preview.invitation.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`}>
+            <Link className="primary-action full-width" href={requestHref(`/professionals/${professional.id}/invitations/${preview.invitation.id}?request=${request.id}${hasAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`)}>
               Confirm and send invitation
             </Link>
           </aside>

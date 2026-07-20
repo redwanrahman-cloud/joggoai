@@ -24,7 +24,7 @@ export function FlowTrail({
           const content = <><span>{number}</span>{step.label}</>;
 
           return (
-            <li className={state} key={step.label}>
+            <li className={state} key={step.label} aria-current={state === "current" ? "step" : undefined}>
               {step.href ? <Link href={step.href}>{content}</Link> : <span className="flow-step">{content}</span>}
             </li>
           );

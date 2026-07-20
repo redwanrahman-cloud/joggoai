@@ -5,6 +5,7 @@ import { reviewProfessionalCredentials } from "../../../features/credentials/cre
 import { evaluateCandidate, getCriteriaFitPercentage } from "../../../features/matching/match-engine";
 import { FlowTrail } from "../../../components/flow-trail";
 import { createScopeAdjustment, resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../features/adjustments/scope-adjustment";
+import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../features/staffing-request/confirmed-requirement";
 
 const professionLabels = { general_practitioner: "Doctor", registered_nurse: "Registered nurse", medical_technologist: "Laboratory technologist", physiotherapist: "Physiotherapist", caregiver: "Caregiver" } as const;
 
@@ -21,14 +22,16 @@ export default async function ProfessionalProfilePage({
   searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ request?: string; adjustment?: string }>;
+  searchParams: Promise<{ request?: string; adjustment?: string; requirement?: string }>;
 }) {
   const { id } = await params;
-  const { request: requestId = "request-icu-night", adjustment } = await searchParams;
+  const { request: requestId = "request-icu-night", adjustment, requirement: encodedRequirement } = await searchParams;
   const repository = createDemoRepository();
   const professional = repository.getProfessional(id);
-  const request = repository.getStaffingRequest(requestId);
-  if (!professional || !request) notFound();
+  const storedRequest = repository.getStaffingRequest(requestId);
+  if (!professional || !storedRequest) notFound();
+  const request = applyConfirmedRequirement(storedRequest, encodedRequirement);
+  const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
 
   let effectiveRequest;
   try {
@@ -80,13 +83,13 @@ export default async function ProfessionalProfilePage({
           label="Clinic coordinator journey"
           steps={[
             { label: "Request", href: "/requests/new" },
-            { label: "Shortlist", href: `/requests/${request.id}/matches` },
-            { label: "Compare", href: `/requests/${request.id}/compare` },
+            { label: "Shortlist", href: requestHref(`/requests/${request.id}/matches`) },
+            { label: "Compare", href: requestHref(`/requests/${request.id}/compare`) },
             { label: "Verify" },
             { label: "Invite" },
           ]}
         />
-        <Link className="back-link" href={`/requests/${request.id}/matches`}>← Back to matches</Link>
+        <Link className="back-link" href={requestHref(`/requests/${request.id}/matches`)}>← Back to matches</Link>
         <section className="profile-hero">
           <div className="profile-monogram" aria-hidden="true">{initials}</div>
           <div>
@@ -178,22 +181,22 @@ export default async function ProfessionalProfilePage({
               <p>ShohojSheba organises evidence and flags gaps. It does not authenticate a government record or make the hiring decision.</p>
             </div>
             {match.eligible ? (
-              <Link className="primary-action full-width" href={`/requests/${request.id}/invitations/new?professional=${professional.id}${hasAcceptedAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`}>
+              <Link className="primary-action full-width" href={requestHref(`/requests/${request.id}/invitations/new?professional=${professional.id}${hasAcceptedAdjustment ? `&adjustment=${SCOPE_ADJUSTMENT_KEY}` : ""}`)}>
                 Review invitation
               </Link>
             ) : scopeAdjustmentAvailable ? (
               <>
-                <Link className="primary-action full-width" href={`/requests/${request.id}/adjustments/${professional.id}`}>
+                <Link className="primary-action full-width" href={requestHref(`/requests/${request.id}/adjustments/${professional.id}`)}>
                   Propose adjusted terms
                 </Link>
-                <Link className="secondary-action full-width" href={`/requests/${request.id}/compare`}>
+                <Link className="secondary-action full-width" href={requestHref(`/requests/${request.id}/compare`)}>
                   Compare with shortlist
                 </Link>
                 <p className="action-boundary">Only the assignment scope can be revised. Registration and profession requirements remain blocked.</p>
               </>
             ) : (
               <>
-                <Link className="primary-action full-width" href={`/requests/${request.id}/compare`}>
+                <Link className="primary-action full-width" href={requestHref(`/requests/${request.id}/compare`)}>
                   Compare with shortlist
                 </Link>
                 <p className="action-boundary">Invitation stays unavailable until the confirmed requirements are updated.</p>

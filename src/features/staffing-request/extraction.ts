@@ -57,3 +57,28 @@ export function validateStaffingRequirement(requirement: StaffingRequirement): s
   if (requirement.requiredSkills.length === 0) errors.push("Add at least one required skill.");
   return errors;
 }
+
+const skillAliases: Array<[RegExp, string]> = [
+  [/\bicu\b|intensive care/i, "ICU"],
+  [/\bbls\b|basic life support/i, "BLS"],
+  [/phlebotomy|blood collection/i, "Phlebotomy"],
+  [/sample handling|specimen handling/i, "Sample handling"],
+  [/general medicine/i, "General medicine"],
+  [/emergency assessment|urgent assessment/i, "Emergency assessment"],
+  [/musculoskeletal rehabilitation|musculoskeletal rehab/i, "Musculoskeletal rehabilitation"],
+  [/post-operative mobility|postoperative mobility/i, "Post-operative mobility"],
+  [/elder care|elderly care/i, "Elder care"],
+  [/mobility assistance|mobility support/i, "Mobility assistance"],
+  [/wound care/i, "Wound care"],
+  [/post-operative care|postoperative care/i, "Post-operative care"],
+];
+
+export function normaliseExtractedSkills(skills: string[]): string[] {
+  return [...new Set(skills.map((skill) => skillAliases.find(([pattern]) => pattern.test(skill))?.[1] ?? skill.trim()).filter(Boolean))];
+}
+
+export function validateStaffingRequestInput(input: string): string | null {
+  if (input.trim().length < 20) return "Describe the profession, location, shift, required skills, and approximate budget.";
+  if (!professionTerms.some(([pattern]) => pattern.test(input))) return "Include a supported healthcare profession, such as doctor, nurse, technologist, physiotherapist, or caregiver.";
+  return null;
+}

@@ -9,8 +9,10 @@ export function ProfileBuilder() {
   const [resume, setResume] = useState(demoResume);
   const [result, setResult] = useState<ProfileIntakeResult | null>(null);
   const [isAnalysing, setIsAnalysing] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   async function analyseResume() {
+    setSubmitted(false);
     setIsAnalysing(true);
     try {
       const response = await fetch("/api/profile-intake", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ input: resume }) });
@@ -30,9 +32,9 @@ export function ProfileBuilder() {
     <nav className="profile-flow" aria-label="Professional registration journey">
       <p>Professional registration journey</p>
       <ol>
-        <li className="current"><span>1</span>Share resume</li>
+        <li className={submitted ? "complete" : "current"} aria-current={!submitted ? "step" : undefined}><span>1</span>Share resume</li>
         <li className={result ? "complete" : "upcoming"}><span>2</span>Review profile</li>
-        <li className={result ? "current" : "upcoming"}><span>3</span>Complete evidence</li>
+        <li className={submitted ? "complete" : result ? "current" : "upcoming"} aria-current={result && !submitted ? "step" : undefined}><span>3</span>Complete evidence</li>
       </ol>
     </nav>
     <div className="profile-builder-grid">
@@ -51,7 +53,16 @@ export function ProfileBuilder() {
 
       <section className="intake-panel intake-results" aria-live="polite">
         <p className="eyebrow">Step 2 · Review every extracted claim</p>
-        {!result ? (
+        {submitted && result ? (
+          <div className="profile-submission-confirmation" role="status">
+            <span className="success-mark" aria-hidden="true">✓</span>
+            <p className="eyebrow">Profile submitted for demo review</p>
+            <h2>{result.profile.displayName}&apos;s draft is in the verification queue.</h2>
+            <p>Claims remain unverified. A reviewer would now check the original registration, identity, qualification, and employment evidence.</p>
+            <dl><div><dt>Status</dt><dd>Awaiting evidence review</dd></div><div><dt>Missing items</dt><dd>{result.evidenceChecklist.filter((item) => item.status !== "provided").length}</dd></div></dl>
+            <button className="secondary-action" type="button" onClick={() => setSubmitted(false)}>Return to profile review</button>
+          </div>
+        ) : !result ? (
           <div className="empty-intake"><span aria-hidden="true">AI</span><h2>Your profile draft will appear here.</h2><p>We will separate profile information, missing evidence, and practical improvements.</p></div>
         ) : (
           <>
@@ -76,7 +87,8 @@ export function ProfileBuilder() {
             {result.warnings.map((warning) => <p className="review-warning" key={warning}>{warning}</p>)}
             <div className="profile-next-actions">
               <a className="primary-action link-action" href="#document-readiness">Complete missing evidence</a>
-              <p>Demo boundary: profile saving and account creation are intentionally not enabled.</p>
+              <button className="secondary-action" type="button" onClick={() => setSubmitted(true)}>Submit for verification</button>
+              <p>Demo submission only. No account is created and no real document is stored.</p>
             </div>
           </>
         )}

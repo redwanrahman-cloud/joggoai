@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { extractStaffingRequestFallback } from "../../../../features/staffing-request/extraction";
+import { extractStaffingRequestFallback, normaliseExtractedSkills, validateStaffingRequestInput } from "../../../../features/staffing-request/extraction";
 import { extractStaffingRequestLive } from "../../../../features/staffing-request/openai-extraction";
 
 export async function POST(request: Request) {
@@ -8,11 +8,14 @@ export async function POST(request: Request) {
   if (!input || input.length > 2_000) {
     return NextResponse.json({ error: "Provide a staffing request between 1 and 2,000 characters." }, { status: 400 });
   }
+  const inputError = validateStaffingRequestInput(input);
+  if (inputError) return NextResponse.json({ error: inputError }, { status: 422 });
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (apiKey) {
     try {
-      return NextResponse.json(await extractStaffingRequestLive(input, apiKey));
+      const result = await extractStaffingRequestLive(input, apiKey);
+      return NextResponse.json({ ...result, requirement: { ...result.requirement, requiredSkills: normaliseExtractedSkills(result.requirement.requiredSkills) } });
     } catch (error) {
       console.error(
         "[staffing-request] Live GPT-5.6 Sol extraction failed:",
