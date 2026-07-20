@@ -1,12 +1,26 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createDemoRepository } from "../../../../../data/demo-repository";
-import { prepareInvitation } from "../../../../../features/assignments/assignment-workflow";
+import { tryPrepareInvitation } from "../../../../../features/assignments/assignment-workflow";
 import { FlowTrail } from "../../../../../components/flow-trail";
-import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
+import { tryResolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../../../../../features/adjustments/scope-adjustment";
 import { applyConfirmedRequirement, withConfirmedRequirement } from "../../../../../features/staffing-request/confirmed-requirement";
 
 function formatShift(value: string) { return new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dhaka", day: "numeric", month: "short", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(value)); }
+
+function InvitationUnavailable({ requestId, professionalId }: { requestId: string; professionalId: string }) {
+  return (
+    <main id="main-content">
+      <div className="error-page">
+        <p className="eyebrow">Invitation unavailable</p>
+        <h1>The confirmed terms need another review.</h1>
+        <p>This professional cannot be invited under the current requirements. Return to the profile to review the remaining gaps.</p>
+        <Link className="primary-action" href={`/professionals/${professionalId}?request=${requestId}`}>Review candidate</Link>
+        <Link className="secondary-action" href={`/requests/${requestId}/matches`}>Return to shortlist</Link>
+      </div>
+    </main>
+  );
+}
 
 export default async function NewInvitationPage({
   params,
@@ -23,27 +37,19 @@ export default async function NewInvitationPage({
   if (!storedRequest || !professional) notFound();
   const baseRequest = applyConfirmedRequirement(storedRequest, encodedRequirement);
   const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
-  let request;
-  try {
-    request = resolveEffectiveRequest(baseRequest, professional, repository, adjustment);
-  } catch {
-    notFound();
-  }
+  const request = tryResolveEffectiveRequest(baseRequest, professional, repository, adjustment);
+  if (!request) return <InvitationUnavailable requestId={id} professionalId={professional.id} />;
   const hasAdjustment = adjustment === SCOPE_ADJUSTMENT_KEY;
   const organisation = repository.getOrganisation(request.organisationId);
   if (!organisation) notFound();
 
-  let preview;
-  try {
-    preview = prepareInvitation(
-      request,
-      organisation,
-      professional,
-      repository,
-    );
-  } catch {
-    notFound();
-  }
+  const preview = tryPrepareInvitation(
+    request,
+    organisation,
+    professional,
+    repository,
+  );
+  if (!preview) return <InvitationUnavailable requestId={id} professionalId={professional.id} />;
 
   return (
     <main id="main-content">

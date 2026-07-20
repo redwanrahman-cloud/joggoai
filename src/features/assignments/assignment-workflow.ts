@@ -59,6 +59,34 @@ export function prepareInvitation(
   };
 }
 
+export function tryPrepareInvitation(
+  request: StaffingRequest,
+  organisation: Organisation,
+  professional: ProfessionalProfile,
+  repository: DemoRepository,
+) {
+  const credentials: Credential[] = repository.listCredentials(professional.id);
+  const match = evaluateCandidate(request, professional, repository);
+  const credentialReview = reviewProfessionalCredentials(professional, credentials);
+  if (!match.eligible || credentialReview.status === "blocked") return null;
+
+  const totalHours = (Date.parse(request.requirement.endsAt) - Date.parse(request.requirement.startsAt)) / 3_600_000;
+  return {
+    invitation: {
+      id: `invitation-${request.id}-${professional.id}`,
+      staffingRequestId: request.id,
+      professionalId: professional.id,
+      status: "pending" as const,
+      sentAt: "2026-07-19T09:15:00.000Z",
+    },
+    organisation,
+    professional,
+    request,
+    totalHours,
+    estimatedTotalBdt: totalHours * professional.expectedHourlyRateBdt,
+  };
+}
+
 export function acceptInvitation(preview: InvitationPreview): AssignmentBrief {
   const invitation: Invitation = {
     ...preview.invitation,

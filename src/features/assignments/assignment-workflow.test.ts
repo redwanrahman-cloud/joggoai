@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createDemoRepository } from "../../data/demo-repository";
-import { acceptInvitation, prepareInvitation } from "./assignment-workflow";
+import { resolveEffectiveRequest, SCOPE_ADJUSTMENT_KEY } from "../adjustments/scope-adjustment";
+import { acceptInvitation, prepareInvitation, tryPrepareInvitation } from "./assignment-workflow";
 
 const repository = createDemoRepository();
 const request = repository.getStaffingRequest("request-icu-night")!;
@@ -29,6 +30,12 @@ describe("assignment workflow", () => {
       professional,
       repository,
     )).toThrow(/Cannot invite an ineligible professional/);
+    expect(tryPrepareInvitation(
+      request,
+      organisation,
+      professional,
+      repository,
+    )).toBeNull();
   });
 
   it("creates a confirmed assignment only after acceptance", () => {
@@ -45,5 +52,27 @@ describe("assignment workflow", () => {
     expect(brief.invitation.respondedAt).toBeTruthy();
     expect(brief.assignment.status).toBe("confirmed");
     expect(brief.assignment.invitationId).toBe(brief.invitation.id);
+  });
+
+  it("prepares an invitation for a lab near match after an amended assignment is confirmed", () => {
+    const labRequest = repository.getStaffingRequest("request-lab-day")!;
+    const labOrganisation = repository.getOrganisation(labRequest.organisationId)!;
+    const professional = repository.getProfessional("pro-adnan-rahim")!;
+    const amendedRequest = resolveEffectiveRequest(
+      labRequest,
+      professional,
+      repository,
+      SCOPE_ADJUSTMENT_KEY,
+    );
+
+    const preview = prepareInvitation(
+      amendedRequest,
+      labOrganisation,
+      professional,
+      repository,
+    );
+
+    expect(preview.invitation.status).toBe("pending");
+    expect(preview.request.requirement.requiredSkills).toEqual(["Sample handling"]);
   });
 });

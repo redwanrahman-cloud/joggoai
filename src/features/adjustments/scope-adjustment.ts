@@ -16,24 +16,24 @@ function normalise(value: string) {
   return value.trim().toLowerCase();
 }
 
-export function createScopeAdjustment(
+export function getScopeAdjustmentProposal(
   request: StaffingRequest,
   professional: ProfessionalProfile,
   repository: DemoRepository,
-): ScopeAdjustmentProposal {
+): ScopeAdjustmentProposal | null {
   const originalMatch = evaluateCandidate(request, professional, repository);
   const nonNegotiableFailures = originalMatch.hardConstraintFailures.filter(
     (failure) => !failure.startsWith("Missing required skills:"),
   );
 
   if (originalMatch.eligible || nonNegotiableFailures.length > 0) {
-    throw new Error("This candidate does not qualify for a scope-only adjustment.");
+    return null;
   }
 
   const removedSkills = request.requirement.requiredSkills.filter(
     (required) => !professional.skills.some((skill) => normalise(skill) === normalise(required)),
   );
-  if (removedSkills.length === 0) throw new Error("No missing skills are available to remove from scope.");
+  if (removedSkills.length === 0) return null;
 
   const retainedSkills = request.requirement.requiredSkills.filter(
     (skill) => !removedSkills.some((removed) => normalise(removed) === normalise(skill)),
@@ -49,9 +49,19 @@ export function createScopeAdjustment(
   };
 
   const revisedMatch = evaluateCandidate(revisedRequest, professional, repository);
-  if (!revisedMatch.eligible) throw new Error("The revised scope does not resolve every eligibility gap.");
+  if (!revisedMatch.eligible) return null;
 
   return { originalRequest: request, revisedRequest, removedSkills, version: 2, auditNote };
+}
+
+export function createScopeAdjustment(
+  request: StaffingRequest,
+  professional: ProfessionalProfile,
+  repository: DemoRepository,
+): ScopeAdjustmentProposal {
+  const proposal = getScopeAdjustmentProposal(request, professional, repository);
+  if (!proposal) throw new Error("This candidate does not qualify for a scope-only adjustment.");
+  return proposal;
 }
 
 export function resolveEffectiveRequest(
@@ -63,4 +73,14 @@ export function resolveEffectiveRequest(
   return adjustment === SCOPE_ADJUSTMENT_KEY
     ? createScopeAdjustment(request, professional, repository).revisedRequest
     : request;
+}
+
+export function tryResolveEffectiveRequest(
+  request: StaffingRequest,
+  professional: ProfessionalProfile,
+  repository: DemoRepository,
+  adjustment?: string,
+) {
+  if (adjustment !== SCOPE_ADJUSTMENT_KEY) return request;
+  return getScopeAdjustmentProposal(request, professional, repository)?.revisedRequest ?? null;
 }
