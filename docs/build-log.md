@@ -412,3 +412,16 @@ Completed:
 Validation:
 
 - Added regression coverage for equivalent `10:00:00Z` and `10:00:00.000Z` timestamps.
+
+## 2026-07-20 — Phase 20: Category-wide comparison depth
+
+Completed:
+
+- Added ten fictional professionals across nursing, medicine, laboratory technology, physiotherapy, and caregiving.
+- Guaranteed at least three same-profession, registration-reviewed near matches for every supported demo request.
+- Gave every near-match card a direct three-person comparison route while keeping its unresolved gap visible.
+- Preserved non-negotiable exclusion for expired or unreviewed registration.
+
+Validation:
+
+- Added category-wide tests for near-match volume, profession alignment, reviewed registration, and visible eligibility gaps.

@@ -279,6 +279,7 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .excluded-card ul { margin-top: 18px; }
 .excluded-card h4 { margin: 22px 0 0; font-size: 0.86rem; }
 .near-match-note { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.82rem; }
+.near-match-actions { display: grid; gap: 12px; margin-top: 16px; text-align: center; }
 .near-match-card { display: flex; flex-direction: column; }
 .near-match-card .secondary-action { margin-top: auto; text-align: center; text-decoration: none; }
 .ai-briefing { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 30px; align-items: center; margin: 42px 0 0; padding: 28px; border: 1px solid rgb(14 118 108 / 25%); border-radius: 22px; background: var(--mint); }

@@ -2,6 +2,49 @@ import type { DemoDataSet } from "../domain/types";
 
 export const DEMO_REFERENCE_DATE = "2026-07-19T00:00:00.000Z";
 
+const additionalProfessionals: DemoDataSet["professionals"] = [
+  { id: "pro-yasmin-ara", displayName: "Yasmin Ara", profession: "registered_nurse", headline: "Night-shift nurse with monitored-care experience", area: "Dhanmondi", city: "Dhaka", skills: ["ICU", "Patient observation"], languages: ["Bangla", "English"], yearsExperience: 4, expectedHourlyRateBdt: 310, reliabilityScore: 90, completedDemoAssignments: 10 },
+  { id: "pro-dr-nabila-haque", displayName: "Dr Nabila Haque", profession: "general_practitioner", headline: "General practitioner experienced in community medicine", area: "Dhanmondi", city: "Dhaka", skills: ["General medicine", "Outpatient care"], languages: ["Bangla", "English"], yearsExperience: 5, expectedHourlyRateBdt: 1000, reliabilityScore: 92, completedDemoAssignments: 14 },
+  { id: "pro-dr-faisal-mahmud", displayName: "Dr Faisal Mahmud", profession: "general_practitioner", headline: "General practitioner with urgent triage experience", area: "Mohammadpur", city: "Dhaka", skills: ["Emergency assessment", "Minor injury care"], languages: ["Bangla", "English"], yearsExperience: 7, expectedHourlyRateBdt: 1150, reliabilityScore: 91, completedDemoAssignments: 17 },
+  { id: "pro-rukaiya-sultana", displayName: "Rukaiya Sultana", profession: "medical_technologist", headline: "Laboratory technologist focused on careful sample collection", area: "Mirpur", city: "Dhaka", skills: ["Phlebotomy", "Haematology"], languages: ["Bangla", "English"], yearsExperience: 4, expectedHourlyRateBdt: 280, reliabilityScore: 91, completedDemoAssignments: 12 },
+  { id: "pro-adnan-rahim", displayName: "Adnan Rahim", profession: "medical_technologist", headline: "Laboratory technologist experienced in specimen processing", area: "Mirpur", city: "Dhaka", skills: ["Sample handling", "Biochemistry"], languages: ["Bangla"], yearsExperience: 5, expectedHourlyRateBdt: 290, reliabilityScore: 90, completedDemoAssignments: 13 },
+  { id: "pro-maya-sen", displayName: "Maya Sen", profession: "physiotherapist", headline: "Physiotherapist focused on musculoskeletal recovery", area: "Dhanmondi", city: "Dhaka", skills: ["Musculoskeletal rehabilitation", "Pain management"], languages: ["Bangla", "English"], yearsExperience: 5, expectedHourlyRateBdt: 440, reliabilityScore: 93, completedDemoAssignments: 15 },
+  { id: "pro-tareq-aziz", displayName: "Tareq Aziz", profession: "physiotherapist", headline: "Physiotherapist experienced in supervised post-operative mobility", area: "Mohammadpur", city: "Dhaka", skills: ["Post-operative mobility", "Exercise therapy"], languages: ["Bangla", "English"], yearsExperience: 4, expectedHourlyRateBdt: 450, reliabilityScore: 89, completedDemoAssignments: 9 },
+  { id: "pro-salma-khatun", displayName: "Salma Khatun", profession: "caregiver", headline: "Caregiver experienced in overnight elder companionship", area: "Dhanmondi", city: "Dhaka", skills: ["Elder care", "Companionship"], languages: ["Bangla"], yearsExperience: 5, expectedHourlyRateBdt: 190, reliabilityScore: 92, completedDemoAssignments: 18 },
+  { id: "pro-babul-mia", displayName: "Babul Mia", profession: "caregiver", headline: "Caregiver trained in mobility and daily-living support", area: "Dhanmondi", city: "Dhaka", skills: ["Mobility assistance", "Daily living support"], languages: ["Bangla"], yearsExperience: 3, expectedHourlyRateBdt: 185, reliabilityScore: 88, completedDemoAssignments: 9 },
+  { id: "pro-jannat-akter", displayName: "Jannat Akter", profession: "caregiver", headline: "Home caregiver focused on respectful elder support", area: "Mohammadpur", city: "Dhaka", skills: ["Elder care", "Meal assistance"], languages: ["Bangla", "English"], yearsExperience: 4, expectedHourlyRateBdt: 210, reliabilityScore: 91, completedDemoAssignments: 14 },
+];
+
+const additionalCredentials: DemoDataSet["credentials"] = additionalProfessionals.map((professional, index) => ({
+  id: `cred-${professional.id.slice(4)}-registration`,
+  professionalId: professional.id,
+  type: "professional_registration",
+  title: `${professional.profession.replaceAll("_", " ")} registration (fictional demo record)`,
+  issuingAuthority: professional.profession === "general_practitioner" ? "Bangladesh Medical and Dental Council" : professional.profession === "registered_nurse" ? "Bangladesh Nursing and Midwifery Council" : "ShohojSheba Fictional Professional Register",
+  referenceNumberMasked: `DEMO-NEAR-${String(index + 1).padStart(3, "0")}`,
+  expiresOn: "2028-12-31",
+  status: "platform_verified",
+  source: "manual_demo_review",
+  reviewedOn: "2026-07-20",
+  notes: "Synthetic credential created only for comparison testing in the competition demonstration.",
+}));
+
+const scenarioAvailability: Record<DemoDataSet["professionals"][number]["profession"], [string, string]> = {
+  registered_nurse: ["2026-07-20T14:00:00.000Z", "2026-07-21T02:00:00.000Z"],
+  general_practitioner: ["2026-07-20T11:00:00.000Z", "2026-07-20T15:00:00.000Z"],
+  medical_technologist: ["2026-07-20T03:00:00.000Z", "2026-07-20T11:00:00.000Z"],
+  physiotherapist: ["2026-07-20T04:00:00.000Z", "2026-07-20T10:00:00.000Z"],
+  caregiver: ["2026-07-20T14:00:00.000Z", "2026-07-21T02:00:00.000Z"],
+};
+
+const additionalAvailability: DemoDataSet["availability"] = additionalProfessionals.map((professional) => ({
+  id: `avail-${professional.id.slice(4)}-scenario`,
+  professionalId: professional.id,
+  startsAt: scenarioAvailability[professional.profession][0],
+  endsAt: scenarioAvailability[professional.profession][1],
+  status: "available",
+}));
+
 export const demoData: DemoDataSet = {
   organisations: [
     {
@@ -190,6 +233,7 @@ export const demoData: DemoDataSet = {
       reliabilityScore: 84,
       completedDemoAssignments: 4,
     },
+    ...additionalProfessionals,
   ],
   credentials: [
     {
@@ -283,6 +327,7 @@ export const demoData: DemoDataSet = {
       reviewedOn: status === "platform_verified" ? "2026-07-18" : undefined,
       notes: "Synthetic credential used only for the competition demonstration.",
     })),
+    ...additionalCredentials,
   ],
   availability: [
     {
@@ -329,6 +374,7 @@ export const demoData: DemoDataSet = {
       ["avail-rokeya-night", "pro-rokeya-begum", "2026-07-20T14:00:00.000Z", "2026-07-21T02:00:00.000Z"],
       ["avail-arif-night", "pro-arif-hossain", "2026-07-20T14:00:00.000Z", "2026-07-21T02:00:00.000Z"],
     ].map(([id, professionalId, startsAt, endsAt]) => ({ id, professionalId, startsAt, endsAt, status: "available" as const })),
+    ...additionalAvailability,
   ],
   staffingRequests: [
     {

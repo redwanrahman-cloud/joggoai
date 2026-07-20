@@ -81,4 +81,20 @@ describe("deterministic candidate matching", () => {
     expect(sabiha?.eligible).toBe(true);
     expect(sabiha?.hardConstraintFailures).not.toContain("Availability does not cover the full confirmed shift.");
   });
+
+  it.each([
+    ["request-icu-night", "registered_nurse"],
+    ["request-doctor-evening", "general_practitioner"],
+    ["request-lab-day", "medical_technologist"],
+    ["request-physio-day", "physiotherapist"],
+    ["request-caregiver-night", "caregiver"],
+  ] as const)("provides at least three safe, comparable near matches for %s", (requestId, profession) => {
+    const scenarioRequest = repository.getStaffingRequest(requestId)!;
+    const nearMatches = rankCandidates(scenarioRequest, repository).filter((match) => isNearMatch(scenarioRequest, match));
+
+    expect(nearMatches.length).toBeGreaterThanOrEqual(3);
+    expect(nearMatches.every((match) => match.professional.profession === profession)).toBe(true);
+    expect(nearMatches.every((match) => match.registration?.status === "platform_verified")).toBe(true);
+    expect(nearMatches.every((match) => match.hardConstraintFailures.length > 0)).toBe(true);
+  });
 });

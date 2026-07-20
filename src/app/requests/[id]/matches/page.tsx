@@ -27,6 +27,14 @@ export default async function MatchResultsPage({ params, searchParams }: { param
   const comparisonIds = [...eligible, ...nearMatches].slice(0, 3).map((match) => match.professional.id).join(",");
   const compareHref = withConfirmedRequirement(`/requests/${request.id}/compare?professionals=${comparisonIds}`, encodedRequirement);
   const requestHref = (href: string) => withConfirmedRequirement(href, encodedRequirement);
+  const compareNearMatchHref = (professionalId: string) => {
+    const selectedIds = [
+      eligible[0]?.professional.id,
+      professionalId,
+      nearMatches.find((candidate) => candidate.professional.id !== professionalId)?.professional.id,
+    ].filter(Boolean).join(",");
+    return requestHref(`/requests/${request.id}/compare?professionals=${selectedIds}`);
+  };
 
   return (
     <main id="main-content">
@@ -152,9 +160,10 @@ export default async function MatchResultsPage({ params, searchParams }: { param
                 <h4>Requirement gaps</h4>
                 <ul>{match.hardConstraintFailures.map((failure) => <li key={failure}>{failure}</li>)}</ul>
                 <p className="near-match-note">Update the confirmed requirements before this professional can be invited.</p>
-                <Link className="secondary-action full-width" href={requestHref(`/professionals/${match.professional.id}?request=${request.id}`)}>
-                  View profile and evidence
-                </Link>
+                <div className="near-match-actions">
+                  <Link className="secondary-action full-width" href={requestHref(`/professionals/${match.professional.id}?request=${request.id}`)}>View profile and evidence</Link>
+                  <Link className="text-link" href={compareNearMatchHref(match.professional.id)}>Compare this professional</Link>
+                </div>
               </article>
               ))}
             </div>

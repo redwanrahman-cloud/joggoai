@@ -7,8 +7,8 @@ describe("MatchResultsPage", () => {
     render(await MatchResultsPage({ params: Promise.resolve({ id: "request-icu-night" }) }));
 
     expect(screen.getByRole("heading", { level: 1, name: "1 recommended match" })).toBeInTheDocument();
-    expect(screen.getByText(/2 safe near matches are ready/i)).toBeInTheDocument();
-    expect(screen.getByText("2 near matches available to compare")).toBeInTheDocument();
+    expect(screen.getByText(/3 safe near matches are ready/i)).toBeInTheDocument();
+    expect(screen.getByText("3 near matches available to compare")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Compare professionals" })).toHaveAttribute(
       "href",
       expect.stringContaining("/requests/request-icu-night/compare"),
@@ -18,5 +18,6 @@ describe("MatchResultsPage", () => {
       expect.stringContaining("/requests/request-icu-night/compare"),
     );
     expect(screen.getByRole("heading", { name: "Near matches worth comparing" })).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "Compare this professional" })).toHaveLength(3);
   });
 });
