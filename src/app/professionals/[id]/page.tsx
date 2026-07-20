@@ -117,9 +117,14 @@ export default async function ProfessionalProfilePage({
         )}
 
         {hasAcceptedAdjustment && (
-          <section className="adjustment-active-banner" aria-labelledby="adjustment-active-heading">
+          <section id="amended-assignment" className="adjustment-active-banner" aria-labelledby="adjustment-active-heading">
             <div><p className="eyebrow">Amended assignment confirmed</p><h2 id="adjustment-active-heading">Eligible under the amended requirements</h2></div>
-            <p>Removed duties are excluded from this contract. Credential review and professional acceptance are still required.</p>
+            <div className="adjustment-active-actions">
+              <p>Removed duties are excluded from this contract. Credential evidence is ready for human review; the professional must still accept the final invitation.</p>
+              <Link className="primary-action" href={requestHref(`/requests/${request.id}/invitations/new?professional=${professional.id}&adjustment=${SCOPE_ADJUSTMENT_KEY}`)}>
+                Continue to invitation review
+              </Link>
+            </div>
           </section>
         )}
 

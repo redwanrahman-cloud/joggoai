@@ -26,7 +26,7 @@ export default async function ScopeAdjustmentPage({ params, searchParams }: {
     notFound();
   }
 
-  const continueHref = requestHref(`/professionals/${professional.id}?request=${request.id}&adjustment=${SCOPE_ADJUSTMENT_KEY}`);
+  const continueHref = `${requestHref(`/professionals/${professional.id}?request=${request.id}&adjustment=${SCOPE_ADJUSTMENT_KEY}`)}#amended-assignment`;
 
   return (
     <main id="main-content">

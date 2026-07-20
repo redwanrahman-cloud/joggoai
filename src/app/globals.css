@@ -341,7 +341,8 @@ textarea:focus, input:focus, select:focus { outline: 3px solid rgb(14 118 108 / 
 .profile-gap-banner ul { margin: 0; color: #79510e; line-height: 1.6; }
 .adjustment-active-banner { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; margin: 24px 0; padding: 24px 28px; border: 1px solid rgb(14 118 108 / 30%); border-radius: 20px; background: var(--mint); }
 .adjustment-active-banner h2 { margin: 0; font-family: Georgia, serif; font-size: 2rem; font-weight: 500; }
-.adjustment-active-banner > p { margin: 0; color: var(--teal-dark); line-height: 1.6; }
+.adjustment-active-actions { display: grid; justify-items: start; gap: 16px; }
+.adjustment-active-actions p { margin: 0; color: var(--teal-dark); line-height: 1.6; }
 .action-boundary { margin: 12px 0 0; color: var(--muted); font-size: 0.76rem; line-height: 1.5; text-align: center; }
 
 .compare-shell { width: min(1240px, calc(100% - 40px)); margin: 28px auto 100px; }
